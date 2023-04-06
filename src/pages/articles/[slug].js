@@ -16,7 +16,7 @@ const BlogPost = ({ post }) => {
         transition={{ duration: 0.7, ease: "easeOut" }}
         className="max-w-2xl mx-auto"
       >
-        <div className="py-20">
+        <div className="px-8 py-20">
           <h1 className="text-center my-10 text-[3rem] font-Nunito font-black leading-tight">
             {post.title}
           </h1>

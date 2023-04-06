@@ -63,7 +63,7 @@ const FastMatch = () => {
   };
 
   const checkMatched = (_signal) => {
-    setCount((prev) => prev + 1);
+    //setCount((prev) => prev + 1);
     let result = newSelect === selected ? true : false; // =====> OK but why i using keyboard, the result always return false???????
     if (result === _signal) {
       // nguoi dung` chon dung

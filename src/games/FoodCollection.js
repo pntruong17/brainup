@@ -175,7 +175,6 @@ const FoodCollection = () => {
                       setVisible={setVisible}
                       item={slot.icon}
                       setValue={setValue}
-                      setCorrectSignal={setCorrectSignal}
                     />
                   );
                 })}

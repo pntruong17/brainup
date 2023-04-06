@@ -1,14 +1,7 @@
 //import React, { useRef, useState, useEffect } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 
-const ItemScrollAnimation = ({
-  id,
-  item,
-  setValue,
-  visible,
-  setVisible,
-  setCorrectSignal,
-}) => {
+const ItemScrollAnimation = ({ id, item, setValue, visible, setVisible }) => {
   const handleClick = (_id) => {
     setValue(_id);
     setVisible(false);

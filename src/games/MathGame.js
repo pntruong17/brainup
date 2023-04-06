@@ -307,7 +307,7 @@ const MathGame = () => {
       <div className="w-full h-screen px-2 py-8 bg-_dark">
         <div>
           {state !== states[0] && (
-            <div className="w-full h-screen p-2 response-grid">
+            <div className="w-full h-full p-2 response-grid">
               <div className="flex flex-col max-w-2xl mx-auto bg-white shadow-md rounded-lg overflow-hidden">
                 <div className="flex flex-nowrap justify-between p-4 border-b bg-slate-50">
                   <h4 className="border rounded-full px-2 text-center text-xs font-medium bg-white">
