@@ -4,7 +4,7 @@ import Footer from "./Footer";
 import Navbar from "./Navbar";
 import { useRouter } from "next/router";
 
-const Layout = ({ children, pageMeta }) => {
+const LayoutEmpty = ({ children, pageMeta }) => {
   const router = useRouter();
   const meta = {
     title: "Webapp Brain Up",
@@ -31,13 +31,10 @@ const Layout = ({ children, pageMeta }) => {
         <link rel="icon" href="/favicon.ico" />
         <title>{meta.title}</title>
       </Head>
-      <header>
-        <Navbar />
-      </header>
+
       <main>{children}</main>
-      <Footer />
     </>
   );
 };
 
-export default Layout;
+export default LayoutEmpty;

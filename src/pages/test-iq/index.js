@@ -5,6 +5,7 @@ import PrepareScene from "@/components/PrepareScene";
 import QuizScene from "@/components/QuizScene";
 import { useUserAuth } from "@/components/helper/UserAuthContextProvider";
 import Calculator from "@/components/Calculator";
+import LayoutEmpty from "@/components/LayoutEmpty";
 
 // const sample_yourdata = {
 //   iq: 113,
@@ -39,6 +40,13 @@ const Testiq = () => {
 
   return (
     <>
+      <LayoutEmpty
+        pageMeta={{
+          title: "IQ Test | Brain Up",
+          description:
+            "Unlock Your Potential with Our Free IQ Test and Brain Games!",
+        }}
+      ></LayoutEmpty>
       <IQcontext.Provider
         value={{ yourdata, setYourdata, user, result, setResult }}
       >

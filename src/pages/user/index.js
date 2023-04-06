@@ -31,7 +31,11 @@ const User = () => {
   useEffect(() => {}, [yourdata]);
   return (
     <>
-      <Layout>
+      <Layout
+        pageMeta={{
+          title: "User Login",
+        }}
+      >
         <div className="m-20">
           {yourdata !== undefined && tested && (
             <ResultTesting yourdata={yourdata} />

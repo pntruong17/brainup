@@ -13,7 +13,13 @@ const Index = ({ posts }) => {
   );
   return (
     <>
-      <Layout>
+      <Layout
+        pageMeta={{
+          title: "Article | Brain Up",
+          description:
+            "Article, Useful information to help the brain stay healthy and work efficiently",
+        }}
+      >
         <motion.section
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}

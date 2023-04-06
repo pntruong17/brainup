@@ -140,13 +140,11 @@ const FoodCollection = () => {
     if (isInfeaSlot && !isInSelected && _value !== " ") {
       setSelected([...selected, newIcon]);
       setIns((prev) => prev + 1);
-      setCorrectSignal(true);
       setWin(true);
     } else {
       const _tempfeature = [...features];
       _tempfeature.sort(() => Math.random() - 0.5);
       setFeatures(_tempfeature);
-      setCorrectSignal(false);
       setWin(false);
       setSelected([...selected, newIcon]);
       setState(states[2]);
@@ -229,7 +227,7 @@ const FoodCollection = () => {
                   viewBox="0 0 24 24"
                   strokeWidth="3"
                   stroke="white"
-                  class="w-6 h-6"
+                  className="w-6 h-6"
                 >
                   <path
                     strokeLinecap="round"

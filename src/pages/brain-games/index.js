@@ -6,7 +6,13 @@ import { gamelib } from "@/libs/gamelib";
 
 const BrainGames = () => {
   return (
-    <Layout>
+    <Layout
+      pageMeta={{
+        title: "Brain Games | Brain Up",
+        description:
+          "Game Designed to train your brain, discover the various cognitive games and exercises",
+      }}
+    >
       <motion.section
         initial={{ opacity: 0, y: 30 }}
         animate={{ opacity: 1, y: 0 }}

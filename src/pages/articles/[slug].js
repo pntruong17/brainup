@@ -7,9 +7,13 @@ import {
   graphqlcms,
 } from "@/components/graphqlcms/graphql";
 
-const BlogPost = ({ post }) => {
+const BlogPost = ({ post, slug }) => {
   return (
-    <Layout>
+    <Layout
+      pageMeta={{
+        title: post.title,
+      }}
+    >
       <motion.section
         initial={{ opacity: 0, y: 30 }}
         animate={{ opacity: 1, y: 0 }}
@@ -34,8 +38,10 @@ export default BlogPost;
 
 export const getStaticPaths = async () => {
   const { posts } = await graphqlcms.request(SLUG_LIST);
+  const _paths = posts.map((post) => ({ params: { slug: post.slug } }));
+
   return {
-    paths: posts.map((post) => ({ params: { slug: post.slug } })),
+    paths: _paths,
     fallback: false,
   };
 };
@@ -47,6 +53,7 @@ export const getStaticProps = async ({ params }) => {
   return {
     props: {
       post,
+      slug,
     },
     revalidate: 10,
   };
