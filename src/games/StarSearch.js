@@ -7,7 +7,6 @@ const StarSearch = () => {
   const states = ["start", "playing", "close"];
   const [timer, setTimer] = useState(90);
   const delayVisible = useRef();
-  const firstStart = useRef(true);
   const [ins, setIns] = useState(0);
   const [state, setState] = useState("start");
   const [visible, setVisible] = useState(true);
@@ -16,14 +15,8 @@ const StarSearch = () => {
   const [totalrow, setTotalrow] = useState(20);
 
   const [point, setPoint] = useState(1);
-  const [rows, setRows] = useState([]);
   const [stars, setStars] = useState([]);
   const [wrongclick, setWrongclick] = useState(3);
-
-  const handleStart = () => {
-    setIns(ins + 1);
-    console.log(ins);
-  };
 
   const randomStates = (n) => {
     const _diamondStyles = [1, 2, 3, 4];
@@ -72,7 +65,6 @@ const StarSearch = () => {
         type: "hero",
       });
     }
-    //console.log(newArray);
     return newArray;
   };
 
@@ -85,7 +77,6 @@ const StarSearch = () => {
       _n -= rand;
     }
     if (_n > 1) _stars.push(_n);
-    console.log(_stars);
     return _stars;
   };
 
@@ -95,7 +86,6 @@ const StarSearch = () => {
     let st = 3 + Math.floor(point / 4.5); //9
     if (s >= 20) s = 20;
     if (st >= 14) st = 14;
-    //console.log("state: " + st + " - star :" + s);
     const state = randomStates(st); //st
     const star = initGroupStars(s); //s
     for (let i = 0; i < star.length; i++) {
@@ -104,7 +94,6 @@ const StarSearch = () => {
       }
     }
     starArray.push(state[0]);
-    console.log(starArray);
     return starArray;
   };
 
@@ -129,7 +118,6 @@ const StarSearch = () => {
 
   useEffect(() => {
     if (state === states[0] || state === states[2]) return;
-    console.log("run");
     if (wrongclick <= 1) {
       setState(states[2]);
     }
@@ -137,10 +125,8 @@ const StarSearch = () => {
       setStars([]);
       setStars(addFullPlace());
       setPoint(point + 1);
-      console.log("dung");
     } else {
       setWrongclick(wrongclick - 1);
-      console.log("sai");
     }
 
     delayVisible.current = setTimeout(() => {
@@ -177,11 +163,6 @@ const StarSearch = () => {
 
     return () => clearInterval(intervalId);
   }, [state, timer]);
-
-  useEffect(() => {
-    console.log("id :" + id);
-    console.log("ins :" + ins);
-  }, [ins, id]);
 
   return (
     <>

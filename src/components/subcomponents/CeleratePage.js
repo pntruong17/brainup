@@ -72,20 +72,16 @@ const Calculator = ({ percentCorrect, myUser, numtest, wrongQuizs, time }) => {
     const _iqSD = 15;
     const _iq = (_iqSD * (_point - _mean)) / _sd + 100;
 
-    console.log("IQ: " + _iq);
     return _iq;
   };
 
   const getData = async () => {
     const quizs = await getQuiz();
     setQuiz(quizs);
-    console.log(quizs); // Hiển thị dữ liệu dạng object trong console
   };
 
   const updateCurrentUser = async () => {
     const _numtests = numtest - 1;
-    console.log("xxx " + myUser.numberTestRemain);
-    console.log(myUser);
     const newUserObject = {
       numberTestRemain: _numtests,
     };
@@ -122,8 +118,6 @@ const Calculator = ({ percentCorrect, myUser, numtest, wrongQuizs, time }) => {
     updateIQCurrentUser(_myiq);
     //setIQ(_myiq);
     calculateTestScore(30 - wrongQuizs.length, time);
-    console.log("data: " + newData);
-    console.log("IQ cua ban la: " + returnIQFunction(percentCorrect, newData));
   }, [quiz]);
   return (
     <>

@@ -1,10 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { getQuiz } from "@/firebase/quizFirebase";
-import {
-  createUser,
-  checkUserExistence,
-  updateUser,
-} from "@/firebase/usersFirebase";
+import { updateUser } from "@/firebase/usersFirebase";
 import ResultTesting from "./subcomponents/ResultTesting";
 import { useUserAuth } from "./helper/UserAuthContextProvider";
 
@@ -86,14 +82,12 @@ const Calculator = ({
     const _iqSD = 15;
     const _iq = (_iqSD * (_point - _mean)) / _sd + 100;
 
-    console.log("IQ: " + _iq);
     return _iq;
   };
 
   const getData = async () => {
     const quizs = await getQuiz();
     setQuiz(quizs);
-    console.log(quizs); // Hiển thị dữ liệu dạng object trong console
   };
 
   const updateCurrentUser = async () => {
@@ -185,8 +179,6 @@ const Calculator = ({
     //updateIQCurrentUser(_myiq);
     //setIQ(_myiq);
     calculateTestScore(30 - wrongQuizs.length, time);
-    console.log("data: " + newData);
-    console.log("IQ cua ban la: " + returnIQFunction(percentCorrect, newData));
   }, [quiz]);
   return (
     <>

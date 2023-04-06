@@ -1,19 +1,7 @@
 import React, { useRef, useEffect, useState } from "react";
 import Link from "next/link";
-import { useRouter } from "next/router";
-import Image from "next/image";
-import { useUserAuth } from "./helper/UserAuthContextProvider";
-import { returnIQTestRemain, createUser } from "../firebase/usersFirebase";
-import { createQuiz } from "@/firebase/quizFirebase";
 
 const Hero = () => {
-  const { user, iuser } = useUserAuth();
-  const navigate = useRouter();
-
-  //----------- Timer---------------
-
-  ////////////////////////////
-
   return (
     <>
       <section className="text-gray-600 body-font">

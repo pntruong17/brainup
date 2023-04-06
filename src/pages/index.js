@@ -2,11 +2,8 @@ import Hero from "@/components/Hero";
 import { motion } from "framer-motion";
 import Layout from "../components/Layout";
 import Statistic from "@/components/Statistic";
-//import { Inter } from '@next/font/google'
 import GameFeatureIntro from "@/components/GameIntro";
 import Testimonial from "@/components/Testimonial";
-
-//const inter = Inter({ subsets: ['latin'] })
 
 export default function Home() {
   return (

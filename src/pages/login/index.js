@@ -1,10 +1,9 @@
-import React, { useState } from "react";
+import React from "react";
 import Link from "next/link";
 import GetStartedForm from "@/components/subcomponents/GetStartedForm";
 import { checkUserExistence } from "@/firebase/usersFirebase";
 
 const LoginPage = ({ data, user }) => {
-  console.log("data: " + data);
   return (
     <>
       <header className="w-full text-gray-600 body-font bg-white shadow-sm">
@@ -40,7 +39,6 @@ export const getServerSideProps = async () => {
       },
     };
   } catch (error) {
-    console.error(error);
     return {
       props: {
         data: null,

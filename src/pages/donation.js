@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { PayPalScriptProvider } from "@paypal/react-paypal-js";
 import { motion } from "framer-motion";
 import DonateButtonWrapper from "@/components/paypal/DonateButton";
@@ -17,7 +17,7 @@ const Donation = () => {
             <img
               className="w-full object-center"
               src="https://www.leaf.ca/wp-content/uploads/elementor/thumbs/iStock-1163228217-scaled-oxcp7dlxlvswkph8bb90c293mgxqktrf4yozycc460.jpg"
-              alt=""
+              alt="donate image brainup"
             />
           </div>
           <div className="flex">

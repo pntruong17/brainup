@@ -1,11 +1,6 @@
 import {
-  Area,
-  Line,
   Bar,
-  ComposedChart,
   BarChart,
-  Legend,
-  CartesianGrid,
   XAxis,
   YAxis,
   Tooltip,

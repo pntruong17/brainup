@@ -1,10 +1,9 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 
 const Step = (props) => {
   const [step, setStep] = useState(0);
   const [open, setOpen] = useState(false);
-  const timeRef = useRef();
   const { steps, setStart, delay } = props;
 
   const handleNext = () => {

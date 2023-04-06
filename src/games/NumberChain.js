@@ -19,7 +19,6 @@ const NumberChain = () => {
     createLayer("D", 4, 30).sort(() => Math.random() - 0.5)
   );
 
-  //console.log(layer1);
   const handleSelected = (id) => {
     setSelected((prev) => [...prev, id]);
     if (selected.length >= 2) setSelected((prev) => prev.slice(1));
@@ -56,8 +55,6 @@ const NumberChain = () => {
         return newState;
       });
     }
-
-    console.log(selected);
   }, [selected]);
 
   return (

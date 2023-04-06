@@ -1,13 +1,5 @@
-import {
-  GetServerSideProps,
-  InferGetServerSidePropsType,
-  NextPage,
-} from "next";
 import { motion } from "framer-motion";
-import { getBlogDetail } from "@/discussions/blog";
-import parse from "html-react-parser";
 import detail from "./blog.module.css";
-import BlogHeader from "@/components/BlogHeader";
 import Layout from "@/components/Layout";
 import {
   QUERY_SINGLE_POST,
@@ -25,14 +17,11 @@ const BlogPost = ({ post }) => {
         className="max-w-2xl mx-auto"
       >
         <div className="py-20">
-          <h1 className="text-center my-10 text-[2rem] font-bold">
+          <h1 className="text-center my-10 text-[3rem] font-Nunito font-black leading-tight">
             {post.title}
           </h1>
-          <div className="flex justify-center mb-4">
-            <BlogHeader />
-          </div>
           <div
-            className={`${detail.html} flex flex-col`}
+            className={`${detail.html} font-Nunito`}
             dangerouslySetInnerHTML={{ __html: post.content.html }}
           ></div>
         </div>

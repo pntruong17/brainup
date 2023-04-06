@@ -54,7 +54,6 @@ const QuizScene = ({ changeScene, result, setResult }) => {
         setTimer((preTimer) => preTimer - 1);
       }, 1000);
     } else {
-      console.log("clear interval");
       clearInterval(tick.current);
     }
 
@@ -86,7 +85,6 @@ const QuizScene = ({ changeScene, result, setResult }) => {
   }, [currentquiz]);
 
   useEffect(() => {
-    console.log(userOptions);
     // show & scroll to submit button
     const isFinishAnswer = userOptions.filter((arr) => arr === "").length <= 0;
     hiddenClass = isFinishAnswer ? "" : "hidden";
@@ -147,7 +145,6 @@ const QuizScene = ({ changeScene, result, setResult }) => {
       time: time,
     };
     setResult(res);
-    console.log(res);
     changeScene("Finish");
   };
   const submitResult = () => {

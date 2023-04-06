@@ -1,4 +1,3 @@
-import NavbarSemi from "@/components/NavbarSemi";
 import React, { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import CheckAndXMark from "./comps/CheckAndXMark";
@@ -12,7 +11,6 @@ import {
 import ShowTopScore from "./comps/ShowTopScore";
 
 const FastMatch = () => {
-  const [count, setCount] = useState(0);
   const TIME_GAME = 60;
   const NAME_COOKIE = "_F_M";
 
@@ -65,12 +63,10 @@ const FastMatch = () => {
   };
 
   const checkMatched = (_signal) => {
-    console.log(_signal);
     setCount((prev) => prev + 1);
     let result = newSelect === selected ? true : false; // =====> OK but why i using keyboard, the result always return false???????
     if (result === _signal) {
       // nguoi dung` chon dung
-      //console.log("Correct!");
       comboRef.current++;
       if (!btnPress) {
         setSignal(1);
@@ -86,10 +82,7 @@ const FastMatch = () => {
           setComboTimer((prev) => prev + 1);
         }
       }
-
-      //console.log("Dung!");
     } else {
-      //console.log("Very Wrong");
       //nguoi dung chon sai
       comboRef.current = 0;
       if (!btnPress) {
@@ -101,7 +94,6 @@ const FastMatch = () => {
     }
   };
   const handleStart = () => {
-    console.log("Start!");
     setBtnPress(true);
     setStart(true);
     //setSelected(newSelect);
@@ -118,18 +110,12 @@ const FastMatch = () => {
   };
 
   useEffect(() => {
-    console.log("selected: " + selected);
-    console.log("newSelect: " + newSelect);
-  }, [newSelect, selected]);
-
-  useEffect(() => {
     setSelected(getRandomSymbol());
   }, []);
 
   //cookies data
   useEffect(() => {
     const hasCookie = checkCookies(NAME_COOKIE);
-    console.log("cookie " + hasCookie);
     if (hasCookie) {
       setPointCookies(getCookies(NAME_COOKIE));
     } else {

@@ -18,9 +18,7 @@ const ShowTopScore = ({ score, data, visible, setVisible }) => {
     if (newArr.length > 3) {
       newArr.splice(3);
     }
-
     _setData(newArr);
-    console.log(lastIndex);
   }, [data]);
 
   return (
@@ -55,11 +53,11 @@ const ShowTopScore = ({ score, data, visible, setVisible }) => {
                   <h3 className="font-black text-xl text-_accent text-center mt-5">
                     Your score is:
                   </h3>
-                  <h3 className="text-3xl text-center text-_dark font-black p-4 border-b">
+                  <h3 className="text-3xl text-center text-_dark font-black font-Nunito p-4 border-b">
                     {score}
                   </h3>
                 </div>
-                <h3 className="font-black text-xl text-_accent text-center mt-5 uppercase">
+                <h3 className="font-black text-xl text-_accent pl-10 mt-5 uppercase">
                   Top Scores
                 </h3>
                 <ul>
@@ -67,7 +65,7 @@ const ShowTopScore = ({ score, data, visible, setVisible }) => {
                     _data.map((d, i) => {
                       return (
                         <li
-                          className={`text-center text-_darkblue text-2xl font-black mt-5 border-l-8 border-_orange`}
+                          className={`pl-10 font-Nunito text-_darkblue text-2xl font-black mt-5`}
                           key={i}
                         >
                           {"Top " + (i + 1) + ": " + d}

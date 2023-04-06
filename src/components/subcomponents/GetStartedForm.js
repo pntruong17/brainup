@@ -1,7 +1,6 @@
 import React from "react";
 import { useUserAuth } from "../helper/UserAuthContextProvider";
 import { useRouter } from "next/router";
-import { createUser } from "@/firebase/usersFirebase";
 
 // const sample_userdata = {
 //   uid: user.uid,
@@ -23,7 +22,6 @@ const GetStartedForm = ({ userExistance }) => {
 
   const googleLogin = () => {
     googleSignIn().then(() => {
-      console.log("Da Sign In Google thanh cong!");
       navigate.push("/");
     });
   };

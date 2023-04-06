@@ -93,7 +93,6 @@ const TreasureCollection = () => {
     const isInfeaSlot = feaSlot.some((v) => v.id === _value);
     const isInSelected = selected.some((v) => v === _value) || false;
 
-    console.log(_value);
     if (isInfeaSlot && !isInSelected && _value !== " ") {
       setSelected((prev) => [...prev, _value]);
       setIns((prev) => prev + 1);
@@ -101,10 +100,7 @@ const TreasureCollection = () => {
       setSelected((prev) => [...prev, _value]);
       setClose(true);
     }
-    console.log(features);
   };
-
-  console.log(features.length);
 
   return (
     <>

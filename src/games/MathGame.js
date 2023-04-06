@@ -112,21 +112,15 @@ const MathGame = () => {
       const nextrand = Math.floor(Math.random() * 5) + 1;
       setArrayTrai(returnRandomNumberArray(firstRandom + nextrand, soPhepTinh));
       setArrayPhai(returnRandomNumberArray(firstRandom, soPhepTinh));
-      console.log("ArrayTrai " + (firstRandom + nextrand));
-      console.log("ArrayPhai " + firstRandom);
     } else if (newrand === "d") {
       setAnswer("d");
       setArrayTrai(returnRandomNumberArray(firstRandom, soPhepTinh));
       setArrayPhai(returnRandomNumberArray(firstRandom, soPhepTinh));
-      console.log("ArrayTrai " + firstRandom);
-      console.log("ArrayPhai " + firstRandom);
     } else if (newrand === "r") {
       setAnswer("r");
       const nextrand = Math.floor(Math.random() * 5) + 1;
       setArrayTrai(returnRandomNumberArray(firstRandom, soPhepTinh));
       setArrayPhai(returnRandomNumberArray(firstRandom + nextrand, soPhepTinh));
-      console.log("ArrayTrai " + firstRandom);
-      console.log("ArrayPhai " + (firstRandom + nextrand));
     } else {
       return null;
     }
@@ -206,7 +200,6 @@ const MathGame = () => {
   //cookies data
   useEffect(() => {
     const hasCookie = checkCookies("MathGame");
-    console.log("cookie " + hasCookie);
     if (hasCookie) {
       setPointCookies(getCookies("MathGame"));
     } else {

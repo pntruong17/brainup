@@ -1,6 +1,5 @@
 import Layout from "@/components/Layout";
 import { motion } from "framer-motion";
-import Link from "next/link";
 import React from "react";
 import GameCard from "@/games/comps/GameCard";
 import { gamelib } from "@/libs/gamelib";

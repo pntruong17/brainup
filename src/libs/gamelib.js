@@ -69,13 +69,13 @@ export const gamelib = [
   {
     id: 6,
     Group: "Language",
-    Name: "Wordle",
-    Slug: "wordle",
-    Desc: "Sharpen your concentration and improve your focus with this engaging game designed to boost your cognitive skills!",
+    Name: "Wordl",
+    Slug: "wordl",
+    Desc: "Wordle is a popular online word-guessing game where players must guess a five-letter word in six attempts. It's fun, challenging, and educational.",
     Howplayed:
-      "Find the one and only diamond in this game! Search carefully, explore every corner, and don't give up until you find it. Start your adventure now!",
-    PhotoURL: "/images/logogames/diamondsearching.png",
-    ColorBG: "bg-_green",
+      "Choose a five-letter word to guess. Make six attempts to guess the word. Each guess will show which letters are correct or in the wrong position. Use process of elimination and logic to guess the word. Guess the word before running out of attempts to win!",
+    PhotoURL: "/images/logogames/wordlle.png",
+    ColorBG: "bg-_dark",
     Game: <Wordle />,
   },
 ];

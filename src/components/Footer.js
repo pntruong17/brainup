@@ -1,9 +1,7 @@
 import React, { useState } from "react";
-import { motion } from "framer-motion";
 import Link from "next/link";
 
 const Footer = () => {
-  const [modalIsOpen, setModalIsOpen] = useState(false);
   return (
     <>
       <footer className="text-gray-600 body-font">

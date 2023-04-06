@@ -1,7 +1,6 @@
 import NavbarFixed from "@/components/NavbarFixed";
 import React, { useState, useEffect, useRef } from "react";
 import MemoryCard from "./comps/MemoryCard";
-//import "./style/MemoryCardGame.css";
 
 const MemoryCardGame = () => {
   //index là level mà người chơi phải vượt wa, giá trị mỗi index là số cặp lá bài được chia`
@@ -66,7 +65,6 @@ const MemoryCardGame = () => {
       .sort(() => Math.random() - 0.5)
       .map((card, index) => ({ id: index, stat: "", icon: card.icon }));
     // lọc lại số cards ở đúng level
-    console.log(shuffleCards);
     //truyền vào state mới để quản lý
     setItems(shuffleCards);
   };
@@ -112,7 +110,6 @@ const MemoryCardGame = () => {
 
   function handleClick(id) {
     if (items[id].stat === "correct" || !canClick) {
-      console.log("correct");
       return;
     }
     playFlip();
@@ -143,12 +140,10 @@ const MemoryCardGame = () => {
       return;
     }
     const isAllCorrect = items.findIndex((item) => item.stat !== "correct");
-    console.log(isAllCorrect);
     if (isAllCorrect < 0) {
       setHidePlay(false);
 
       handleWinGame();
-      console.log("level up");
     } else {
     }
   }, [items]);

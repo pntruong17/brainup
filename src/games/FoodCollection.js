@@ -10,8 +10,6 @@ const FoodCollection = () => {
   const [state, setState] = useState(states[0]);
 
   const [win, setWin] = useState(null);
-  const [correctSignal, setCorrectSignal] = useState(null);
-  const [wrongCount, setWrongCount] = useState(3);
 
   const [visible, setVisible] = useState(true);
 
@@ -98,10 +96,6 @@ const FoodCollection = () => {
   };
 
   useEffect(() => {
-    console.log(features);
-  }, [featureSlots, selected]);
-
-  useEffect(() => {
     if (state === states[0]) {
       return;
     }
@@ -124,7 +118,6 @@ const FoodCollection = () => {
         setFeatureSlots(newFeaSlot);
       }
     };
-    console.log(state);
     updateFeatures();
   }, [ins, state]);
 

@@ -11,7 +11,6 @@ const User = () => {
   const [yourdata, setYourData] = useState();
   const [tested, setTested] = useState("loading");
   const { user } = useUserAuth();
-  console.log(user);
   useEffect(() => {
     const fetchData = async () => {
       if (user) {
@@ -29,9 +28,7 @@ const User = () => {
     fetchData();
   }, [user]);
 
-  useEffect(() => {
-    console.log("yourdata", yourdata);
-  }, [yourdata]);
+  useEffect(() => {}, [yourdata]);
   return (
     <>
       <Layout>

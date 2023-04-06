@@ -55,7 +55,6 @@ const Navbar = () => {
   useEffect(() => {
     if (user) {
       setImgUser(user.photoURL);
-      console.log(user.photoURL);
     }
   }, [user]);
 
@@ -80,7 +79,6 @@ const Navbar = () => {
     setPopover(false);
     logOut();
     navigate.push("/");
-    console.log("sign out");
   };
   const handleSignIn = () => {
     navigate.push("/login");

@@ -16,7 +16,6 @@ const PrepareScene = ({ changeScene, setMyUser, numtest, setNumtest }) => {
   const [_uid, _setUid] = useState(null);
 
   const clickPlay = () => {
-    console.log("Doing Test");
     changeScene("Doing Test");
   };
 
@@ -34,26 +33,16 @@ const PrepareScene = ({ changeScene, setMyUser, numtest, setNumtest }) => {
     const testNumber = async () => {
       const testNumber = await returnIQTestRemain(_uid);
       setNumtest(testNumber);
-      console.log("testNumber: " + testNumber);
       if (testNumber > 0) {
         setState("test");
-        console.log("Co The Test IQ!");
       } else {
         //setState("purchase");
         setState("test");
-        console.log("Khong The Test - Hay Mua 1 luot Test!");
       }
     };
     testNumber();
-    console.log(_uid);
   }, [_uid]);
 
-  const toggleCanTest = () => {
-    console.log("free test");
-  };
-  useEffect(() => {
-    console.log(_uid);
-  }, [_uid, user]);
   return (
     <motion.div
       initial={{ opacity: 0 }}
@@ -133,7 +122,7 @@ const PrepareScene = ({ changeScene, setMyUser, numtest, setNumtest }) => {
                   <path d="M20 6L9 17l-5-5"></path>
                 </svg>
               </span>
-              Analysis of your intelligence types
+              Analysis of your intelligence level
             </p>
           </div>
           <h5 className="text-center font-semibold text-gray-800 mb-2">
@@ -158,20 +147,6 @@ const PrepareScene = ({ changeScene, setMyUser, numtest, setNumtest }) => {
               <span className="absolute bottom-0 right-0 w-8 h-20 -mb-8 -mr-5 transition-all duration-300 ease-out transform rotate-45 translate-x-1 bg-white opacity-10 group-hover:translate-x-0"></span>
               <span className="absolute top-0 left-0 w-20 h-8 -mt-1 -ml-12 transition-all duration-300 ease-out transform -rotate-45 -translate-x-1 bg-white opacity-10 group-hover:translate-x-0"></span>
               <span className="relative z-20 flex items-center text-sm">
-                <svg
-                  className="relative w-5 h-5 mr-2 text-white"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeWnejoin="round"
-                    strokeWidth="2"
-                    d="M13 10V3L4 14h7v7l9-11h-7z"
-                  ></path>
-                </svg>
                 You Can Test IQ Now
               </span>
             </button>

@@ -1,13 +1,8 @@
 import NavbarFixed from "@/components/NavbarFixed";
 import React, { createContext, useState, useEffect, useRef } from "react";
 import Board from "./comps/wordle/Board";
-import GameOver from "./comps/wordle/GameOver";
 import Keyboard from "./comps/wordle/Keyboard";
-import {
-  boardDefault,
-  generateWordSet,
-  generateWordSet2,
-} from "./comps/wordle/Words";
+import { boardDefault, generateWordSet2 } from "./comps/wordle/Words";
 
 export const WordleContext = createContext();
 
@@ -28,7 +23,6 @@ const Wordle = () => {
     generateWordSet2().then((words) => {
       setWordSet(words.wordSet);
       setCorrectWord(words.todaysWord);
-      console.log(words);
     });
   }, []);
 
@@ -45,13 +39,10 @@ const Wordle = () => {
       alert("Word not found");
     }
 
-    //console.log(currWord);
-    //console.log(correctWord);
     if (currWord.toLowerCase() === correctWord.toLowerCase()) {
       setGameOver({ gameOver: true, guessedWord: true });
       return;
     }
-    console.log(currAttempt);
     if (currAttempt.attempt === 5) {
       setGameOver({ gameOver: true, guessedWord: false });
       return;
@@ -94,12 +85,10 @@ const Wordle = () => {
     generateWordSet2().then((words) => {
       setWordSet(words.wordSet);
       setCorrectWord(words.todaysWord);
-      console.log(words);
     });
   };
 
   useEffect(() => {
-    //console.log(board);
     if (!gameOver.gameOver) return;
 
     setTimeoutRef.current = setTimeout(() => {
@@ -110,7 +99,7 @@ const Wordle = () => {
   return (
     <>
       <NavbarFixed />
-      <div className="w-full h-screen bg-[#322638] text-_w_text overflow-hidden">
+      <div className="w-full h-screen bg-_dark text-_w_text overflow-hidden">
         <div className="max-w-xl h-full mx-auto flex flex-col justify-between items-center relative">
           <div className="w-full px-10">
             <div className="w-full border-b flex justify-between pt-5 pb-1">
@@ -168,8 +157,8 @@ const Wordle = () => {
             <Keyboard />
           </WordleContext.Provider>
           {modalName === "close" && (
-            <div className="fixed w-full h-full bg-_w_bg/[.8] px-5 flex justify-center items-center">
-              <div className="w-96 h-64 bg-_w_bg border border-gray-500 rounded-md">
+            <div className="fixed w-full h-full bg-_dark/[.8] px-5 flex justify-center items-center">
+              <div className="w-96 h-64 bg-_dark border border-gray-500 rounded-md">
                 <div className="h-full flex flex-col justify-center items-center">
                   <h3 className="font-bold text-center text-xl">
                     {gameOver.guessedWord
@@ -199,7 +188,7 @@ const Wordle = () => {
             </div>
           )}
           {modalName === "tip" && (
-            <div className="absolute top-0 w-full h-full bg-_w_bg px-5">
+            <div className="absolute top-0 w-full h-full bg-_dark px-5">
               <svg
                 onClick={() => setModalName("none")}
                 xmlns="http://www.w3.org/2000/svg"
@@ -297,7 +286,7 @@ const Wordle = () => {
             </div>
           )}
           {modalName === "credits" && (
-            <div className="absolute top-0 w-full h-full bg-_w_bg px-5">
+            <div className="absolute top-0 w-full h-full bg-_dark px-5">
               <svg
                 onClick={() => setModalName("none")}
                 xmlns="http://www.w3.org/2000/svg"

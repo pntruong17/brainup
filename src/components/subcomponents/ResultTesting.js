@@ -1,12 +1,11 @@
 import React, { useEffect, useState } from "react";
 import Link from "next/link";
-import { AnimatePresence, motion } from "framer-motion";
+import { motion } from "framer-motion";
 import BarChartComp from "@/components/subcomponents/BarChart";
 import BarChartVerticle from "@/components/subcomponents/BarChartVerticle";
 import { data, dataAges, dataEdus } from "public/data/sampleDataIQ";
 
 const ResultTesting = ({ yourdata }) => {
-  //console.log(yourdata);
   const [showIQ, setShowIQ] = useState();
   const [showIQage, setShowIQage] = useState();
   const [showIQedu, setShowIQedu] = useState();
@@ -74,11 +73,9 @@ const ResultTesting = ({ yourdata }) => {
     const _iqedu = dataEdus
       .filter((edu) => edu.edu === yourdata.edu)
       .map((edu) => edu["IQ by education"]);
-    console.log(_iqedu);
     const _iqage = dataAges
       .filter((age) => age.age === yourdata.age)
       .map((age) => age["IQ by age"]);
-    console.log(_iqage);
 
     let newDataAge = [
       ...dataAges,

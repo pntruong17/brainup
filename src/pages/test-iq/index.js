@@ -30,8 +30,6 @@ const Testiq = () => {
   }, [user, navigate]);
 
   useEffect(() => {
-    console.log(result);
-    console.log(yourdata);
     //setFinish(true);
   }, [result, yourdata]);
 

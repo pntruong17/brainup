@@ -14,6 +14,7 @@ module.exports = {
       },
       fontFamily: {
         Inter: ["Inter", "sans-serif"],
+        Nunito: ["Nunito", "sans-serif"],
         Roboto: ["Roboto", "sans-serif"],
         Unbounded: ["Unbounded", "sans-serif"],
         Albert: ['"Albert Sans"', "sans-serif"],

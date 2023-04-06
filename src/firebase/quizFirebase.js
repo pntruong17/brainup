@@ -26,7 +26,6 @@ export const getQuiz = async () => {
   const querySnapshot = await getDocs(collection(db, "quizs"));
   querySnapshot.forEach((doc) => {
     // doc.data() is never undefined for query doc snapshots
-    //console.log(doc.id, " => ", doc.data());
     quizDoc.push({
       ...doc.data(),
       id: doc.id,

@@ -1,13 +1,7 @@
 import React, { useState } from "react";
 import Link from "next/link";
-import Hamburger from "./subcomponents/Hamburger";
-import { useUserAuth } from "./helper/UserAuthContextProvider";
-import { useRouter } from "next/router";
 
 const NavbarFixed = () => {
-  const { user, logOut } = useUserAuth();
-  const navigate = useRouter();
-
   let Links = [
     {
       name: "Home",

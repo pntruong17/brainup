@@ -3,9 +3,7 @@ import { motion, AnimatePresence } from "framer-motion";
 
 const PregameModal = ({
   nameGame,
-  gameDesc,
   Howplayed,
-  colorBG,
   photoURL,
   visibleModal,
   setVisibleModal,

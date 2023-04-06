@@ -1,20 +1,13 @@
 import React, { useEffect, useRef, useState } from "react";
 import { motion } from "framer-motion";
-import Image from "next/image";
 import Link from "next/link";
 import { gamelib } from "@/libs/gamelib";
-import { getQuiz } from "@/firebase/quizFirebase";
 
 const GameFeatureIntro = () => {
   // test getDocument
   const [width, setWidth] = useState(0);
   const casousel = useRef();
-  const [currentImageNumber, setCurrentImageNumber] = useState(2);
 
-  const getDocument = async () => {
-    const quiz = await getQuiz();
-    console.log(quiz);
-  };
   useEffect(() => {
     setWidth(casousel.current.scrollWidth - casousel.current.offsetWidth);
   }, []);

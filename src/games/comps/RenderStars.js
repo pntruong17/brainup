@@ -1,16 +1,8 @@
-import React, { useEffect, useState, useRef } from "react";
-import { AnimatePresence, motion } from "framer-motion";
-const RenderStars = ({
-  visible,
-  setVisible,
-  star,
-  handleClick,
-  setIns,
-  setID,
-}) => {
+import React, { useState } from "react";
+import { motion } from "framer-motion";
+const RenderStars = ({ visible, setVisible, star, setIns, setID }) => {
   const [_deg, _setDeg] = useState(0);
   const clickSelf = () => {
-    console.log("click self");
     _setDeg(0);
     setID(star.id);
     setIns((prev) => prev + 1);

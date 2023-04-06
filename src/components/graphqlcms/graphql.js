@@ -14,6 +14,7 @@ export const QUERY_POSTS = gql`
       slug
       title
       tags
+      excerpt
     }
   }
 `;

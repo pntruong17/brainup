@@ -15,7 +15,6 @@ async function getBlogs() {
   });
   let res = await response.json();
   const discussions = res.data.repository.discussions.nodes;
-  //console.log(discussions);
   const posts = discussions.map((discussion) => {
     const {
       title,

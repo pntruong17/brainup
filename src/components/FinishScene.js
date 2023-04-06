@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import { createQuiz } from "../firebase/quizFirebase";
 import GenderOption from "./subcomponents/GenderOption";
@@ -25,8 +25,6 @@ const FinishScene = ({
   const [isDisabled, setIsDisabled] = useState(false);
 
   const [smit, setSmit] = useState(false);
-
-  console.log("finish : " + wrongQuizs);
 
   const checkEmptyFields = () => {
     let arr = [];
@@ -68,7 +66,6 @@ const FinishScene = ({
 
   useEffect(() => {
     if (!smit) return;
-    console.log(empties);
 
     if (empties.length <= 0) {
       let codesampple = {
@@ -93,10 +90,8 @@ const FinishScene = ({
         });
 
         setIsDisabled(true);
-        console.log(codesampple);
       } else {
         setIsDisabled(true);
-        console.log(codesampple);
         changeScene("Calculator");
       }
     }
