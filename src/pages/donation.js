@@ -29,7 +29,8 @@ const Donation = () => {
                 Your donation will help us develop more high-quality brain games
                 in the future. Thank you for your support.
               </p>
-              <div className="w-full flex justify-center mt-8">
+
+              <div className="w-full flex justify-center items-center mt-8">
                 <div className="w-[200px]">
                   <PayPalScriptProvider
                     options={{
@@ -41,6 +42,13 @@ const Donation = () => {
                     <DonateButtonWrapper currency={"USD"} />
                   </PayPalScriptProvider>
                 </div>
+                <h5 className="font-bold font-Nunito px-5">Or</h5>
+                <a
+                  className="font-Nunito font-bold border border-_darkblue/[0.5] rounded-full px-8 py-1 text-_darkblue hover:text-_green"
+                  href="https://www.buymeacoffee.com/brainup"
+                >
+                  Buy me a coffee!
+                </a>
               </div>
             </div>
           </div>
