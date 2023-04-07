@@ -13,10 +13,10 @@ const ItemScrollAnimation = ({ id, item, setValue, visible, setVisible }) => {
         {visible && (
           <motion.div
             onClick={() => handleClick(id)}
-            className="w-1/5 h-[50px] xs:h-[60px] flex items-center justify-center text-5xl md:text-6xl cursor-pointer border"
+            className="w-1/5 h-[50px] xs:h-[60px] flex items-center justify-center text-5xl md:text-6xl cursor-pointer"
             key={visible}
             initial={{ scale: 0 }}
-            animate={{ rotate: 360, scale: 1 }}
+            animate={{ scale: 1 }}
             exit={{ scale: 0 }}
             transition={{
               type: "tween",
