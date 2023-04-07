@@ -2,7 +2,6 @@ import React from "react";
 import { PayPalScriptProvider } from "@paypal/react-paypal-js";
 import { motion } from "framer-motion";
 import DonateButtonWrapper from "@/components/paypal/DonateButton";
-import Head from "next/head";
 import LayoutEmpty from "@/components/LayoutEmpty";
 
 const Donation = () => {
@@ -42,7 +41,7 @@ const Donation = () => {
                   <div className="w-[200px]">
                     <PayPalScriptProvider
                       options={{
-                        "client-id": process.env.REACT_PAYPAL_CLIENT_ID,
+                        "client-id": process.env.NEXT_PUBLIC_PAYPAL_CLIENT_ID,
                         components: "buttons",
                         currency: "USD",
                       }}

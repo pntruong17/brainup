@@ -53,7 +53,7 @@ const DonateButtonWrapper = ({ currency }) => {
           })
           .then((orderId) => {
             // Your code here after create the donation
-            navigate.push("/");
+
             return orderId;
           });
       }}
