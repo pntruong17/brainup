@@ -29,7 +29,7 @@ const ShowTopScore = ({ score, data, visible, setVisible }) => {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            className="fixed w-full h-screen bg-_dark/[.98] z-10"
+            className="fixed w-full px-3 h-screen bg-_dark/[.98] z-10"
           >
             <div onClick={handleClose} className="absolute top-2 right-2">
               <svg

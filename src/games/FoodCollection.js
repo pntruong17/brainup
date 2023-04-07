@@ -154,16 +154,17 @@ const FoodCollection = () => {
   return (
     <>
       <NavbarFixed />
-      <div className="flex flex-col w-screen h-screen bg-_dark justify-center p-3">
+      <div className="flex w-full h-screen bg-_dark justify-center items-center px-3 py-10">
         {state === states[1] && (
-          <div className="max-w-2xl mx-auto box-shadow-framer rounded-2xl bg-white p-5 -m-2">
-            <div className="w-full">
+          <div className="rounded-2xl bg-white p-5 -m-2">
+            <div className="w-full flex justify-between">
               <h4 className="text-xs border rounded-full px-3 py-1 text-center">
                 Collected: {selected.length} / 35
               </h4>
             </div>
-            <div className="w-full">
-              <div className="grid grid-cols-5 response-grid mx-auto relative">
+
+            <div className="w-[200px] h-[400px] xs:w-[300px] xs:h-[500px] md:w-[400px] md:h-[600px]">
+              <div className="flex flex-wrap">
                 {featureSlots.map((slot, index) => {
                   return (
                     <ItemScrollAnimation
@@ -181,31 +182,32 @@ const FoodCollection = () => {
           </div>
         )}
 
-        <div className="w-full flex h-28 justify-center">
-          <button
-            onClick={handleStart}
-            className={`${
-              state === states[0] ? "" : "hidden"
-            } flex justify-center items-center rounded-full w-28 h-12 border bg-green-400 m-1 hover:box-shadow-framer`}
-          >
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              viewBox="0 0 24 24"
-              fill="currentColor"
-              className="w-6 h-6 text-white"
+        {state === states[0] && (
+          <div className="w-full flex h-28 justify-center">
+            <button
+              onClick={handleStart}
+              className={`flex justify-center items-center rounded-full w-28 h-12 border bg-green-400 m-1 hover:box-shadow-framer`}
             >
-              <path
-                fillRule="evenodd"
-                d="M4.5 5.653c0-1.426 1.529-2.33 2.779-1.643l11.54 6.348c1.295.712 1.295 2.573 0 3.285L7.28 19.991c-1.25.687-2.779-.217-2.779-1.643V5.653z"
-                clipRule="evenodd"
-              />
-            </svg>
-          </button>
-        </div>
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 24 24"
+                fill="currentColor"
+                className="w-6 h-6 text-white"
+              >
+                <path
+                  fillRule="evenodd"
+                  d="M4.5 5.653c0-1.426 1.529-2.33 2.779-1.643l11.54 6.348c1.295.712 1.295 2.573 0 3.285L7.28 19.991c-1.25.687-2.779-.217-2.779-1.643V5.653z"
+                  clipRule="evenodd"
+                />
+              </svg>
+            </button>
+          </div>
+        )}
+
         {state === states[2] && (
           <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-96">
             <h3 className="text-xl text-center text-_red font-bold">
-              {win ? "You are Win! " : "You are Wrong!"}
+              {win ? "You are win! " : "You chose incorrectly"}
             </h3>
             <h3 className="text-center text-sm text-white my-1">
               Your choices are:

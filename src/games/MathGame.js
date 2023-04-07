@@ -305,82 +305,79 @@ const MathGame = () => {
       />
 
       <div className="w-full h-screen px-2 py-8 bg-_dark">
-        <div>
-          {state !== states[0] && (
-            <div className="w-full h-full p-2 response-grid">
-              <div className="flex flex-col max-w-2xl mx-auto bg-white shadow-md rounded-lg overflow-hidden">
-                <div className="flex flex-nowrap justify-between p-4 border-b bg-slate-50">
-                  <h4 className="border rounded-full px-2 text-center text-xs font-medium bg-white">
-                    {"Score: " + point}
-                  </h4>
-                  <h2 className="px-2 text-center text-sm font-bold bg-white">
-                    {"Time: " + renderTimer()}
-                  </h2>
-                  <h4 className="border hidden rounded-full px-2 text-center text-xs font-medium bg-white">
-                    {"Correct: " + correct + "/" + totalClick}
-                  </h4>
-                  <svg
-                    onClick={() => setShowTopScore(true)}
-                    xmlns="http://www.w3.org/2000/svg"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    strokeWidth="1.5"
-                    stroke="currentColor"
-                    className="w-6 h-6 cursor-pointer"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      d="M3 13.125C3 12.504 3.504 12 4.125 12h2.25c.621 0 1.125.504 1.125 1.125v6.75C7.5 20.496 6.996 21 6.375 21h-2.25A1.125 1.125 0 013 19.875v-6.75zM9.75 8.625c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125v11.25c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 01-1.125-1.125V8.625zM16.5 4.125c0-.621.504-1.125 1.125-1.125h2.25C20.496 3 21 3.504 21 4.125v15.75c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 01-1.125-1.125V4.125z"
-                    />
-                  </svg>
-                </div>
-                <div className="w-full">
-                  <div className="w-full flex flex-wrap px-4 ">
-                    <div className="flex sm:w-1/2 h-48 md:h-60 w-full items-center justify-center px-3 py-4 md:py-10">
-                      <MathBoard mathArray={arrayTrai} randnum={firstRandom} />
-                    </div>
-                    <div className="flex sm:w-1/2 h-48 md:h-60 w-full items-center justify-center px-3 py-4 md:py-10">
-                      <MathBoard mathArray={arrayPhai} randnum={firstRandom} />
-                    </div>
-                  </div>
-                </div>
-
-                <div className="w-full h-28 flex justify-center">
-                  <CheckAndXMark
-                    signal={signal}
-                    checkChange={totalClick}
-                    visibleMark={visibleMark}
-                    setVisibleMark={setVisibleMark}
+        {state !== states[0] && (
+          <div className="w-full h-full p-2 _response-grid">
+            <div className="w-full h-full sm:h-auto flex flex-col justify-between max-w-2xl mx-auto bg-white shadow-md rounded-lg overflow-hidden">
+              <div className="flex flex-nowrap justify-between p-4 border-b bg-slate-50">
+                <h4 className="border rounded-full px-2 text-center text-xs font-medium bg-white">
+                  {"Score: " + point}
+                </h4>
+                <h2 className="px-2 text-center text-sm font-bold bg-white">
+                  {"Time: " + renderTimer()}
+                </h2>
+                <h4 className="border hidden rounded-full px-2 text-center text-xs font-medium bg-white">
+                  {"Correct: " + correct + "/" + totalClick}
+                </h4>
+                <svg
+                  onClick={() => setShowTopScore(true)}
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  strokeWidth="1.5"
+                  stroke="currentColor"
+                  className="w-6 h-6 cursor-pointer"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    d="M3 13.125C3 12.504 3.504 12 4.125 12h2.25c.621 0 1.125.504 1.125 1.125v6.75C7.5 20.496 6.996 21 6.375 21h-2.25A1.125 1.125 0 013 19.875v-6.75zM9.75 8.625c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125v11.25c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 01-1.125-1.125V8.625zM16.5 4.125c0-.621.504-1.125 1.125-1.125h2.25C20.496 3 21 3.504 21 4.125v15.75c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 01-1.125-1.125V4.125z"
                   />
-                </div>
+                </svg>
+              </div>
 
-                <div className="w-full">
-                  <div className="flex flex-nowrap justify-center flex-1">
-                    <button
-                      onClick={handleLeftClick}
-                      className="w-1/3 h-28 bg-white p-1 border-t text-xs text-gray-800 font-semibold uppercase hover:bg-gray-100 transition-all duration-100"
-                    >
-                      Left Phase is Greater
-                    </button>
-                    <button
-                      onClick={handleDownClick}
-                      className="w-1/3 h-28 bg-white p-1 border text-xs text-gray-800 font-semibold uppercase hover:bg-gray-100 transition-all duration-100"
-                    >
-                      {"="}
-                    </button>
-                    <button
-                      onClick={handleRightClick}
-                      className="w-1/3 h-28 bg-white p-1 border-t text-xs text-gray-800 font-semibold uppercase hover:bg-gray-100 transition-all duration-100"
-                    >
-                      Right Phase is Greater
-                    </button>
-                  </div>
+              <div className="w-full flex flex-wrap px-4 ">
+                <div className="flex sm:w-1/2 h-auto sm:h-60 w-full items-center justify-center px-3 py-4 md:py-10">
+                  <MathBoard mathArray={arrayTrai} randnum={firstRandom} />
+                </div>
+                <div className="flex sm:w-1/2 h-auto sm:h-60 w-full items-center justify-center px-3 py-4 md:py-10">
+                  <MathBoard mathArray={arrayPhai} randnum={firstRandom} />
+                </div>
+              </div>
+
+              <div className="w-full h-28 flex justify-center">
+                <CheckAndXMark
+                  signal={signal}
+                  checkChange={totalClick}
+                  visibleMark={visibleMark}
+                  setVisibleMark={setVisibleMark}
+                />
+              </div>
+
+              <div className="w-full">
+                <div className="flex flex-nowrap justify-center flex-1">
+                  <button
+                    onClick={handleLeftClick}
+                    className="w-1/3 h-28 bg-white p-1 border-t text-xs text-gray-800 font-semibold uppercase hover:bg-gray-100 transition-all duration-100"
+                  >
+                    Left Phase is Greater
+                  </button>
+                  <button
+                    onClick={handleDownClick}
+                    className="w-1/3 h-28 bg-white p-1 border text-xs text-gray-800 font-semibold uppercase hover:bg-gray-100 transition-all duration-100"
+                  >
+                    {"="}
+                  </button>
+                  <button
+                    onClick={handleRightClick}
+                    className="w-1/3 h-28 bg-white p-1 border-t text-xs text-gray-800 font-semibold uppercase hover:bg-gray-100 transition-all duration-100"
+                  >
+                    Right Phase is Greater
+                  </button>
                 </div>
               </div>
             </div>
-          )}
-        </div>
+          </div>
+        )}
       </div>
     </>
   );

@@ -3,7 +3,7 @@ import React from "react";
 const MemoryCard = ({ item, id, handleCardClick }) => (
   <>
     <div
-      className={`card w-12 h-12 lg:w-24 lg:h-24 m-1 cursor-pointer ${
+      className={`card w-12 h-12 sm:w-24 sm:h-24 m-1 cursor-pointer ${
         item.stat === "active" ||
         item.stat === "wrong" ||
         item.stat === "correct"
@@ -12,7 +12,7 @@ const MemoryCard = ({ item, id, handleCardClick }) => (
       } ${item.stat === "correct" ? "correct" : ""} `}
       onClick={() => handleCardClick(id)}
     >
-      <div className="flex back text-3xl lg:text-5xl text-center justify-center items-center">
+      <div className="flex back text-3xl sm:text-5xl text-center justify-center items-center">
         {item.icon}
       </div>
       <div className="front text-sm text-center overflow-hidden">

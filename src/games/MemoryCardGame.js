@@ -1,6 +1,7 @@
 import NavbarFixed from "@/components/NavbarFixed";
 import React, { useState, useEffect, useRef } from "react";
 import MemoryCard from "./comps/MemoryCard";
+import { motion } from "framer-motion";
 
 const MemoryCardGame = () => {
   //index là level mà người chơi phải vượt wa, giá trị mỗi index là số cặp lá bài được chia`
@@ -150,8 +151,8 @@ const MemoryCardGame = () => {
   return (
     <>
       <NavbarFixed />
-      <div className="flex w-full h-screen bg-_dark justify-center items-center p-3">
-        <div className="bg-white rounded-md response-cards overflow-hidden">
+      <div className="flex w-full h-screen bg-_dark justify-center items-center px-3 py-10">
+        <div className="bg-white rounded-md flex flex-col justify-between max-w-xl h-full sm:h-auto overflow-hidden">
           <div className="flex flex-nowrap justify-between p-4 border-b bg-slate-50">
             <h4 className="border text-_pink rounded-full px-2 text-center text-xs font-medium">
               {"Total cards: " + items.length}
@@ -163,7 +164,8 @@ const MemoryCardGame = () => {
               Flips remaining: {flips > 0 ? flips : "0"}
             </h4>
           </div>
-          <div className="p-5">
+
+          <div className="p-1">
             <div className="flex flex-wrap justify-center">
               {items.map((item, index) => (
                 <MemoryCard
@@ -175,14 +177,16 @@ const MemoryCardGame = () => {
               ))}
             </div>
           </div>
+
           <div className="flex justify-center my-4">
             {!hidePlayButton && (
-              <button
+              <motion.button
+                Layout
                 className="px-5 py-2 border rounded-full bg-_blue text-white text-sm font-semibold"
                 onClick={() => shuffleCards()}
               >
                 {"Play Level " + (lv + 1)}
-              </button>
+              </motion.button>
             )}
           </div>
         </div>

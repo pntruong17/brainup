@@ -1,4 +1,4 @@
-//import React, { useRef, useState, useEffect } from "react";
+import React, { useRef, useState, useEffect } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 
 const ItemScrollAnimation = ({ id, item, setValue, visible, setVisible }) => {
@@ -13,7 +13,7 @@ const ItemScrollAnimation = ({ id, item, setValue, visible, setVisible }) => {
         {visible && (
           <motion.div
             onClick={() => handleClick(id)}
-            className="flex items-center justify-center xxs:w-10 md:w-20 text-5xl md:text-6xl cursor-pointer"
+            className="w-1/5 h-[50px] xs:h-[60px] flex items-center justify-center text-5xl md:text-6xl cursor-pointer border"
             key={visible}
             initial={{ scale: 0 }}
             animate={{ rotate: 360, scale: 1 }}
