@@ -18,11 +18,7 @@ const Index = ({ triviaData }) => {
           <div className="max-w-[680px] shadow-sm mx-auto border px-5 rounded-xl">
             {triviaData.map((trivia, i) => {
               return (
-                <TriviaCard
-                  key={i}
-                  trivia={trivia}
-                  image={`/images/trivia/${trivia.image}`}
-                />
+                <TriviaCard key={i} trivia={trivia} image={`${trivia.image}`} />
               );
             })}
           </div>

@@ -20,11 +20,7 @@ const index = ({ triviByGroup }) => {
             </h2>
             {triviByGroup.map((trivia, i) => {
               return (
-                <TriviaCard
-                  key={i}
-                  trivia={trivia}
-                  image={`/images/trivia/${trivia.image}`}
-                />
+                <TriviaCard key={i} trivia={trivia} image={`${trivia.image}`} />
               );
             })}
           </div>

@@ -14,7 +14,7 @@ const TriviaCard = ({ trivia, image }) => {
           />
         </div>
         <div className="p-5 flex flex-col justify-center">
-          <Link href={"/trivia-group/" + group}>
+          <Link href={"/trivia-category/" + group}>
             <h4 className="font-bold text-_accent text-lg capitalize hover:underline cursor-pointer">
               {group}
             </h4>
