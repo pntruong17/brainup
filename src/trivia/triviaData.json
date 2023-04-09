@@ -1,0 +1,98 @@
+{
+  "questions": [
+    {
+      "title": "What is the capital of France?",
+      "slug": "what-is-the-capital-of-france",
+      "image": "/images/trivia/1.png",
+      "group": "sports",
+      "expert": "public",
+      "questions": [
+        {
+          "img1": "1.png",
+          "img2": null,
+          "fact": "Paris",
+          "answers": [
+            {
+              "answer": "Paris",
+              "correct": true
+            },
+            {
+              "answer": "Berlin",
+              "correct": false
+            },
+            {
+              "answer": "Madrid",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "img1": "2.png",
+          "img2": null,
+          "fact": "Paris",
+          "answers": [
+            {
+              "answer": "Paris",
+              "correct": true
+            },
+            {
+              "answer": "Berlin",
+              "correct": false
+            },
+            {
+              "answer": "Madrid",
+              "correct": false
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "What is the capital of France?",
+      "slug": "what-is-the-capital-of-germany",
+      "image": "/images/trivia/2.png",
+      "group": "sports",
+      "expert": "public",
+      "questions": [
+        {
+          "img1": "",
+          "img2": null,
+          "fact": "Paris",
+          "answers": [
+            {
+              "answer": "Paris",
+              "correct": true
+            },
+            {
+              "answer": "Berlin",
+              "correct": false
+            },
+            {
+              "answer": "Madrid",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "img1": "",
+          "img2": null,
+          "fact": "Paris",
+          "answers": [
+            {
+              "answer": "Paris",
+              "correct": true
+            },
+            {
+              "answer": "Berlin",
+              "correct": false
+            },
+            {
+              "answer": "Madrid",
+              "correct": false
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

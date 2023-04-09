@@ -20,6 +20,10 @@ const Navbar = () => {
       link: "/brain-games",
     },
     {
+      name: "Trivia",
+      link: "/trivia",
+    },
+    {
       name: "Articles",
       link: "/articles",
     },

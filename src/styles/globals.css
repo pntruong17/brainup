@@ -148,6 +148,10 @@
   }
 }
 
+.animate-rotation {
+  animation: analog_rotation 5s linear;
+}
+
 .flipped {
   transform: rotateY(180deg);
 }
@@ -249,5 +253,13 @@
   }
   100% {
     transform: rotate(-360deg);
+  }
+}
+@keyframes analog_rotation {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
   }
 }
