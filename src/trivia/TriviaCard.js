@@ -5,8 +5,8 @@ const TriviaCard = ({ trivia, image }) => {
   const { title, group, expert, slug } = trivia;
   return (
     <>
-      <div className="w-full h-auto flex my-5 font-Nunito">
-        <div className="w-44 h-36 overflow-hidden rounded-lg">
+      <div className="w-full h-auto flex flex-col sm:flex-row my-5 font-Nunito border- bg-white sm:bg-transparent sm:border-none rounded-lg">
+        <div className="w-full sm:w-44 h-36 overflow-hidden rounded-lg">
           <img
             className="object-cover object-center cursor-pointer hover:scale-105 duration-200"
             src={image}

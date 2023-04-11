@@ -46,6 +46,8 @@ module.exports = {
         _w_match: "#388E3C",
         _w_no_match: "#ebeff1",
         _w_almost: "#F9A825",
+        _contrast_text: "#002795",
+        _contrast_bg: "#FFD154",
       },
     },
   },

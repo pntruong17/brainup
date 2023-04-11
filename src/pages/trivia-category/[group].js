@@ -1,5 +1,5 @@
 import React from "react";
-import Layout from "@/components/Layout";
+import LayoutTrivia from "@/components/LayoutTrivia";
 import TriviaCard from "@/trivia/TriviaCard";
 import fs from "fs";
 import path from "path";
@@ -7,7 +7,7 @@ import path from "path";
 const index = ({ triviByGroup }) => {
   return (
     <>
-      <Layout
+      <LayoutTrivia
         pageMeta={{
           title: " | Trivia",
           description: "Trivia",
@@ -26,7 +26,7 @@ const index = ({ triviByGroup }) => {
           </div>
           <div className="w-full"></div>
         </div>
-      </Layout>
+      </LayoutTrivia>
     </>
   );
 };

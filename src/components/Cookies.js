@@ -19,6 +19,11 @@ const updateCookies = (_cookieName, _dataArr) => {
     cookies.set(_cookieName, newArr, { path: "/" });
   }
 };
+
+const updateSingleNumberCookies = (_cookieName, _data) => {
+  cookies.set(_cookieName, _data, { path: "/" });
+};
+
 const checkCookies = (_cookieName) => {
   const mycookies = cookies.get(_cookieName);
   if (mycookies) {
@@ -27,4 +32,10 @@ const checkCookies = (_cookieName) => {
     return false;
   }
 };
-export { setCookies, getCookies, updateCookies, checkCookies };
+export {
+  setCookies,
+  getCookies,
+  updateCookies,
+  checkCookies,
+  updateSingleNumberCookies,
+};
