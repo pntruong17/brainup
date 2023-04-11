@@ -28,8 +28,8 @@
           ]
         },
         {
-          "img1": "2.png",
-          "img2": null,
+          "img1": "https://res.cloudinary.com/dammaehjo/image/upload/v1681248968/cld-sample-5.jpg",
+          "img2": "https://res.cloudinary.com/dammaehjo/image/upload/v1681248966/cld-sample.jpg",
           "fact": "Paris",
           "answers": [
             {
@@ -47,7 +47,7 @@
           ]
         },
         {
-          "img1": "/images/trivia/1.png",
+          "img1": "https://res.cloudinary.com/dammaehjo/image/upload/v1681249307/sama_a_painting_of_A_very_beautiful_girl_from_old_legends_who_h_2ee594c2-a8f6-4fd3-9003-d13844617280_qclf3a.png",
           "img2": "/images/trivia/2.png",
           "fact": "Paris",
           "answers": [
@@ -66,7 +66,7 @@
           ]
         },
         {
-          "img1": "/images/trivia/1.png",
+          "img1": "https://res.cloudinary.com/dammaehjo/image/upload/v1681249307/sama_a_painting_of_A_very_beautiful_girl_from_old_legends_who_h_2ee594c2-a8f6-4fd3-9003-d13844617280_qclf3a.png",
           "img2": "/images/trivia/2.png",
           "fact": "Paris",
           "answers": [
