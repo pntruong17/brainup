@@ -1,10 +1,10 @@
 import Head from "next/head";
 import React from "react";
 import { useRouter } from "next/router";
-import NavbarFixed from "./NavbarFixed";
 import FooterDark from "./FooterDark";
+import NavbarCategoty from "./NavbarCategoty";
 
-const LayoutTrivia = ({ children, pageMeta }) => {
+const LayoutTriviaGroup = ({ children, pageMeta }) => {
   const router = useRouter();
   const meta = {
     title: "Webapp Brain Up",
@@ -31,11 +31,11 @@ const LayoutTrivia = ({ children, pageMeta }) => {
         <link rel="icon" href="/favicon.ico" />
         <title>{meta.title}</title>
       </Head>
-      <NavbarFixed />
+      <NavbarCategoty />
       <main>{children}</main>
       <FooterDark />
     </>
   );
 };
 
-export default LayoutTrivia;
+export default LayoutTriviaGroup;

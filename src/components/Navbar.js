@@ -119,7 +119,7 @@ const Navbar = () => {
               <Link
                 href={link.link}
                 onClick={() => setOpen(false)}
-                className="font-Inter text-base font-medium text-gray-800 hover:text-green-400 duration-200"
+                className="font-Inter text-base font-medium text-gray-800 hover:text-_green duration-200"
               >
                 {link.name}
               </Link>

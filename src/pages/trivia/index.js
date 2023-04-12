@@ -18,7 +18,7 @@ const Index = ({ triviaData }) => {
           <h2 className="font-black text-4xl text-center text-_contrast_bg font-Nunito underline sm:mb-8">
             Trivia
           </h2>
-          <div className="max-w-[680px] shadow-sm mx-auto sm:border rounded-xl">
+          <div className="max-w-[680px] bg-_contrast_bg shadow-sm mx-auto p-3 rounded-xl">
             {triviaData.map((trivia, i) => {
               return (
                 <TriviaCard key={i} trivia={trivia} image={`${trivia.image}`} />

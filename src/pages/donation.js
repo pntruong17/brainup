@@ -17,9 +17,9 @@ const Donation = () => {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1, ease: "easeOut" }}
-          className="w-full h-screen p-10"
+          className="w-full h-screen p-5 md:p-10"
         >
-          <div className="max-w-2xl mx-auto rounded-3xl shadow-md overflow-hidden">
+          <div className="max-w-2xl mx-auto rounded-3xl shadow-md overflow-hidden pb-3">
             <div className="w-full h-32 overflow-hidden">
               <img
                 className="w-full object-center"
@@ -28,7 +28,7 @@ const Donation = () => {
               />
             </div>
             <div className="flex">
-              <div className="w-full p-10">
+              <div className="w-full p-2 md:p-10">
                 <h2 className="font-bold text-2xl text-center">
                   Let&apos;s do a good deed today!
                 </h2>
@@ -37,8 +37,8 @@ const Donation = () => {
                   games in the future. Thank you for your support.
                 </p>
 
-                <div className="w-full flex justify-center items-center mt-8">
-                  <div className="w-[200px]">
+                <div className="w-full flex flex-wrap justify-center items-center mt-8">
+                  <div className="w-full md:w-1/3">
                     <PayPalScriptProvider
                       options={{
                         "client-id": process.env.NEXT_PUBLIC_PAYPAL_CLIENT_ID,
@@ -49,9 +49,11 @@ const Donation = () => {
                       <DonateButtonWrapper currency={"USD"} />
                     </PayPalScriptProvider>
                   </div>
-                  <h5 className="font-bold font-Nunito px-5">Or</h5>
+                  <h5 className="w-full md:w-1/3 font-bold font-Nunito px-5 text-center">
+                    Or
+                  </h5>
                   <a
-                    className="font-Nunito font-bold border border-_darkblue/[0.5] rounded-full px-8 py-1 text-_darkblue hover:text-_green"
+                    className="w-full md:w-1/3 font-Nunito font-bold border border-_darkblue/[0.5] rounded-md px-8 py-1 text-_darkblue hover:text-_green hover:border-_green text-center"
                     href="https://www.buymeacoffee.com/brainup"
                   >
                     Buy me a coffee!

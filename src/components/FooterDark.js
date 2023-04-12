@@ -12,7 +12,7 @@ const FooterDark = () => {
           >
             <img
               className="h-6"
-              src={"/images/logo/logodark.png"}
+              src={"/images/logo/logowhite.png"}
               alt="logo iqup"
             />
           </a>

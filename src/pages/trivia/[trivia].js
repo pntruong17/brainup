@@ -1,6 +1,7 @@
 import React, { useEffect, useReducer, useState } from "react";
 import fs from "fs";
 import path from "path";
+import { motion } from "framer-motion";
 import LayoutTrivia from "@/components/LayoutTrivia";
 import AnswerButton from "@/trivia/AnswerButton";
 import TriviaCard from "@/trivia/TriviaCard";
@@ -337,14 +338,22 @@ const Trivia = ({ triviBySlug, triviNotThisQuiz }) => {
                   </div>
                 </div>
                 <div className="w-full bg-white h-[300px] p-5 overflow-hidden flex justify-center relative">
-                  <img
-                    src={`${thisQuestion.img1}`}
-                    className="object-contain object-center h-full"
-                    alt=""
-                  />
+                  {state === STATES[1] && (
+                    <motion.img
+                      initial={{ opacity: 0 }}
+                      animate={{ opacity: 1 }}
+                      transition={{ duration: 0.5, type: "tween" }}
+                      src={`${thisQuestion.img1}`}
+                      className="object-contain object-center h-full"
+                      alt=""
+                    />
+                  )}
                   {thisQuestion.img2 !== null &&
                     (state === STATES[2] || state === STATES[3]) && (
-                      <img
+                      <motion.img
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        transition={{ duration: 0.35, type: "tween" }}
                         src={`${thisQuestion.img2}`}
                         className="absolute top-0 object-contain object-center h-full"
                         alt=""
@@ -364,18 +373,9 @@ const Trivia = ({ triviBySlug, triviNotThisQuiz }) => {
                       />
                     ))}
                   </div>
-                  <div className="flex justify-between">
-                    <h3 onClick={handlePause} className="p-1 text-xl">
-                      Pause Timer
-                    </h3>
-                    <h3 onClick={handleReset} className="p-1 text-xl">
-                      Reset Timer
-                    </h3>
-                    <h3 onClick={handleStart} className="p-1 text-xl">
-                      Start Timer
-                    </h3>
+                  <div className="flex flex-row-reverse justify-between">
                     <div
-                      className={`group flex items-center p-1 font-bold text-xl sm:text-2xl hover:underline cursor-pointer ${
+                      className={`group flex items-center p-1 font-black text-xl text-_w_match tracking-tight sm:text-2xl hover:underline cursor-pointer ${
                         state === "timeout" || state === "answered"
                           ? "visible"
                           : "invisible"
@@ -388,28 +388,28 @@ const Trivia = ({ triviBySlug, triviNotThisQuiz }) => {
                       ) : (
                         <h3 onClick={handleNext}>Next Question</h3>
                       )}
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        fill="none"
-                        viewBox="0 0 24 24"
-                        strokeWidth="2.5"
-                        stroke="currentColor"
-                        className="w-6 h-6 group-hover:translate-x-2 duration-150 ml-2"
-                      >
-                        <path
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                          d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"
-                        />
-                      </svg>
                     </div>
+                    {(state === STATES[2] || state === STATES[3]) &&
+                      questionLeft !== 1 && (
+                        <h3 className="p-1 text-lg font-bold text-gray-600 tracking-tight">
+                          Question left: {questionLeft - 1}
+                        </h3>
+                      )}
                   </div>
-                  <div className="border rounded-lg">
-                    <p className="p-3 font-semibold tracking-tight">
-                      {" "}
-                      <span className="font-bold text-_orange">Fact: </span>
-                      {thisQuestion.fact}
-                    </p>
+                  <div className="p-2">
+                    {(state === STATES[2] || state === STATES[3]) && (
+                      <motion.div
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        exit={{ opacity: 0 }}
+                        className="border rounded-lg"
+                      >
+                        <p className="p-3 font-semibold tracking-tight">
+                          <span className="font-bold text-_orange">Fact: </span>
+                          {thisQuestion.fact}
+                        </p>
+                      </motion.div>
+                    )}
                   </div>
                 </div>
                 {state === STATES[0] && (

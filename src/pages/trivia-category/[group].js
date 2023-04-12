@@ -1,23 +1,23 @@
 import React from "react";
-import LayoutTrivia from "@/components/LayoutTrivia";
 import TriviaCard from "@/trivia/TriviaCard";
 import fs from "fs";
 import path from "path";
+import LayoutTriviaGroup from "@/components/LayoutTriviaGroup";
 
 const index = ({ triviByGroup }) => {
   return (
     <>
-      <LayoutTrivia
+      <LayoutTriviaGroup
         pageMeta={{
           title: " | Trivia",
           description: "Trivia",
         }}
       >
-        <div className="w-full pt-32 px-5">
-          <div className="max-w-[680px] shadow-sm mx-auto border px-5 rounded-xl">
-            <h2 className="text-3xl text-center font-bold text-_green font-Nunito">
-              Sports
-            </h2>
+        <div className="w-full min-h-screen pt-6 sm:pt-10 bg-[#16202C] px-3">
+          <h2 className="font-black text-4xl text-center text-_contrast_bg font-Nunito underline sm:mb-8">
+            Sports
+          </h2>
+          <div className="max-w-[680px] bg-_contrast_bg shadow-sm mx-auto p-3 rounded-xl">
             {triviByGroup.map((trivia, i) => {
               return (
                 <TriviaCard key={i} trivia={trivia} image={`${trivia.image}`} />
@@ -26,7 +26,7 @@ const index = ({ triviByGroup }) => {
           </div>
           <div className="w-full"></div>
         </div>
-      </LayoutTrivia>
+      </LayoutTriviaGroup>
     </>
   );
 };

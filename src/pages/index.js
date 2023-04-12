@@ -4,6 +4,7 @@ import Layout from "../components/Layout";
 import Statistic from "@/components/Statistic";
 import GameFeatureIntro from "@/components/GameIntro";
 import Testimonial from "@/components/Testimonial";
+import AllTopic from "@/components/AllTopic";
 
 export default function Home() {
   return (
@@ -22,8 +23,7 @@ export default function Home() {
         >
           <Hero />
           <Statistic />
-          <GameFeatureIntro />
-          <Testimonial />
+          <AllTopic />
         </motion.main>
       </Layout>
     </>
