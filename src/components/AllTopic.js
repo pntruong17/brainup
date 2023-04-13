@@ -1,5 +1,5 @@
 import React from "react";
-
+import Link from "next/link";
 const AllTopic = () => {
   const linkTopic = [
     {
@@ -40,99 +40,107 @@ const AllTopic = () => {
               Recently Published
             </h3>
             <div className="flex flex-wrap mt-10">
-              <div className="w-1/2 p-3">
-                <div className="group rounded-2xl w-full p-10 shadow-lg overflow-hidden relative cursor-pointer">
-                  <h3 className="font-bold text-gray-900 text-xl group-hover:underline group-hover:text-_green duration-100">
-                    Recently PublishedBalanced Color Palettes — Generative
-                    Snacks!
-                  </h3>
-                  <p className="pt-5 text-base">
-                    Recently PublishedBalanced Color Palettes — Generative
-                    Snacks!
-                  </p>
-                  <div className="absolute -bottom-4 -right-4 w-14 h-14 bg-_green rounded-2xl">
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      fill="none"
-                      viewBox="0 0 24 24"
-                      strokeWidth="2.5"
-                      stroke="currentColor"
-                      className="absolute bottom-6 right-6 w-6 h-6 text-white group-hover:translate-x-1 duration-100"
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"
-                      />
-                    </svg>
+              <div className="w-full md:w-1/2 p-3">
+                <Link href={"/trivia/guess-the-movie-by-emoji-quiz"}>
+                  <div className="group rounded-2xl w-full min-h-[280px] p-10 shadow-lg overflow-hidden relative cursor-pointer">
+                    <h3 className="font-bold text-gray-900 text-xl group-hover:underline group-hover:text-_green duration-100">
+                      Guess the Movie by Emoji — Quiz
+                    </h3>
+                    <p className="pt-5 text-base">
+                      Can you guess the movies by emojis? Let&apos;s find out
+                      and have heaps of fun in the guess the movie by emoji
+                      quiz!
+                    </p>
+                    <div className="absolute -bottom-4 -right-4 w-14 h-14 bg-_green rounded-2xl">
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        strokeWidth="2.5"
+                        stroke="currentColor"
+                        className="absolute bottom-6 right-6 w-6 h-6 text-white group-hover:translate-x-1 duration-100"
+                      >
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"
+                        />
+                      </svg>
+                    </div>
                   </div>
-                </div>
+                </Link>
               </div>
-              <div className="w-1/2 p-3">
-                <div className="group rounded-2xl w-full p-10 shadow-lg overflow-hidden relative cursor-pointer">
-                  <h3 className="font-bold text-gray-900 text-xl group-hover:underline group-hover:text-_green duration-100">
-                    Recently PublishedBalanced Color Palettes — Generative
-                    Snacks!
-                  </h3>
-                  <p className="pt-5 text-base">
-                    Recently PublishedBalanced Color Palettes — Generative
-                    Snacks!
-                  </p>
-                  <div className="absolute -bottom-4 -right-4 w-14 h-14 bg-_green rounded-2xl">
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      fill="none"
-                      viewBox="0 0 24 24"
-                      strokeWidth="2.5"
-                      stroke="currentColor"
-                      className="absolute bottom-6 right-6 w-6 h-6 text-white group-hover:translate-x-1 duration-100"
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"
-                      />
-                    </svg>
+              <div className="w-full md:w-1/2 p-3">
+                <Link
+                  href={
+                    "/articles/the-top-9-brain-foods-for-studying-and-exams"
+                  }
+                >
+                  <div className="group rounded-2xl w-full min-h-[280px] p-10 shadow-lg overflow-hidden relative cursor-pointer">
+                    <h3 className="font-bold text-gray-900 text-xl group-hover:underline group-hover:text-_green duration-100">
+                      The Top 9 Brain Foods for Studying and Exams — Articles
+                    </h3>
+                    <p className="pt-5 text-base">
+                      Foods that are good for the brain, help you study and work
+                      more effectively
+                    </p>
+                    <div className="absolute -bottom-4 -right-4 w-14 h-14 bg-_green rounded-2xl">
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        strokeWidth="2.5"
+                        stroke="currentColor"
+                        className="absolute bottom-6 right-6 w-6 h-6 text-white group-hover:translate-x-1 duration-100"
+                      >
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"
+                        />
+                      </svg>
+                    </div>
                   </div>
-                </div>
+                </Link>
               </div>
-              <div className="w-1/2 p-3">
-                <div className="group rounded-2xl w-full p-10 shadow-lg overflow-hidden relative cursor-pointer">
-                  <h3 className="font-bold text-gray-900 text-xl group-hover:underline group-hover:text-_green duration-100">
-                    Recently PublishedBalanced Color Palettes — Generative
-                    Snacks!
-                  </h3>
-                  <p className="pt-5 text-base">
-                    Recently PublishedBalanced Color Palettes — Generative
-                    Snacks!
-                  </p>
-                  <div className="absolute -bottom-4 -right-4 w-14 h-14 bg-_green rounded-2xl">
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      fill="none"
-                      viewBox="0 0 24 24"
-                      strokeWidth="2.5"
-                      stroke="currentColor"
-                      className="absolute bottom-6 right-6 w-6 h-6 text-white group-hover:translate-x-1 duration-100"
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"
-                      />
-                    </svg>
+              <div className="w-full md:w-1/2 p-3">
+                <Link href={"/brain-games/wordl"}>
+                  <div className="group rounded-2xl w-full min-h-[280px] p-10 shadow-lg overflow-hidden relative cursor-pointer">
+                    <h3 className="font-bold text-gray-900 text-xl group-hover:underline group-hover:text-_green duration-100">
+                      Wordle — Brain Game
+                    </h3>
+                    <p className="pt-5 text-base">
+                      Wordle is a popular online word-guessing game where
+                      players must guess a five-letter word in six attempts.
+                      It&apos;s fun, challenging, and educational.
+                    </p>
+                    <div className="absolute -bottom-4 -right-4 w-14 h-14 bg-_green rounded-2xl">
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        strokeWidth="2.5"
+                        stroke="currentColor"
+                        className="absolute bottom-6 right-6 w-6 h-6 text-white group-hover:translate-x-1 duration-100"
+                      >
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"
+                        />
+                      </svg>
+                    </div>
                   </div>
-                </div>
+                </Link>
               </div>
-              <div className="w-1/2 p-3">
-                <div className="group rounded-2xl w-full p-10 shadow-lg overflow-hidden relative cursor-pointer">
+              <div className="w-full md:w-1/2 p-3">
+                <Link href={"/test-iq"}></Link>
+                <div className="group rounded-2xl w-full min-h-[280px] p-10 shadow-lg overflow-hidden relative cursor-pointer">
                   <h3 className="font-bold text-gray-900 text-xl group-hover:underline group-hover:text-_green duration-100">
-                    Recently PublishedBalanced Color Palettes — Generative
-                    Snacks!
+                    Get a free IQ Test — IQ
                   </h3>
                   <p className="pt-5 text-base">
-                    Recently PublishedBalanced Color Palettes — Generative
-                    Snacks!
+                    Take the challenge and discover your IQ score...
                   </p>
                   <div className="absolute -bottom-4 -right-4 w-14 h-14 bg-_green rounded-2xl">
                     <svg

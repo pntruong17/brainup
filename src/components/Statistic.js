@@ -3,16 +3,16 @@ import React from "react";
 const Statistic = () => {
   return (
     <>
-      <section className="text-gray-600 font-Nunito">
+      <section className="text-gray-600 font-Albert">
         <div className="max-w-6xl px-5 py-5 mx-auto">
           <div className="flex flex-col text-center w-full mb-20">
             <h2 className="text-4xl font-bold mb-4 text-_dark tracking-tighter">
               The effectiveness of our IQ test
             </h2>
-            <p className=" mx-auto leading-relaxed text-lg tracking-tight">
+            <p className="font-Nunito mx-auto leading-relaxed text-lg tracking-tight">
               The IQ test we provide has been used by millions of users
               worldwide{" "}
-              <span className="font-bold text-md">
+              <span className=" ">
                 &#40; We will immediately eliminate any fraudulent test attempts
                 &#41;
               </span>

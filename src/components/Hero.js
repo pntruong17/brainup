@@ -7,7 +7,7 @@ const Hero = () => {
       <section className="text-gray-600 font-Nunito">
         <div className="max-w-7xl mx-auto flex px-5 py-20 md:py-44 md:flex-row flex-col items-center">
           <div className="lg:flex-grow md:w-1/2 lg:pr-24 md:pr-16 flex flex-col md:items-start md:text-left mb-16 md:mb-0 items-center">
-            <h1 className="mt-4 font-Nunito font-bold text-3xl md:text-5xl text-gray-900 tracking-tighter md:leading-[1.15]">
+            <h1 className="mt-4 font-Albert font-bold text-3xl md:text-5xl text-gray-900 tracking-tighter md:leading-[1.15]">
               Improve your mind with{" "}
               <span className="text-_green cursor-pointer">brain games</span>{" "}
               and{" "}

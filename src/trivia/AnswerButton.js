@@ -4,13 +4,19 @@ import { motion } from "framer-motion";
 const AnswerButton = ({
   state,
   showCorrect,
+  runAnimation,
   currentQuiz,
   answers,
   checkAnswer,
 }) => {
   const [showWrong, setShowWrong] = useState(false);
   const handleClick = () => {
-    if (state === "timeout" || state === "answered" || state === "cloded")
+    if (
+      state === "timeout" ||
+      state === "answered" ||
+      state === "cloded" ||
+      !runAnimation
+    )
       return;
     checkAnswer(correct);
     setShowWrong(true);

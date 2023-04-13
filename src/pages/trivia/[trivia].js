@@ -1,4 +1,5 @@
 import React, { useEffect, useReducer, useState } from "react";
+import Image from "next/image";
 import fs from "fs";
 import path from "path";
 import { motion } from "framer-motion";
@@ -15,7 +16,7 @@ import {
 
 const Trivia = ({ triviBySlug, triviNotThisQuiz }) => {
   //scoreboard
-  const TIMER = 8;
+  const TIMER = 12;
   const STATES = ["start", "timego", "timeout", "answered", "cloded"];
   const CLASS = [
     { title: "Reincarnate", points: 0 },
@@ -33,6 +34,7 @@ const Trivia = ({ triviBySlug, triviNotThisQuiz }) => {
   const [pointCookies, setPointCookies] = useState(0);
   const [seconds, setSeconds] = useState(0);
   const [isActiveTime, setIsActiveTime] = useState(false);
+  const [runAnimation, setRunAnimation] = useState(false); //timer
 
   const [currentQuiz, setCurrentQuiz] = useState(0);
   const [questionLeft, setQuestionLeft] = useState(
@@ -134,6 +136,13 @@ const Trivia = ({ triviBySlug, triviNotThisQuiz }) => {
     }
   };
 
+  const handleOnLoadingComplete = () => {
+    if (state === STATES[1]) {
+      handleStart();
+      setRunAnimation(true);
+    }
+  };
+
   //cookies data
   useEffect(() => {
     const hasCookie = checkCookies("_USER_COOKIES_TRIVIA_LVL");
@@ -217,18 +226,17 @@ const Trivia = ({ triviBySlug, triviNotThisQuiz }) => {
   };
 
   useEffect(() => {
-    if (state === STATES[1]) {
-      handleStart();
-    }
     if (state === STATES[4]) {
       //handleKillTimer();
     }
     if (state === STATES[3]) {
       handlePause();
+      setRunAnimation(false);
     }
     if (state === STATES[2]) {
       dispatchGameScore({ type: "timeout" });
       setShowCorrect(true);
+      setRunAnimation(false);
       setSeconds(0);
       handlePause();
     }
@@ -241,9 +249,10 @@ const Trivia = ({ triviBySlug, triviNotThisQuiz }) => {
     //console.log("timeBonus", gameScore.timeBonus);
     //console.log("timeBonusStack", gameScore.timeBonusStack);
     //console.log("correct", correct);
-    console.log("pointCookies", pointCookies);
-    console.log("levelPlayer", levelPlayer);
-  }, [correct, gameScore, pointCookies, levelPlayer]);
+    //console.log(thisQuestion.img1);
+    //console.log("pointCookies", pointCookies);
+    //console.log("levelPlayer", levelPlayer);
+  }, [correct, gameScore, pointCookies, levelPlayer, thisQuestion]);
 
   useEffect(() => {
     let interval = null;
@@ -267,6 +276,7 @@ const Trivia = ({ triviBySlug, triviNotThisQuiz }) => {
     if (currentQuiz > triviBySlug.questions.length) {
       setState(STATES[4]);
     }
+    //console.log(thisQuestion);
   }, [thisQuestion, currentQuiz]);
 
   //reset state for other quiz
@@ -322,7 +332,7 @@ const Trivia = ({ triviBySlug, triviNotThisQuiz }) => {
                       <div className="absolute top-[20px] w-2 h-2 bg-teal-800 rounded-full transform"></div>
                       <div
                         className={`absolute top-[4px] w-1 h-5 bg-teal-800 rounded-full transform origin-bottom ${
-                          state === "timego" ? "animate-rotation" : ""
+                          runAnimation ? "animate-rotation" : ""
                         }  `}
                       ></div>
                       <h3 className="text-xs pt-[65px] font-black text-_w_almost text-center">
@@ -338,26 +348,41 @@ const Trivia = ({ triviBySlug, triviNotThisQuiz }) => {
                   </div>
                 </div>
                 <div className="w-full bg-white h-[300px] p-5 overflow-hidden flex justify-center relative">
-                  {state === STATES[1] && (
-                    <motion.img
-                      initial={{ opacity: 0 }}
-                      animate={{ opacity: 1 }}
-                      transition={{ duration: 0.5, type: "tween" }}
-                      src={`${thisQuestion.img1}`}
-                      className="object-contain object-center h-full"
-                      alt=""
-                    />
-                  )}
-                  {thisQuestion.img2 !== null &&
-                    (state === STATES[2] || state === STATES[3]) && (
-                      <motion.img
+                  {state === STATES[1] &&
+                    thisQuestion.img1 ===
+                      triviBySlug.questions[currentQuiz].img1 && (
+                      <motion.div
                         initial={{ opacity: 0 }}
                         animate={{ opacity: 1 }}
-                        transition={{ duration: 0.35, type: "tween" }}
-                        src={`${thisQuestion.img2}`}
-                        className="absolute top-0 object-contain object-center h-full"
-                        alt=""
-                      />
+                        transition={{ duration: 0.5, type: "tween" }}
+                      >
+                        <Image
+                          src={`${thisQuestion.img1}`}
+                          layout="fill"
+                          objectFit="contain"
+                          alt=""
+                          priority
+                          onLoadingComplete={handleOnLoadingComplete}
+                        />
+                      </motion.div>
+                    )}
+                  {thisQuestion.img2 !== null &&
+                    (state === STATES[2] || state === STATES[3]) &&
+                    thisQuestion && (
+                      <motion.div
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        transition={{ duration: 0.5, type: "tween" }}
+                      >
+                        <Image
+                          src={`${thisQuestion.img2}`}
+                          priority
+                          layout="fill"
+                          objectFit="contain"
+                          className="absolute top-0 object-contain object-center h-full"
+                          alt=""
+                        />
+                      </motion.div>
                     )}
                 </div>
                 <div className="w-full bg-white h-[300px] px-3 pb-3 flex flex-col justify-between">
@@ -366,6 +391,7 @@ const Trivia = ({ triviBySlug, triviNotThisQuiz }) => {
                       <AnswerButton
                         key={i}
                         state={state}
+                        runAnimation={runAnimation}
                         currentQuiz={currentQuiz}
                         showCorrect={showCorrect}
                         answers={answer}
@@ -404,7 +430,7 @@ const Trivia = ({ triviBySlug, triviNotThisQuiz }) => {
                         exit={{ opacity: 0 }}
                         className="border rounded-lg"
                       >
-                        <p className="p-3 font-semibold tracking-tight">
+                        <p className="p-3 text-sm font-semibold tracking-tighter">
                           <span className="font-bold text-_orange">Fact: </span>
                           {thisQuestion.fact}
                         </p>

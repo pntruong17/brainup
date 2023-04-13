@@ -1,152 +1,141 @@
 {
   "questions": [
     {
-      "title": "What is the capital of Vietnam?",
-      "slug": "what-is-the-capital-of-vietnam",
+      "title": "Guess the Movie by Emoji Quiz",
+      "slug": "guess-the-movie-by-emoji-quiz",
       "image": "/images/trivia/1.png",
-      "group": "sports",
-      "expert": "public",
-      "fact": "asdhwk aw dj",
+      "group": "entertainment",
+      "expert": "Can you guess the movies by emojis? Let's find out and have heaps of fun in the guess the movie by emoji quiz!",
       "questions": [
         {
-          "img1": "/images/trivia/1.png",
-          "img2": "/images/trivia/2.png",
-          "fact": "Paris",
+          "img1": "https://res.cloudinary.com/dammaehjo/image/upload/v1681308229/trivia/guess-movie-1_fhq8v4.png",
+          "img2": "https://res.cloudinary.com/dammaehjo/image/upload/v1681308227/trivia/thor1_fwnbyf.jpg",
+          "fact": "Director Kenneth Branagh chose Chris Hemsworth for the role of Thor after considering over 500 other candidates, and he convinced Marvel that Hemsworth was the perfect choice for the role",
           "answers": [
             {
-              "answer": "Paris",
-              "correct": true
-            },
-            {
-              "answer": "Berlin",
+              "answer": "The Avengers",
               "correct": false
             },
             {
-              "answer": "Madrid",
+              "answer": "Wonder Woman",
+              "correct": false
+            },
+            {
+              "answer": "Thor",
+              "correct": true
+            }
+          ]
+        },
+        {
+          "img1": "https://res.cloudinary.com/dammaehjo/image/upload/v1681308229/trivia/man-dancing2_joeej2.png",
+          "img2": "https://res.cloudinary.com/dammaehjo/image/upload/v1681308228/trivia/joker2_v0bboy.jpg",
+          "fact": "One fact about the Joker movie (2019) is that actor Joaquin Phoenix lost 52 pounds for his role as Arthur Fleck/Joker, which he achieved by following a strict diet and working with a choreographer to create a unique and unsettling physicality for the character.",
+          "answers": [
+            {
+              "answer": "It (2017)",
+              "correct": false
+            },
+            {
+              "answer": "Joker (2019)",
+              "correct": true
+            },
+            {
+              "answer": "Dumbo (2019)",
               "correct": false
             }
           ]
         },
         {
-          "img1": "https://res.cloudinary.com/dammaehjo/image/upload/v1681248968/cld-sample-5.jpg",
-          "img2": "https://res.cloudinary.com/dammaehjo/image/upload/v1681248966/cld-sample.jpg",
-          "fact": "Paris",
+          "img1": "https://res.cloudinary.com/dammaehjo/image/upload/v1681308228/trivia/charlie2_tr6c9f.png",
+          "img2": "https://res.cloudinary.com/dammaehjo/image/upload/v1681308227/trivia/chalie3_gx1rbl.jpg",
+          "fact": "Tim Burton, initially wanted Marilyn Manson to play Willy Wonka, but the studio ultimately decided to cast Johnny Depp in the role instead.",
           "answers": [
             {
-              "answer": "Paris",
+              "answer": "Charlie and the Chocolate Factory (2005)",
               "correct": true
             },
             {
-              "answer": "Berlin",
+              "answer": "Chocolat (2000)",
               "correct": false
             },
             {
-              "answer": "Madrid",
+              "answer": "Like Water for Chocolate (1992)",
               "correct": false
             }
           ]
         },
         {
-          "img1": "https://res.cloudinary.com/dammaehjo/image/upload/v1681249307/sama_a_painting_of_A_very_beautiful_girl_from_old_legends_who_h_2ee594c2-a8f6-4fd3-9003-d13844617280_qclf3a.png",
-          "img2": "/images/trivia/2.png",
-          "fact": "Paris",
+          "img1": "https://res.cloudinary.com/dammaehjo/image/upload/v1681308229/trivia/huntgame_ulucoh.png",
+          "img2": "https://res.cloudinary.com/dammaehjo/image/upload/v1681308228/trivia/huntgame_nse3ek.jpg",
+          "fact": "Jennifer Lawrence, who played the lead character Katniss Everdeen, accidentally kicked co-star Josh Hutcherson in the head during a stunt rehearsal. Hutcherson suffered a concussion and was briefly hospitalized, but he recovered and continued filming the movie.",
           "answers": [
             {
-              "answer": "Paris",
-              "correct": true
-            },
-            {
-              "answer": "Berlin",
+              "answer": "The Avengers",
               "correct": false
             },
             {
-              "answer": "Madrid",
+              "answer": "Robin Hood (2010)",
+              "correct": false
+            },
+            {
+              "answer": "The Hunger Games (2012)",
+              "correct": true
+            }
+          ]
+        },
+        {
+          "img1": "https://res.cloudinary.com/dammaehjo/image/upload/v1681308228/trivia/madagasca_q5aidg.png",
+          "img2": "https://res.cloudinary.com/dammaehjo/image/upload/v1681308227/trivia/madagasca_trnl9s.jpg",
+          "fact": "the voice of the character King Julien, a ring-tailed lemur, was provided by Sacha Baron Cohen, who is also known for his roles in other comedy films such as Borat and Bruno. Cohen's performance was praised for adding a lot of humor and energy to the movie's cast of animal characters.",
+          "answers": [
+            {
+              "answer": "The Lion King",
+              "correct": false
+            },
+            {
+              "answer": "March of the Penguins",
+              "correct": false
+            },
+            {
+              "answer": "Madagascar",
+              "correct": true
+            }
+          ]
+        },
+        {
+          "img1": "https://res.cloudinary.com/dammaehjo/image/upload/v1681308227/trivia/ghost_wuizuu.png",
+          "img2": "https://res.cloudinary.com/dammaehjo/image/upload/v1681308227/trivia/ghostbusters_vbbvon.jpg",
+          "fact": "the iconic theme song 'Ghostbusters' was written and performed by Ray Parker Jr. in just a few days, after he was given the movie's title and a brief description of the plot. The song became a massive hit and is still widely recognized today as one of the most memorable movie themes of all time.",
+          "answers": [
+            {
+              "answer": "Ghostbusters",
+              "correct": true
+            },
+            {
+              "answer": "Ghost (1990)",
+              "correct": false
+            },
+            {
+              "answer": "The Sixth Sense (1999)",
               "correct": false
             }
           ]
         },
         {
-          "img1": "https://res.cloudinary.com/dammaehjo/image/upload/v1681249307/sama_a_painting_of_A_very_beautiful_girl_from_old_legends_who_h_2ee594c2-a8f6-4fd3-9003-d13844617280_qclf3a.png",
-          "img2": "/images/trivia/2.png",
-          "fact": "Paris",
+          "img1": "https://res.cloudinary.com/dammaehjo/image/upload/v1681308527/ted2_gyr9t0.png",
+          "img2": "https://res.cloudinary.com/dammaehjo/image/upload/v1681308526/ted_kpekzw.jpg",
+          "fact": "One short fact about the movie Ted is that the title character, a foul-mouthed teddy bear, was voiced by the film's director and co-writer Seth MacFarlane, who is also known for creating the animated TV series Family Guy. The movie was a box office hit and spawned a sequel, Ted 2, in 2015.",
           "answers": [
             {
-              "answer": "Paris",
+              "answer": "Paddington (2014)",
+              "correct": false
+            },
+            {
+              "answer": "Ted",
               "correct": true
             },
             {
-              "answer": "Berlin",
-              "correct": false
-            },
-            {
-              "answer": "Madrid",
-              "correct": false
-            }
-          ]
-        },
-        {
-          "img1": "/images/trivia/1.png",
-          "img2": "/images/trivia/2.png",
-          "fact": "Paris",
-          "answers": [
-            {
-              "answer": "Paris",
-              "correct": true
-            },
-            {
-              "answer": "Berlin",
-              "correct": false
-            },
-            {
-              "answer": "Madrid",
-              "correct": false
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "title": "What is the capital of France?",
-      "slug": "what-is-the-capital-of-germany",
-      "image": "/images/trivia/2.png",
-      "group": "sports",
-      "expert": "public",
-      "fact": "asdhwk aw dj",
-      "questions": [
-        {
-          "img1": "",
-          "img2": null,
-          "fact": "Paris",
-          "answers": [
-            {
-              "answer": "Paris",
-              "correct": true
-            },
-            {
-              "answer": "Berlin",
-              "correct": false
-            },
-            {
-              "answer": "Madrid",
-              "correct": false
-            }
-          ]
-        },
-        {
-          "img1": "",
-          "img2": null,
-          "fact": "Paris",
-          "answers": [
-            {
-              "answer": "Paris",
-              "correct": true
-            },
-            {
-              "answer": "Berlin",
-              "correct": false
-            },
-            {
-              "answer": "Madrid",
+              "answer": "Brother Bear (2003)",
               "correct": false
             }
           ]
