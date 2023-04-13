@@ -150,8 +150,8 @@
       "expert": "Can you guess actress by their eyes? Let's find out and have some fun!",
       "questions": [
         {
-          "img1": "https://res.cloudinary.com/dammaehjo/image/upload/v1681365316/actress/Meryl_Streep_l20tah.jpg",
-          "img2": "https://res.cloudinary.com/dammaehjo/image/upload/v1681365317/actress/Meryl_Streep-eye_p4k61a.jpg",
+          "img1": "https://res.cloudinary.com/dammaehjo/image/upload/v1681365317/actress/Meryl_Streep-eye_p4k61a.jpg",
+          "img2": "https://res.cloudinary.com/dammaehjo/image/upload/v1681365316/actress/Meryl_Streep_l20tah.jpg",
           "fact": "Meryl Streep: The Devil Wears Prada, Sophie's Choice, Doubt, The Iron Lady, Mamma Mia!",
           "answers": [
             {
@@ -169,8 +169,8 @@
           ]
         },
         {
-          "img1": "https://res.cloudinary.com/dammaehjo/image/upload/v1681308228/trivia/joker2_v0bboy.jpg",
-          "img2": "https://res.cloudinary.com/dammaehjo/image/upload/v1681308229/trivia/man-dancing2_joeej2.png",
+          "img1": "https://res.cloudinary.com/dammaehjo/image/upload/v1681365316/actress/JudiDench-eye_fi8yez.jpg",
+          "img2": "https://res.cloudinary.com/dammaehjo/image/upload/v1681365316/actress/JudiDench_u5omo9.jpg",
           "fact": "Judi Dench: Shakespeare in Love, Philomena, Skyfall, Mrs. Brown, Notes on a Scandal",
           "answers": [
             {
@@ -188,8 +188,8 @@
           ]
         },
         {
-          "img1": "https://res.cloudinary.com/dammaehjo/image/upload/v1681365316/actress/JudiDench-eye_fi8yez.jpg",
-          "img2": "https://res.cloudinary.com/dammaehjo/image/upload/v1681365316/actress/JudiDench_u5omo9.jpg",
+          "img1": "https://res.cloudinary.com/dammaehjo/image/upload/v1681365315/actress/Cate_Blanchett_Cannes-eye_fryvgk.jpg",
+          "img2": "https://res.cloudinary.com/dammaehjo/image/upload/v1681365315/actress/Cate_Blanchett_Cannes_eryyar.jpg",
           "fact": "Cate Blanchett: The Lord of the Rings trilogy, The Aviator, Blue Jasmine, Carol, Thor: Ragnarok",
           "answers": [
             {
