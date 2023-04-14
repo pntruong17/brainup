@@ -19,6 +19,10 @@ const LayoutTrivia = ({ children, pageMeta }) => {
         <meta charset="UTF-8" />
         <meta name="description" content={meta.description} />
         <meta
+          name="google-site-verification"
+          content="pIvi3peKE0glug9rJWPBUkKFklTiI_5dCjGGYa2EcYo"
+        />
+        <meta
           property="og:url"
           content={`https://brainup.gg${router.asPath}`}
         />
