@@ -85,7 +85,7 @@ const Navbar = () => {
       className={`w-full fixed z-50 top-0 left-0 bg-white shadow-sm md:shadow-none ${hasColor}`}
     >
       <div
-        className={`max-w-7xl mx-auto md:flex items-center justify-between  py-4 px-5`}
+        className={`max-w-7xl mx-auto md:flex items-center justify-between py-4 px-5`}
       >
         <div className="text-base cursor-pointer flex items-center text-gray-800">
           <Link
@@ -93,7 +93,7 @@ const Navbar = () => {
             className="flex font-medium items-center text-gray-900 md:mb-0"
           >
             <img
-              className="h-8"
+              className="h-6 md:h-8"
               src={"/images/logo/logodark.png"}
               alt="logo iqup"
             />
@@ -102,7 +102,7 @@ const Navbar = () => {
 
         <div
           onClick={() => setOpen(!open)}
-          className="text-3xl absolute right-8 top-6 cursor-pointer md:hidden"
+          className="text-3xl absolute right-8 top-4 cursor-pointer md:hidden"
         >
           <Hamburger openMenu={open} setOpenMenu={setOpen} />
         </div>

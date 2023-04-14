@@ -3,6 +3,7 @@ import { motion } from "framer-motion";
 import Link from "next/link";
 import { graphqlcms, QUERY_POSTS } from "@/components/graphqlcms/graphql";
 import Layout from "@/components/Layout";
+import Image from "next/image";
 
 const Index = ({ posts }) => {
   const [blogSEO, setBlogSEO] = useState(() =>
@@ -24,21 +25,24 @@ const Index = ({ posts }) => {
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7, ease: "easeOut" }}
-          class="text-_dark body-font"
+          class="text-_dark body-font px-3"
         >
-          <div class="max-w-7xl px-5 pt-24 mx-auto font-Nunito">
+          <div class="max-w-7xl h-auto pt-16 md:pt-24 mx-auto font-Nunito">
             <div className="flex flex-wrap">
               <Link
                 href={"/articles/" + blogSEO[0].slug}
-                className="w-full tablet:w-1/2 h-[35rem] overflow-hidden relative rounded-xl my-3"
+                className="w-full md:w-1/2 min-h-[30rem] overflow-hidden relative rounded-xl my-3"
               >
-                <img
+                <Image
+                  layout="fill"
+                  objectFit="cover"
+                  loading="lazy"
                   className="max-w-full min-h-full hover:cursor-pointer"
                   src={blogSEO[0].coverImage.url}
                 />
                 <div className="absolute bottom-5 w-full">
-                  <div className="w-[90%] mx-auto bg-white p-10 rounded-lg shadow">
-                    <h2 className="text-3xl font-black hover:text-_blue hover:cursor-pointer">
+                  <div className="w-[90%] mx-auto bg-white p-6 rounded-lg shadow">
+                    <h2 className="text-2xl md:text-3xl font-black hover:text-_blue hover:cursor-pointer">
                       {blogSEO[0].title}
                     </h2>
                     <p className="text-base mt-5">{blogSEO[0].excerpt}</p>
@@ -47,14 +51,19 @@ const Index = ({ posts }) => {
               </Link>
               <Link
                 href={"/articles/" + blogSEO[1].slug}
-                className="w-full h-[35rem] tablet:w-1/2 tablet:px-10 my-3"
+                className="w-full min-h-[30rem] md:w-1/2 md:px-10 my-3 overflow-hidden"
               >
-                <img
-                  className="w-full object-cover h-2/3 rounded-t-xl hover:cursor-pointer"
-                  src={blogSEO[1].coverImage.url}
-                />
-                <div className="p-5">
-                  <h2 className="text-3xl font-black hover:text-_blue hover:cursor-pointer">
+                <div className="relative w-full h-1/2 rounded-t-xl hover:cursor-pointer overflow-hidden flex justify-center items-center">
+                  <Image
+                    fill
+                    objectFit="cover"
+                    loading="lazy"
+                    className="h-full hover:cursor-pointer"
+                    src={blogSEO[1].coverImage.url}
+                  />
+                </div>
+                <div className="p-3">
+                  <h2 className="text-2xl md:text-3xl font-black hover:text-_blue hover:cursor-pointer">
                     {blogSEO[1].title}
                   </h2>
                   <p className="text-base mt-5">{blogSEO[1].excerpt}</p>

@@ -14,7 +14,7 @@ const LayoutEmpty = ({ children, pageMeta }) => {
   return (
     <>
       <Head>
-        <meta charset="UTF-8" />
+        <meta charSet="UTF-8" />
         <meta name="description" content={meta.description} />
         <meta
           name="google-site-verification"
@@ -25,6 +25,7 @@ const LayoutEmpty = ({ children, pageMeta }) => {
           content={`https://brainup.gg${router.asPath}`}
         />
         <meta property="og:type" content={meta.type} />
+        <meta property="og:image" content="" />
         <meta property="og:description" content={meta.description} />
         <meta
           property="og:site_name"

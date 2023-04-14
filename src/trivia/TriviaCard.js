@@ -1,14 +1,18 @@
 import React from "react";
 import Link from "next/link";
+import Image from "next/image";
 
 const TriviaCard = ({ trivia, image }) => {
   const { title, group, expert, slug } = trivia;
   return (
     <>
-      <div className="w-full h-auto flex flex-col sm:flex-row my-5 font-Nunito border- bg-white sm:bg-transparent sm:border-none rounded-lg">
-        <div className="w-full sm:w-44 h-36 overflow-hidden rounded-lg">
-          <img
-            className="object-cover object-center cursor-pointer hover:scale-105 duration-200"
+      <div className="w-full min-h-[160px] flex flex-col sm:flex-row my-5 font-Nunito bg-white sm:bg-transparent rounded-lg">
+        <div className="relative sm:w-44 h-36 overflow-hidden rounded-xl">
+          <Image
+            fill
+            objectFit="cover"
+            loading="lazy"
+            className="cursor-pointer hover:scale-105 duration-200"
             src={image}
             alt={title}
           />

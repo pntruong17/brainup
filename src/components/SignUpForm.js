@@ -103,11 +103,6 @@ export default function SignUp() {
             onChange={(e) => setConfirmPassword(e.target.value)}
           />
         </div>
-        <ReCAPTCHA
-          type="hidden"
-          sitekey={process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY}
-          onChange={handleCaptchaChange}
-        />
         <button className="donate-button mx-auto" type="submit">
           Sign up
         </button>

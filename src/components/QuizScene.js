@@ -29,8 +29,10 @@ const QuizScene = ({ changeScene, result, setResult }) => {
     "If you're not feeling well, come back later. When you're not feeling well, your answers might not be accurate.",
     "If you're ready, click the LET'S GO button to start the timer!",
   ];
-  const [state, setState] = useState("prepare"); // prepare->quiz->close
+  const STATES = ["prepared", "quiz", "closed"];
+  const [state, setState] = useState(STATES[0]); // prepare->quiz->close
   const [currentquiz, setCurrentquiz] = useState(0);
+  const [thisQuestion, setThisQuestion] = useState(questions[0]);
   const [userOptions, setUserOptions] = useState(() =>
     questions.map((qi) => "")
   );
@@ -43,26 +45,50 @@ const QuizScene = ({ changeScene, result, setResult }) => {
   const [showTitle, setShowTitle] = useState("");
   const [hbar, setHbar] = useState("25%");
   const [timer, setTimer] = useState(900); // 900s
-  const [start, setStart] = useState(false);
-  const firstStart = useRef(true);
-  const tick = useRef();
+  const [secondRef, setSecondRef] = useState(900);
+  const [lockButton, setLockButton] = useState(false);
+
+  const [isActiveTime, setIsActiveTime] = useState(false);
+
+  const imageLoadingComplete = () => {
+    if (state === STATES[0]) return;
+    // unlock buttons + time go continuously
+    setLockButton(false);
+    handleRestart();
+  };
+
+  const handleStart = () => {
+    setIsActiveTime(true);
+    console.log("starting");
+  };
+
+  const handlePause = () => {
+    setSecondRef(timer);
+    setIsActiveTime(false);
+    console.log("pause");
+  };
+
+  const handleRestart = () => {
+    setTimer(secondRef);
+    setIsActiveTime(true);
+  };
 
   useEffect(() => {
-    if (state === "prepare") return;
-    if (start) {
-      tick.current = setInterval(() => {
-        setTimer((preTimer) => preTimer - 1);
-      }, 1000);
-    } else {
-      clearInterval(tick.current);
-    }
+    let interval = null;
 
-    return () => clearInterval(tick.current);
-  }, [start]);
+    if (isActiveTime) {
+      interval = setInterval(() => {
+        setTimer((time) => time - 1);
+      }, 1000);
+    } else if (!isActiveTime && timer !== 0) {
+      clearInterval(interval);
+    }
+    return () => clearInterval(interval);
+  }, [isActiveTime, timer]);
 
   const startQuiz = () => {
-    setStart(true);
-    setState("quiz");
+    handleStart();
+    setState(STATES[1]);
   };
 
   const renderTimer = () => {
@@ -105,9 +131,16 @@ const QuizScene = ({ changeScene, result, setResult }) => {
     }
   }, [userOptions]);
 
+  useEffect(() => {
+    if (state === STATES[0]) return;
+    //lock time + button when userOptions changes
+    handlePause();
+    setLockButton(true);
+  }, [userOptions, currentquiz]);
+
   const changeTimeCode = (sec) => {
     if (sec < 10 && sec >= 0) {
-      sec = "0" + sec;
+      sec = "0" + Math.round(sec);
     }
     if (sec > 59) {
       sec = "00";
@@ -157,17 +190,26 @@ const QuizScene = ({ changeScene, result, setResult }) => {
       checkTheResult();
     }
   }, [timer]);
+  useEffect(() => {
+    const newQuiz = questions[currentquiz];
+    setThisQuestion(newQuiz);
+  }, [currentquiz]);
+  useEffect(() => {
+    console.log("userOptions", userOptions);
+    console.log("isActiveTime", isActiveTime);
+    console.log("state", state);
+  }, [userOptions, isActiveTime, state]);
 
   return (
     <>
-      <Step steps={steps} setStart={startQuiz} delay={1000} />
+      <Step steps={steps} setStart={startQuiz} delay={500} />
       <motion.section
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         exit={{ opacity: 0 }}
         className="text-gray-600 body-font bg-_darkblue"
       >
-        <div className="h-screen max-w-5xl px-5 py-5 mx-auto">
+        <div className="min-h-screen max-w-5xl px-5 py-5 mx-auto">
           <div className="flex flex-col">
             <div className="flex justify-center my-2 md:my-6">
               <h4 className="font-Inter font-semibold text-sm text-center text-blue-500 bg-blue-200 rounded-full px-10 py-1">
@@ -232,23 +274,31 @@ const QuizScene = ({ changeScene, result, setResult }) => {
                 <div className={`w-[${hbar}] h-full bg-_blue/[0.68]`}></div>
               </div>
               <div className="p-5 md:w-1/2">
-                <div className="h-full overflow-hidden">
-                  <img
-                    className="w-full h-full object-scale-down object-center"
-                    src={
-                      "/images/" + questions[currentquiz].questionText + ".jpg"
-                    }
-                    alt="blog"
-                  />
+                <div className="w-full h-full overflow-hidden flex justify-center items-center">
+                  {thisQuestion.questionText ===
+                    questions[currentquiz].questionText && (
+                    <Image
+                      width={800}
+                      height={600}
+                      loading="lazy"
+                      className=""
+                      onLoadingComplete={imageLoadingComplete}
+                      src={"/images/" + thisQuestion.questionText + ".jpg"}
+                      alt="blog"
+                    />
+                  )}
                 </div>
               </div>
-              <div className="p-5 md:w-1/2">
-                <div className="h-full">
+              <div className="p-5 w-full md:w-1/2">
+                <div className="w-full">
                   <div className="grid grid-cols-2 gap-2">
-                    {questions[currentquiz].answerOptions.map((item, i) => (
+                    {thisQuestion.answerOptions.map((item, i) => (
                       <QuizOption
                         key={i}
+                        index={i}
+                        lockButton={lockButton}
                         option={item}
+                        questions={questions}
                         currentquiz={currentquiz}
                         setCurrentquiz={setCurrentquiz}
                         userOptions={userOptions}

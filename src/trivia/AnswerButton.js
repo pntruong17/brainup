@@ -40,7 +40,7 @@ const AnswerButton = ({
             showCorrect && correct ? "bg-green-400" : "border"
           } ${
             showWrong && !correct ? "bg-_w_almost" : ""
-          } border-_w_almost  p-1 flex justify-center items-center cursor-pointer`}
+          } border-_w_almost  p-2 flex justify-center items-center cursor-pointer`}
         >
           <h3 className="text-sm text-_darkblue font-black text-center tracking-tight">
             {answer}

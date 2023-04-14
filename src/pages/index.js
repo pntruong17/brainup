@@ -7,17 +7,13 @@ import Testimonial from "@/components/Testimonial";
 import AllTopic from "@/components/AllTopic";
 
 export default function Home() {
-  console.log(
-    "NEXT_PUBLIC_RECAPTCHA_SITE_KEY",
-    process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY
-  );
   return (
     <>
       <Layout
         pageMeta={{
-          title: "Brain Up | Home",
+          title: "Brain Up - Brain Games for you today!",
           description:
-            "Brain up app test iq free and brain games, help your brain faster",
+            "Brain Up is a free IQ test and brain games app that focuses on enhancing cognitive abilities, improving information processing speed, and logical reasoning skills. With Brain Up, you have the opportunity to boost your problem-solving and critical thinking abilities, as well as improve your focus. Discover Brain Up now to develop your mental capacity and become a successful individual in the future.",
         }}
       >
         <motion.main
