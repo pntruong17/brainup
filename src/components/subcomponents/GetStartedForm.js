@@ -31,8 +31,8 @@ const GetStartedForm = ({ userExistance }) => {
   return (
     <>
       <section className="text-gray-600 body-font">
-        <div className="container px-5 py-24 mx-auto flex flex-wrap items-center">
-          <div className="max-w-lg bg-white rounded-lg border shadow-md p-8 flex flex-col mx-auto w-full mt-10 md:mt-0">
+        <div className="w-full px-3 py-5 md:py-24 mx-auto flex flex-wrap items-center">
+          <div className="max-w-lg bg-white rounded-lg border shadow-md p-5 md:p-8 flex flex-col mx-auto w-full mt-0">
             <p className="font-semibold text-2xl text-_darkblue mt-3 text-center mb-10">
               Please sign in to use our service
             </p>
