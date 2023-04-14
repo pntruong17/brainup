@@ -12,7 +12,7 @@ export default function SignUp() {
   const [confirmPassword, setConfirmPassword] = useState("");
   const [error, setError] = useState("");
   const [captchaToken, setCaptchaToken] = useState("");
-  const [isCaptchaVerified, setIsCaptchaVerified] = useState(false);
+  const [isCaptchaVerified, setIsCaptchaVerified] = useState(true);
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -104,6 +104,7 @@ export default function SignUp() {
           />
         </div>
         <ReCAPTCHA
+          type="hidden"
           sitekey={process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY}
           onChange={handleCaptchaChange}
         />

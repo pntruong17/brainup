@@ -167,9 +167,9 @@ const AllTopic = () => {
               Explore Topics
             </h3>
             <div className="flex flex-wrap py-10">
-              {linkTopic.map((topic) => (
+              {linkTopic.map((topic, index) => (
                 <div
-                  key={topic.id}
+                  key={index}
                   className="px-5 py-2 rounded-lg bg-_green/[0.1] text-_green text-sm font-semibold m-1 cursor-pointer hover:bg-_green/[0.9] hover:text-green-50 duration-100"
                 >
                   {topic.title}

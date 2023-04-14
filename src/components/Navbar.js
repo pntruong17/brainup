@@ -1,10 +1,11 @@
-import React, { useState, useEffect, memo } from "react";
+import React, { useState, useEffect, memo, useId } from "react";
 import Link from "next/link";
 import Hamburger from "./subcomponents/Hamburger";
 import { useUserAuth } from "./helper/UserAuthContextProvider";
 import { useRouter } from "next/router";
 
 const Navbar = () => {
+  const id = useId();
   const [imgUser, setImgUser] = useState();
   const [popover, setPopover] = useState(false);
   const { user, logOut } = useUserAuth();
@@ -111,9 +112,9 @@ const Navbar = () => {
             open ? " " : "hidden"
           }`}
         >
-          {Links.map((link) => (
+          {Links.map((link, index) => (
             <li
-              key={link.name}
+              key={index}
               className="md:ml-5 md:my-0 py-3 border-b md:border-none"
             >
               <Link
