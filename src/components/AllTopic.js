@@ -33,7 +33,7 @@ const AllTopic = () => {
   ];
   return (
     <>
-      <div className="text-gray-600 font-Nunito my-14">
+      <div className="text-gray-600 font-Inter my-14">
         <div className="max-w-6xl flex flex-wrap px-5 py-5 mx-auto">
           <div className="w-full md:w-2/3 mt-10">
             <h3 className="text-2xl font-bold text-_dark underline text-center md:text-left">

@@ -1,7 +1,5 @@
 import Head from "next/head";
 import React from "react";
-import Footer from "./Footer";
-import Navbar from "./Navbar";
 import { useRouter } from "next/router";
 
 const LayoutEmpty = ({ children, pageMeta }) => {

@@ -1,20 +1,20 @@
-import React, { useRef, useEffect, useState } from "react";
+import React from "react";
 import Link from "next/link";
 
 const Hero = () => {
   return (
     <>
-      <section className="text-gray-600 font-Nunito">
+      <section className="text-gray-600 font-Inter">
         <div className="max-w-7xl mx-auto flex px-5 py-20 md:py-44 md:flex-row flex-col items-center">
           <div className="lg:flex-grow md:w-1/2 lg:pr-24 md:pr-16 flex flex-col md:items-start md:text-left mb-16 md:mb-0 items-center">
-            <h1 className="mt-4 font-Albert font-bold text-3xl md:text-5xl text-gray-900 tracking-tighter md:leading-[1.15]">
+            <h1 className="mt-4 font-Inter font-bold text-3xl md:text-5xl text-gray-900 tracking-tighter md:leading-[1.15]">
               Improve your mind with{" "}
               <span className="text-_green cursor-pointer">brain games</span>{" "}
               and{" "}
               <span className="text-_green cursor-pointer">free IQ tests</span>{" "}
               to measure your logic.
             </h1>
-            <p className="my-8 leading-relaxed text-base md:text-xl text-gray-600 tracking-tight">
+            <p className="my-8 leading-relaxed text-lg text-gray-600 tracking-tighter">
               Unlock Your Potential with Our Free IQ Test and Brain Games!{" "}
               <br />
               Take the challenge and discover your IQ score.

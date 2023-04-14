@@ -1,87 +1,117 @@
-import React from "react";
-import { useUserAuth } from "./helper/UserAuthContextProvider";
+import { useState } from "react";
 import { useRouter } from "next/router";
+import { useUserAuth } from "./helper/UserAuthContextProvider";
+import ReCAPTCHA from "react-google-recaptcha";
+import Head from "next/head";
 
-const SignUpForm = () => {
-  const { googleSignIn, user, iuser, setIuser } = useUserAuth();
-  const navigate = useRouter();
+export default function SignUp() {
+  const router = useRouter();
+  const { signUp } = useUserAuth();
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
+  const [error, setError] = useState("");
+  const [captchaToken, setCaptchaToken] = useState("");
+  const [isCaptchaVerified, setIsCaptchaVerified] = useState(false);
 
-  const GoogleLogin = () => {
-    googleSignIn().then(() => {
-      navigate.push("/");
-    });
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+    try {
+      if (isCaptchaVerified) {
+        // here -> isCaptchaVerified
+        if (password !== confirmPassword) {
+          setError("Passwords do not match.");
+        } else if (!isValidPassword(password)) {
+          setError(
+            "Password must have at least one special character, one number, one lowercase, one uppercase letter and 8 characters"
+          );
+        } else {
+          await signUp(email, password);
+          router.push("/");
+        }
+      } else {
+        setError("Please verify that you're not a robot.");
+      }
+    } catch (error) {
+      setError(error.message);
+    }
   };
-  return (
-    <>
-      <section className="text-gray-600 body-font">
-        <div className="container px-5 py-24 mx-auto flex flex-wrap items-center">
-          <div className="max-w-lg bg-white rounded-lg p-8 flex flex-col mx-auto w-full mt-10 md:mt-0 shadow-2xl">
-            <h2 className="text-gray-900 text-lg font-medium title-font mb-5">
-              Sign up to use the service
-            </h2>
-            <div className="relative mb-4">
-              <label
-                htmlFor="email"
-                className="leading-7 text-sm text-gray-600"
-              >
-                Email
-              </label>
-              <input
-                type="email"
-                id="email"
-                name="email"
-                className="w-full bg-white rounded border border-gray-300 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out"
-              />
-            </div>
-            <div className="relative mb-4">
-              <label
-                htmlFor="password"
-                className="leading-7 text-sm text-gray-600"
-              >
-                Password
-              </label>
-              <input
-                type="password"
-                id="password"
-                name="password"
-                className="w-full bg-white rounded border border-gray-300 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out"
-              />
-            </div>
-            <div className="relative mb-4">
-              <label
-                htmlFor="password2"
-                className="leading-7 text-sm text-gray-600"
-              >
-                Repeat Password
-              </label>
-              <input
-                type="password"
-                id="password2"
-                name="password2"
-                className="w-full bg-white rounded border border-gray-300 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out"
-              />
-            </div>
-            <button className="text-white bg-black border border-black py-2 px-8 focus:outline-none hover:bg-white hover:text-black rounded text-lg transition duration-100">
-              Sign Up
-            </button>
-            <p className="text-xs text-gray-500 mt-3">
-              Literally you probably haven&apos;t heard of them jean shorts.
-            </p>
-            <p className="text-md text-gray-500 mt-3 text-center">
-              Or sign up with
-            </p>
-            <button
-              onClick={GoogleLogin}
-              className="text-green-700 bg-white p-3 w-full justify-center border border-green-700 font-medium rounded-full flex align-middle gap-2 hover:font-semibold"
-            >
-              <i className="fa-brands fa-google"></i>
-              Sign Up with Google
-            </button>
-          </div>
-        </div>
-      </section>
-    </>
-  );
-};
 
-export default SignUpForm;
+  const isValidPassword = (password) => {
+    console.log(password);
+    const regex = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^&*()]).{8,}$/;
+    return regex.test(password);
+  };
+
+  const handleCaptchaChange = (token) => {
+    setCaptchaToken(token);
+    setIsCaptchaVerified(true);
+  };
+
+  return (
+    <div>
+      <Head>
+        <script
+          async
+          src={`https://www.google.com/recaptcha/api.js?render=${process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY}`}
+        ></script>
+      </Head>
+
+      <form onSubmit={handleSubmit}>
+        <div className="w-full flex items-center mb-3">
+          <label
+            className="mr-5 flex-1 text-right font-medium text-sm"
+            htmlFor="email"
+          >
+            Email
+          </label>
+          <input
+            className="w-3/4 px-5 py-1 border rounded-lg"
+            type="email"
+            id="email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+          />
+        </div>
+        <div className="w-full flex items-center mb-3">
+          <label
+            className="mr-5 flex-1 text-right font-medium text-sm"
+            htmlFor="password"
+          >
+            Password
+          </label>
+          <input
+            className="w-3/4 px-5 py-1 border rounded-lg"
+            type="password"
+            id="password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+          />
+        </div>
+        <div className="w-full flex items-center mb-3">
+          <label
+            className="mr-5 flex-1 text-right font-medium text-sm"
+            htmlFor="confirm-password"
+          >
+            Confirm Password
+          </label>
+          <input
+            className="w-3/4 px-5 py-1 border rounded-lg"
+            type="password"
+            id="confirm-password"
+            value={confirmPassword}
+            onChange={(e) => setConfirmPassword(e.target.value)}
+          />
+        </div>
+        <ReCAPTCHA
+          sitekey={process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY}
+          onChange={handleCaptchaChange}
+        />
+        <button className="donate-button mx-auto" type="submit">
+          Sign up
+        </button>
+        {error && <p className="text-center text-_red p-5 text-sm">{error}</p>}
+      </form>
+    </div>
+  );
+}

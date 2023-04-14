@@ -1,6 +1,8 @@
-import React from "react";
+import React, { useState } from "react";
 import { useUserAuth } from "../helper/UserAuthContextProvider";
 import { useRouter } from "next/router";
+import SignIn from "../SignInForm";
+import SignUp from "../SignUpForm";
 
 // const sample_userdata = {
 //   uid: user.uid,
@@ -17,6 +19,7 @@ import { useRouter } from "next/router";
 // };
 
 const GetStartedForm = ({ userExistance }) => {
+  const [hasAcc, setHasAcc] = useState(true);
   const { googleSignIn, user } = useUserAuth();
   const navigate = useRouter();
 
@@ -76,6 +79,43 @@ const GetStartedForm = ({ userExistance }) => {
               </svg>
               Sign in with Google
             </button>
+            <p className="font-semibold text-lg text-_darkblue mt-10 text-center mb-5">
+              {hasAcc
+                ? "Or sign in with email and password"
+                : "Create a new account"}
+            </p>
+            <div className={`${hasAcc ? "" : "hidden"}`}>
+              <SignIn />
+            </div>
+            <div className={`${!hasAcc ? "" : "hidden"}`}>
+              <SignUp />
+            </div>
+            <p
+              className={`font-Albert text-base text-_darkblue mt-3 text-left mb-10 ${
+                hasAcc ? "" : "hidden"
+              }`}
+            >
+              Create an account with{" "}
+              <span
+                onClick={() => setHasAcc(false)}
+                className="text-_green cursor-pointer hover:underline"
+              >
+                email and password
+              </span>
+            </p>
+            <p
+              className={`font-Albert text-base text-_darkblue mt-3 text-left mb-10 ${
+                !hasAcc ? "" : "hidden"
+              }`}
+            >
+              I have an{" "}
+              <span
+                onClick={() => setHasAcc(true)}
+                className="text-_green cursor-pointer hover:underline"
+              >
+                account
+              </span>
+            </p>
           </div>
         </div>
       </section>
