@@ -36,7 +36,7 @@ const User = () => {
           title: "User Login",
         }}
       >
-        <div className="m-20">
+        <div className="m-2 md:m-20">
           {yourdata !== undefined && tested && (
             <ResultTesting yourdata={yourdata} />
           )}

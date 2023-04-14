@@ -104,8 +104,8 @@ const FinishScene = ({
         exit={{ opacity: 0 }}
         className="text-gray-600 body-font w-full h-screen bg-_darkblue"
       >
-        <div className="container px-5 py-24 mx-auto flex flex-wrap items-center">
-          <div className="max-w-lg bg-white rounded-lg p-8 flex flex-col mx-auto w-full mt-10 md:mt-0 shadow-lg">
+        <div className="container px-3 py-5 md:py-24 mx-auto flex flex-wrap items-center">
+          <div className="max-w-lg bg-white rounded-lg p-2 md:p-8 flex flex-col mx-auto w-full mt-10 md:mt-0 shadow-lg">
             <h2 className="text-gray-900 text-lg font-medium title-font mb-5">
               Please select the options below to complete the test
             </h2>

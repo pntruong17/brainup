@@ -11,7 +11,8 @@ const Index = ({ triviaData }) => {
       <LayoutTrivia
         pageMeta={{
           title: "Trivia | Brain up",
-          description: "Trivia",
+          description:
+            "Test your knowledge with our Trivia or Quiz game website! Enjoy a variety of entertaining quizzes, brain teasers, and word games with topics from pop culture to science. Compete against players from around the world and see how you rank. Join the fun today!",
         }}
       >
         <div className="w-full min-h-screen pt-6 sm:pt-10 bg-[#16202C] px-3">

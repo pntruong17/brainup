@@ -12,6 +12,7 @@ const BlogPost = ({ post, slug }) => {
     <Layout
       pageMeta={{
         title: post.title,
+        description: post.excerpt,
       }}
     >
       <motion.section

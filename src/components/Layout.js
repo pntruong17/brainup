@@ -20,14 +20,18 @@ const Layout = ({ children, pageMeta }) => {
         <meta name="description" content={meta.description} />
         <meta
           property="og:url"
-          content={`https://brainup.io${router.asPath}`}
+          content={`https://brainup.gg${router.asPath}`}
         />
         <meta property="og:type" content={meta.type} />
-        <meta property="og:site_name" content="Webapp IQ test and Brain game" />
+        <meta property="og:description" content={meta.description} />
+        <meta
+          property="og:site_name"
+          content="Webapp IQ test, trivia and Brain game"
+        />
         <meta property="og:title" content={meta.title} />
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <meta name="keywords" content="Home" />
+        <meta name="keywords" content="brain games, iq test, trivia, blog" />
         <link rel="icon" href="/favicon.ico" />
         <title>{meta.title}</title>
       </Head>
