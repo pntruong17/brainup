@@ -29,17 +29,18 @@ const QuizScene = ({ changeScene, result, setResult }) => {
     "If you're not feeling well, come back later. When you're not feeling well, your answers might not be accurate.",
     "If you're ready, click the LET'S GO button to start the timer!",
   ];
+
   const STATES = ["prepared", "quiz", "closed"];
   const [state, setState] = useState(STATES[0]); // prepare->quiz->close
   const [currentquiz, setCurrentquiz] = useState(0);
   const [thisQuestion, setThisQuestion] = useState(questions[0]);
   const [userOptions, setUserOptions] = useState(() =>
-    questions.map((qi) => "")
+    questions.map((q) => "")
   );
   const [section, setSection] = useState([
     { range: 8, title: "General Logical Reasoning Section" },
     { range: 14, title: "Numerical Reasoning Section" },
-    { range: 22, title: "High Logical Reasoning Section" },
+    { range: 22, title: "Logical Reasoning Section" },
     { range: 30, title: "Spatial Reasoning Section" },
   ]);
   const [showTitle, setShowTitle] = useState("");
@@ -49,14 +50,30 @@ const QuizScene = ({ changeScene, result, setResult }) => {
   const [lockButton, setLockButton] = useState(false);
 
   const [isActiveTime, setIsActiveTime] = useState(false);
+  const [imageLoadingComplete, setImageLoadingComplete] = useState(undefined);
 
-  const imageLoadingComplete = () => {
+  // --> check button locked & paused
+  useEffect(() => {
     if (state === STATES[0]) return;
-    // unlock buttons + time go continuously
-    setLockButton(false);
-    handleRestart();
+    if (imageLoadingComplete) {
+      handleRestart();
+      setLockButton(false);
+    } else {
+      handlePause();
+      setLockButton(true);
+    }
+  }, [imageLoadingComplete]);
+  useEffect(() => {
+    if (state === STATES[0]) return;
+    setImageLoadingComplete(false);
+  }, [currentquiz]);
+  // --> end check button & timer
+
+  const imageLoadingCompleted = () => {
+    setImageLoadingComplete(true);
   };
 
+  // --> timer section
   const handleStart = () => {
     setIsActiveTime(true);
     console.log("starting");
@@ -85,16 +102,25 @@ const QuizScene = ({ changeScene, result, setResult }) => {
     }
     return () => clearInterval(interval);
   }, [isActiveTime, timer]);
-
-  const startQuiz = () => {
-    handleStart();
-    setState(STATES[1]);
-  };
-
   const renderTimer = () => {
     let munite = Math.floor(timer / 60);
     let second = timer % 60;
     return "" + changeTimeCode(munite) + ":" + changeTimeCode(second);
+  };
+  const changeTimeCode = (sec) => {
+    if (sec < 10 && sec >= 0) {
+      sec = "0" + Math.round(sec);
+    }
+    if (sec > 59) {
+      sec = "00";
+    }
+    return sec;
+  };
+  // --> end of timer section
+
+  const startQuiz = () => {
+    handleStart();
+    setState(STATES[1]);
   };
 
   useEffect(() => {
@@ -131,22 +157,6 @@ const QuizScene = ({ changeScene, result, setResult }) => {
     }
   }, [userOptions]);
 
-  useEffect(() => {
-    if (state === STATES[0]) return;
-    //lock time + button when userOptions changes
-    handlePause();
-    setLockButton(true);
-  }, [userOptions, currentquiz]);
-
-  const changeTimeCode = (sec) => {
-    if (sec < 10 && sec >= 0) {
-      sec = "0" + Math.round(sec);
-    }
-    if (sec > 59) {
-      sec = "00";
-    }
-    return sec;
-  };
   const handleBackArrow = () => {
     if (currentquiz === 0) return;
     setCurrentquiz((prevState) => prevState - 1);
@@ -181,19 +191,19 @@ const QuizScene = ({ changeScene, result, setResult }) => {
     changeScene("Finish");
   };
   const submitResult = () => {
-    setStart(false);
     checkTheResult();
   };
   useEffect(() => {
     if (timer <= 0) {
-      setStart(false);
       checkTheResult();
     }
   }, [timer]);
+
   useEffect(() => {
     const newQuiz = questions[currentquiz];
     setThisQuestion(newQuiz);
   }, [currentquiz]);
+
   useEffect(() => {
     console.log("userOptions", userOptions);
     console.log("isActiveTime", isActiveTime);
@@ -282,7 +292,7 @@ const QuizScene = ({ changeScene, result, setResult }) => {
                       height={600}
                       loading="lazy"
                       className=""
-                      onLoadingComplete={imageLoadingComplete}
+                      onLoadingComplete={imageLoadingCompleted}
                       src={"/images/" + thisQuestion.questionText + ".jpg"}
                       alt="blog"
                     />

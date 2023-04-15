@@ -1,11 +1,17 @@
+//import firebase from "firebase/app";
 import firebase, { db } from "./firebaseconfig";
+
 import {
   collection,
   updateDoc,
   getDoc,
+  getDocs,
   setDoc,
   deleteDoc,
   doc,
+  orderBy,
+  query,
+  limit,
 } from "firebase/firestore";
 
 const sample_userdata = {
@@ -102,4 +108,57 @@ export const checkUserExistence = async (collectionId) => {
     console.error(error);
     throw error;
   }
+};
+
+// const newRecord = {
+//   uid: "0101",
+//   idTrivia:"trivia0000"
+//   neurons: 1543,
+// };
+
+export const addNeuronAndIdTrivia = async (newRecord) => {
+  const { uid, idTrivia, neurons } = newRecord;
+  const userRef = doc(db, "users", uid); // Tạo tham chiếu đến collection "users"
+
+  try {
+    const userDoc = await getDoc(userRef); // Get the user document
+
+    if (userDoc.exists()) {
+      // Case 1: Update existing document
+      const data = userDoc.data();
+      const isPlayed = data.idTrivia.some((id) => id === idTrivia);
+      console.log(isPlayed);
+      let nextIdTrivia = [...data.idTrivia];
+      if (!isPlayed) {
+        nextIdTrivia.push(idTrivia);
+      }
+
+      await updateDoc(userRef, {
+        idTrivia: nextIdTrivia,
+        neurons: data.neurons + neurons,
+      });
+    } else {
+      // Case 2: Create new document
+      await setDoc(userRef, {
+        uid: uid,
+        idTrivia: [idTrivia],
+        neurons: neurons,
+      });
+    }
+  } catch (error) {
+    console.error("Error adding neuron and trivia ID:", error);
+  }
+};
+
+export const returnTopTenNeuronsUsers = async () => {
+  const userRef = collection(db, "users"); // Get reference to the "users" collection
+  const q = query(userRef, orderBy("neurons", "desc"), limit(3));
+  const querySnapshot = await getDocs(q);
+  const topTenUsers = [];
+
+  querySnapshot.forEach((doc) => {
+    topTenUsers.push(doc.data());
+  });
+
+  return topTenUsers;
 };

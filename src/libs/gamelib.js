@@ -7,7 +7,7 @@ import Wordle from "@/games/Wordle";
 
 export const gamelib = [
   {
-    id: 1,
+    id: "braingame000",
     Group: "Math",
     Name: "Math Game",
     Slug: "math-game",
@@ -19,7 +19,7 @@ export const gamelib = [
     Game: <MathGame />,
   },
   {
-    id: 2,
+    id: "braingame001",
     Group: "Memory",
     Name: "Memory Cards",
     Slug: "memory-card",
@@ -31,7 +31,7 @@ export const gamelib = [
     Game: <MemoryCardGame />,
   },
   {
-    id: 3,
+    id: "braingame002",
     Group: "Memory",
     Name: "Collect Food",
     Slug: "collect-food",
@@ -43,7 +43,7 @@ export const gamelib = [
     Game: <FoodCollection />,
   },
   {
-    id: 4,
+    id: "braingame003",
     Group: "Speed",
     Name: "Fast Match",
     Slug: "fast-match",
@@ -55,7 +55,7 @@ export const gamelib = [
     Game: <FastMatch />,
   },
   {
-    id: 5,
+    id: "braingame004",
     Group: "Attention",
     Name: "Diamond Search",
     Slug: "diamond-search",
@@ -67,7 +67,7 @@ export const gamelib = [
     Game: <StarSearch />,
   },
   {
-    id: 6,
+    id: "braingame005",
     Group: "Language",
     Name: "Wordl",
     Slug: "wordl",
