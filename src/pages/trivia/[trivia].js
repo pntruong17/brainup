@@ -2,6 +2,7 @@ import React, { useEffect, useReducer, useState } from "react";
 import Image from "next/image";
 import fs from "fs";
 import path from "path";
+import { useUserAuth } from "@/components/helper/UserAuthContextProvider";
 import { motion } from "framer-motion";
 import LayoutTrivia from "@/components/LayoutTrivia";
 import AnswerButton from "@/trivia/AnswerButton";
@@ -13,11 +14,12 @@ import {
   setCookies,
   updateSingleNumberCookies,
 } from "@/components/Cookies";
+import ScoreBoard from "@/components/subcomponents/ScoreBoard";
 
 const Trivia = ({ triviBySlug, triviNotThisQuiz }) => {
   //scoreboard
   const TIMER = 12;
-  const STATES = ["start", "timego", "timeout", "answered", "cloded"];
+  const STATES = ["start", "timego", "timeout", "answered", "showingScore"];
   const CLASS = [
     { title: "Reincarnate", points: 0 },
     { title: "Preschool", points: 2000 },
@@ -54,6 +56,7 @@ const Trivia = ({ triviBySlug, triviNotThisQuiz }) => {
     xpNeeded: undefined,
   });
   const [chart, setChart] = useState(15);
+  const { user } = useUserAuth();
   // chart
   const radius = 65;
   const strokeWidth = 18;
@@ -205,10 +208,6 @@ const Trivia = ({ triviBySlug, triviNotThisQuiz }) => {
     setQuestionLeft((prev) => prev - 1);
     setCurrentQuiz((prev) => prev + 1);
   };
-  const handleShowResults = () => {
-    setState(STATES[4]);
-    handleKillTimer();
-  };
 
   const handleStart = () => {
     setIsActiveTime(true);
@@ -252,7 +251,8 @@ const Trivia = ({ triviBySlug, triviNotThisQuiz }) => {
     //console.log(thisQuestion.img1);
     //console.log("pointCookies", pointCookies);
     //console.log("levelPlayer", levelPlayer);
-  }, [correct, gameScore, pointCookies, levelPlayer, thisQuestion]);
+    console.log(user.uid);
+  }, [correct, gameScore, pointCookies, levelPlayer, thisQuestion, user]);
 
   useEffect(() => {
     let interval = null;
@@ -455,92 +455,14 @@ const Trivia = ({ triviBySlug, triviNotThisQuiz }) => {
             )}
             {state === STATES[4] && (
               <div className="w-full h-full p-2 bg-_contrast_bg border rounded-lg pt-16">
-                <div className="max-w-[380px] h-auto mx-auto pt-16 pb-3 px-2 rounded-2xl bg-amber-100 border-b-8 border-gray-400/[0.2] relative">
-                  <div className="absolute -top-[20px] sm:-top-[35px] xs:left-[22%] sm:left-[75px] sm:w-[230px] sm:h-[80px] bg-blue-400 border-b-8 border-blue-500/[0.9] rounded-lg text-4xl font-bold text-white flex justify-center items-center">
-                    Score Board
-                  </div>
-                  <div className="max-w-[280px] h-[68px] mx-auto mb-2 text-_green bg-white rounded-md shadow-lg flex justify-between items-center p-2 border-b-4">
-                    <h3 className="font-bold text-xl tracking-tight">
-                      1. Win Streak{" "}
-                    </h3>
-                    <h3 className="font-bold text-xl tracking-tight">
-                      {gameScore.winstreak}
-                    </h3>
-                  </div>
-                  <div className="max-w-[280px] h-[68px] mx-auto mb-2 text-_accent bg-white rounded-md shadow-lg flex justify-between items-center p-2 border-b-4">
-                    <h3 className="font-bold text-xl tracking-tight">
-                      2. Timer Bonus{" "}
-                    </h3>
-                    <h3 className="font-bold text-xl tracking-tight">
-                      {gameScore.timeBonusStack}
-                    </h3>
-                  </div>
-                  <div className="max-w-[280px] h-[68px] mx-auto mb-2 text-_w_almost bg-white rounded-md shadow-lg flex justify-between items-center p-2 border-b-4">
-                    <h3 className="font-bold text-xl tracking-tight">
-                      3. Correct{" "}
-                    </h3>
-                    <h3 className="font-bold text-xl tracking-tight">
-                      {gameScore.point}
-                    </h3>
-                  </div>
-                  <div className="max-w-[280px] h-[68px] mx-auto mb-2 text-_red bg-white rounded-md shadow-lg flex justify-between items-center p-2 border-b-4">
-                    <h3 className="font-black text-2xl tracking-tight">
-                      Total:{" "}
-                    </h3>
-                    <h3 className="font-black text-2xl tracking-tight">
-                      {gameScore.winstreak +
-                        gameScore.timeBonusStack +
-                        gameScore.point}
-                    </h3>
-                  </div>
-                  <h4 className="font-bold text-xl tracking-tight text-center pt-3">
-                    Your level:
-                  </h4>
-                  <div className="w-40 h-40 mx-auto">
-                    <svg
-                      className="w-40 h-40 overflow-visible"
-                      transform="rotate(-90)"
-                    >
-                      <circle
-                        className="text-gray-300 stroke-current "
-                        strokeWidth={4}
-                        strokeDasharray={circumference}
-                        strokeDashoffset={0}
-                        strokeLinecap="round"
-                        fill="none"
-                        r={radius}
-                        cx="50%"
-                        cy="50%"
-                      />
-                      <circle
-                        className="text-blue-500 stroke-current "
-                        strokeWidth={strokeWidth}
-                        strokeDasharray={circumference}
-                        strokeDashoffset={offset}
-                        strokeLinecap="round"
-                        fill="none"
-                        r={radius}
-                        cx="50%"
-                        cy="50%"
-                      />
-                      <text
-                        className="text-blue-800 font-black text-center origin-center tracking-tighter"
-                        transform="rotate(90)"
-                        x="50%"
-                        y="50%"
-                        dominantBaseline="central"
-                        textAnchor="middle"
-                        fontSize={18}
-                      >
-                        {levelPlayer.title}
-                      </text>
-                    </svg>
-                  </div>
-                  <h4 className="font-semibold text-base tracking-tight text-center p-2">
-                    {levelPlayer.xpNeeded} XP needed to reach next level -{" "}
-                    {levelPlayer.nextTitle}
-                  </h4>
-                </div>
+                <ScoreBoard
+                  uid={user.uid}
+                  idTrivia={triviBySlug.id}
+                  winstreak={gameScore.winstreak}
+                  timeBonusStack={gameScore.timeBonusStack}
+                  correct={gameScore.point}
+                  state={state}
+                />
                 <div className="w-full rounded-md mt-5 ">
                   <div className="font-black text-_contrast_text text-2xl underline text-center my-10">
                     READY FOR YOUR NEXT QUIZ?

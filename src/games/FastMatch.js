@@ -96,8 +96,6 @@ const FastMatch = () => {
   const handleStart = () => {
     setBtnPress(true);
     setStart(true);
-    //setSelected(newSelect);
-    //setNewSelect((prev) => getRandomSymbol());
     setCheckbullshit((prev) => prev + 1);
   };
   const handleRestart = () => {
@@ -132,7 +130,6 @@ const FastMatch = () => {
   // end cookies data
 
   useEffect(() => {
-    //if (!playBtn) return;
     newTurn();
     checkMatched(isRight);
   }, [checkbullshit]);
