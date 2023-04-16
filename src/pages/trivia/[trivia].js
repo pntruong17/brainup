@@ -15,6 +15,7 @@ import {
   updateSingleNumberCookies,
 } from "@/components/Cookies";
 import ScoreBoard from "@/components/subcomponents/ScoreBoard";
+import { useRouter } from "next/router";
 
 const Trivia = ({ triviBySlug, triviNotThisQuiz }) => {
   //scoreboard
@@ -111,7 +112,16 @@ const Trivia = ({ triviBySlug, triviNotThisQuiz }) => {
     }
   };
   const [gameScore, dispatchGameScore] = useReducer(gameReducer, initGameScore);
+  // end of reducer function
 
+  const navigate = useRouter();
+
+  useEffect(() => {
+    if (user === null) {
+      navigate.push("/login");
+      return;
+    }
+  }, [user, navigate]);
   const calculateLevelPlayer = () => {
     const _findIndex = CLASS.findIndex((item) => item.points > pointCookies);
 
@@ -251,7 +261,7 @@ const Trivia = ({ triviBySlug, triviNotThisQuiz }) => {
     //console.log(thisQuestion.img1);
     //console.log("pointCookies", pointCookies);
     //console.log("levelPlayer", levelPlayer);
-    console.log(user.uid);
+    //onsole.log(user.uid);
   }, [correct, gameScore, pointCookies, levelPlayer, thisQuestion, user]);
 
   useEffect(() => {

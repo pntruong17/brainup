@@ -3,6 +3,7 @@ import { useUserAuth } from "../helper/UserAuthContextProvider";
 import { useRouter } from "next/router";
 import SignIn from "../SignInForm";
 import SignUp from "../SignUpForm";
+import axios from "axios";
 
 // const sample_userdata = {
 //   uid: user.uid,
@@ -23,10 +24,12 @@ const GetStartedForm = ({ userExistance }) => {
   const { googleSignIn, user } = useUserAuth();
   const navigate = useRouter();
 
-  const googleLogin = () => {
-    googleSignIn().then(() => {
-      navigate.push("/");
-    });
+  const googleLogin = async () => {
+    const login = await googleSignIn();
+    const credentials = login.user.uid;
+    const user = await axios.post("/api/auth/login", credentials);
+    console.log(login.user.uid);
+    navigate.push("/");
   };
   return (
     <>

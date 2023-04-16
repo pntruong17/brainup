@@ -102,11 +102,6 @@ const ScoreBoard = ({
     }
   };
 
-  const getTop = async () => {
-    const _top = await returnTopTenNeuronsUsers();
-    setTopTenUsers(_top);
-  };
-
   const saveTrivia = async (newRecordTrivia) => {
     await saveRecordTrivia(newRecordTrivia);
   };

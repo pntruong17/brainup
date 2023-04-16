@@ -1,5 +1,6 @@
 import React, { useState, useEffect, memo, useId } from "react";
 import Link from "next/link";
+import axios from "axios";
 import Hamburger from "./subcomponents/Hamburger";
 import { useUserAuth } from "./helper/UserAuthContextProvider";
 import { useRouter } from "next/router";
@@ -47,6 +48,12 @@ const Navbar = () => {
     }
 */
 
+  const handleLogOut = async () => {
+    const user = await axios.get("/api/auth/logout");
+
+    console.log(user);
+  };
+
   useEffect(() => {
     if (user) {
       setImgUser(user.photoURL);
@@ -74,6 +81,7 @@ const Navbar = () => {
     setPopover(false);
     setOpen(false);
     logOut();
+    handleLogOut();
     navigate.push("/");
   };
   const handleSignIn = () => {
