@@ -4,6 +4,7 @@ import axios from "axios";
 import Hamburger from "./subcomponents/Hamburger";
 import { useUserAuth } from "./helper/UserAuthContextProvider";
 import { useRouter } from "next/router";
+import { Links } from "@/libs/menuItem";
 
 const Navbar = () => {
   const id = useId();
@@ -12,26 +13,7 @@ const Navbar = () => {
   const { user, logOut } = useUserAuth();
   const navigate = useRouter();
 
-  let Links = [
-    {
-      name: "Test IQ Free",
-      link: "/test-iq",
-    },
-    {
-      name: "Brain Games",
-      link: "/brain-games",
-    },
-    {
-      name: "Trivia",
-      link: "/trivia",
-    },
-    {
-      name: "Articles",
-      link: "/articles",
-    },
-    //{ name: "Blog", link: "/blog" },
-  ];
-  let [open, setOpen] = useState(false);
+  const [open, setOpen] = useState(false);
   const [hasColor, setHascolor] = useState("bg-white md:bg-transparent");
   /*
 
@@ -48,7 +30,7 @@ const Navbar = () => {
     }
 */
 
-  const handleLogOut = async () => {
+  const logOutRemoveCookie = async () => {
     const user = await axios.get("/api/auth/logout");
 
     console.log(user);
@@ -81,7 +63,7 @@ const Navbar = () => {
     setPopover(false);
     setOpen(false);
     logOut();
-    handleLogOut();
+    logOutRemoveCookie();
     navigate.push("/");
   };
   const handleSignIn = () => {
@@ -150,7 +132,7 @@ const Navbar = () => {
               </button>
             )}
             {popover && (
-              <div className="absolute top-12 md:right-0 w-52 h-auto bg-white rounded-md border py-1 shadow-sm">
+              <div className="absolute top-12 md:right-0 w-52 h-auto bg-white rounded-2xl py-1 shadow-md">
                 <svg
                   onClick={() => setPopover(false)}
                   xmlns="http://www.w3.org/2000/svg"
@@ -173,14 +155,14 @@ const Navbar = () => {
                   {user.displayName}
                 </h5>
                 <Link href={"/user"}>
-                  <div className="text-base text-gray-500 mt-2 px-4 py-1 hover:bg-green-500/[0.8] hover:text-white cursor-pointer">
+                  <div className="text-base text-gray-600 mt-2 px-4 py-1 hover:bg-gray-200 cursor-pointer">
                     Your IQ score
                   </div>
                 </Link>
 
                 <h5
                   onClick={signOutGoogle}
-                  className="text-base text-gray-500 mb-2 px-4 py-1 hover:bg-green-500/[0.8] hover:text-white cursor-pointer"
+                  className="text-base text-gray-600 mb-3 px-4 py-1 hover:bg-gray-200  cursor-pointer"
                 >
                   Sign out
                 </h5>

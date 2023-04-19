@@ -1,43 +1,9 @@
 import React, { useState } from "react";
 import Link from "next/link";
+import { triviaLinks } from "@/libs/menuItem";
 
 const NavbarCategoty = () => {
-  let Links = [
-    {
-      name: "Home & Food",
-      link: "/trivia-category/home-food",
-    },
-    {
-      name: "sports",
-      link: "/trivia-category/sports",
-    },
-    {
-      name: "places",
-      link: "/trivia-category/places",
-    },
-    {
-      name: "science",
-      link: "/trivia-category/science",
-    },
-    {
-      name: "nature",
-      link: "/trivia-category/nature",
-    },
-    {
-      name: "style",
-      link: "/trivia-category/style",
-    },
-    {
-      name: "funny",
-      link: "/trivia-category/funny",
-    },
-
-    {
-      name: "Art",
-      link: "/trivia-category/Art",
-    },
-  ];
-  let [open, setOpen] = useState(false);
+  const [open, setOpen] = useState(false);
 
   return (
     <>
@@ -85,7 +51,7 @@ const NavbarCategoty = () => {
               </svg>
 
               <ul className="w-full h-full flex flex-col justify-center">
-                {Links.map((link) => (
+                {triviaLinks.map((link) => (
                   <li key={link.name} className="my-2 text-center">
                     <Link
                       href={link.link}
@@ -102,7 +68,7 @@ const NavbarCategoty = () => {
       </div>
       <div className="hidden md:block w-full bg-[#16202C]">
         <ul className="w-full flex flex-wrap justify-center">
-          {Links.map((link) => (
+          {triviaLinks.map((link) => (
             <li key={link.name} className="my-2 text-center">
               <Link
                 href={link.link}

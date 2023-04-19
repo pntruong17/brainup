@@ -1,30 +1,9 @@
 import React, { useState } from "react";
 import Link from "next/link";
+import { Links } from "@/libs/menuItem";
 
 const NavbarFixed = () => {
-  let Links = [
-    {
-      name: "Home",
-      link: "/",
-    },
-    {
-      name: "Test IQ Free",
-      link: "/test-iq",
-    },
-    {
-      name: "Brain Games",
-      link: "/brain-games",
-    },
-    {
-      name: "Trivia",
-      link: "/trivia",
-    },
-    {
-      name: "Articles",
-      link: "/articles",
-    },
-  ];
-  let [open, setOpen] = useState(false);
+  const [open, setOpen] = useState(false);
 
   return (
     <div className="fixed top-2 left-2 z-10">

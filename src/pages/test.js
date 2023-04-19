@@ -10,6 +10,8 @@ import {
   calculatePercentageIncrease,
 } from "@/firebase/quizFirebase";
 
+import { setCookies } from "@/components/cookie";
+
 const newRecord = {
   uid: "0101",
   idTrivia: "trivia0010",
@@ -33,7 +35,7 @@ const Test = ({
   winstreak = 151,
   timeBonusStack = 252,
   correct = 541,
-  state = "showingScore1",
+  state = "showingScore",
 }) => {
   const CLASS = [
     { title: "Reincarnate", points: 0 },
@@ -148,9 +150,11 @@ const Test = ({
       idTrivia: idTrivia,
       neurons: winstreak + timeBonusStack + correct,
     };
-    returnNeuronsAndAddNeuronAndIdTriviaFunc(newRecord).then(() =>
-      calculateLevelPlayer()
-    );
+    console.log(typeof idTrivia);
+    setCookies("_Nerurons_Score_", idTrivia);
+    // returnNeuronsAndAddNeuronAndIdTriviaFunc(newRecord).then(() =>
+    //   calculateLevelPlayer()
+    // );
   }, []);
   useEffect(() => {
     console.log(levelPlayer.percent);

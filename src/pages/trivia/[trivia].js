@@ -1,7 +1,5 @@
 import React, { useEffect, useReducer, useState } from "react";
 import Image from "next/image";
-import fs from "fs";
-import path from "path";
 import { useUserAuth } from "@/components/helper/UserAuthContextProvider";
 import { motion } from "framer-motion";
 import LayoutTrivia from "@/components/LayoutTrivia";
@@ -13,9 +11,10 @@ import {
   getCookies,
   setCookies,
   updateSingleNumberCookies,
-} from "@/components/Cookies";
+} from "@/components/cookie";
 import ScoreBoard from "@/components/subcomponents/ScoreBoard";
 import { useRouter } from "next/router";
+import triviaData from "/src/trivia/triviaData.json";
 
 const Trivia = ({ triviBySlug, triviNotThisQuiz }) => {
   //scoreboard
@@ -497,11 +496,7 @@ const Trivia = ({ triviBySlug, triviNotThisQuiz }) => {
     </>
   );
 };
-
 export const getStaticPaths = async () => {
-  const filePath = path.join(process.cwd(), "src", "trivia", "triviaData.json");
-  const fileContents = await fs.readFileSync(filePath, "utf8");
-  const triviaData = await JSON.parse(fileContents); // Thay đổi tại đây
   const _pathBySlug = triviaData.questions.map((trivi) => ({
     params: { trivia: trivi.slug },
   }));
@@ -513,11 +508,8 @@ export const getStaticPaths = async () => {
 
 export const getStaticProps = async ({ params }) => {
   const slugTrivia = params.trivia;
-  const filePath = path.join(process.cwd(), "src", "trivia", "triviaData.json");
 
-  const fileContents = await fs.readFileSync(filePath, "utf8");
-  const triviaData = await JSON.parse(fileContents);
-  const triviBySlug = triviaData.questions.filter(
+  const triviBySlug = triviaData.questions.find(
     (trivi) => trivi.slug === slugTrivia
   );
   const triviNotThisQuiz = triviaData.questions.filter(
@@ -528,9 +520,44 @@ export const getStaticProps = async ({ params }) => {
   }
   return {
     props: {
-      triviBySlug: triviBySlug[0],
+      triviBySlug: triviBySlug,
       triviNotThisQuiz: triviNotThisQuiz,
     },
   };
 };
+// export const getStaticPaths = async () => {
+//   const filePath = path.join(process.cwd(), "src", "trivia", "triviaData.json");
+//   const fileContents = await fs.readFileSync(filePath, "utf8");
+//   const triviaData = await JSON.parse(fileContents); // Thay đổi tại đây
+//   const _pathBySlug = triviaData.questions.map((trivi) => ({
+//     params: { trivia: trivi.slug },
+//   }));
+//   return {
+//     paths: _pathBySlug,
+//     fallback: false,
+//   };
+// };
+
+// export const getStaticProps = async ({ params }) => {
+//   const slugTrivia = params.trivia;
+//   const filePath = path.join(process.cwd(), "src", "trivia", "triviaData.json");
+
+//   const fileContents = await fs.readFileSync(filePath, "utf8");
+//   const triviaData = await JSON.parse(fileContents);
+//   const triviBySlug = triviaData.questions.filter(
+//     (trivi) => trivi.slug === slugTrivia
+//   );
+//   const triviNotThisQuiz = triviaData.questions.filter(
+//     (trivi) => trivi.slug !== slugTrivia
+//   );
+//   if (triviNotThisQuiz.length > 4) {
+//     triviNotThisQuiz.slice(0, 4);
+//   }
+//   return {
+//     props: {
+//       triviBySlug: triviBySlug[0],
+//       triviNotThisQuiz: triviNotThisQuiz,
+//     },
+//   };
+// };
 export default Trivia;

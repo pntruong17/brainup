@@ -7,7 +7,7 @@ import {
   getCookies,
   setCookies,
   updateCookies,
-} from "@/components/Cookies";
+} from "@/components/cookie";
 import ShowTopScore from "./comps/ShowTopScore";
 
 const FastMatch = () => {

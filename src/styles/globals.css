@@ -163,6 +163,32 @@
   border: 2px solid blueviolet;
   border-radius: 0.5rem;
 }
+.user-correct {
+  background-color: #1e90ff;
+}
+.user-incorrect {
+  background-color: #ff5733;
+}
+.card {
+  position: relative;
+  transition: transform 0.25s;
+  transform-style: preserve-3d;
+}
+.animate-rotation-18 {
+  animation: analog_rotation 18s linear;
+}
+
+.flipped {
+  transform: rotateY(180deg);
+}
+.matched {
+  border: 2px solid blueviolet;
+  border-radius: 0.5rem;
+}
+.correct {
+  border: 2px solid blueviolet;
+  border-radius: 0.5rem;
+}
 .card {
   position: relative;
   transition: transform 0.25s;

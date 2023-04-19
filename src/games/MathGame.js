@@ -8,7 +8,7 @@ import {
   getCookies,
   setCookies,
   updateCookies,
-} from "@/components/Cookies";
+} from "@/components/cookie";
 
 const MathGame = () => {
   let timeRef = useRef();
