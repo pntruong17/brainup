@@ -1,5 +1,6 @@
 import Image from "next/image";
 import React from "react";
+import Link from "next/link";
 
 const CardKidsGame = ({ game }) => {
   return (
@@ -21,13 +22,16 @@ const CardKidsGame = ({ game }) => {
           <div className="w-full flex flex-col justify-between items-center">
             <div w-full>
               <h3 className="text-center text-lg font-black tracking-tighter">
-                {game?.title || "This is game for kid"}
+                {game?.name || "This is game for kid"}
               </h3>
             </div>
             <div w-full>
-              <button className="mx-auto py-1 px-3 text-center text-xl font-black bg-white rounded-full border-b-4 border-green-200 hover:border-b-2 duration-100">
+              <Link
+                href={"/kid-games/" + game.slug}
+                className="mx-auto py-1 px-3 text-center text-xl font-black bg-white rounded-full border-b-4 border-green-200 hover:border-b-2 duration-100"
+              >
                 Get it
-              </button>
+              </Link>
             </div>
           </div>
         </div>

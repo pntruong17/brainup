@@ -1,6 +1,8 @@
 import CardKidsGame from "@/kidgames/CardKidsGame";
 import Image from "next/image";
 import React from "react";
+import { kidgamelib } from "@/libs/kidgamelib";
+import Link from "next/link";
 
 const Index = ({ user, game }) => {
   return (
@@ -23,7 +25,7 @@ const Index = ({ user, game }) => {
           <div className="relative w-full min-h-[350px] rounded-3xl overflow-hidden mt-10">
             <Image
               src={
-                game?.image ??
+                kidgamelib[0]?.image ??
                 "https://s.luyengame.net/categories/kids/78ede9626584c36515817160f36785a1.jpg"
               }
               fill
@@ -34,16 +36,19 @@ const Index = ({ user, game }) => {
             <div className="absolute w-full h-full p-3 xs:p-10 flex flex-col justify-between items-center">
               <div className="w-full">
                 <h3 className="text-center text-3xl xs:text-4xl font-black tracking-tighter bg-white/[0.8]">
-                  {game?.title || "This is game for kid"}
+                  {kidgamelib[0]?.name || "This is game for kid"}
                 </h3>
                 <p className="text-center text-lg font-medium tracking-tighter bg-white/[0.8]">
-                  {game?.desc || "How to fixed the problem?"}
+                  {kidgamelib[0]?.desc || "How to fixed the problem?"}
                 </p>
               </div>
               <div className="w-full flex justify-center">
-                <button className="mx-auto py-2 px-5 text-center text-2xl xs:text-4xl font-black bg-white rounded-full border-b-4 border-green-200 hover:border-b-2 duration-100">
+                <Link
+                  href={"/kid-games/" + kidgamelib[0].slug}
+                  className="mx-auto py-2 px-5 text-center text-2xl xs:text-4xl font-black bg-white rounded-full border-b-4 border-green-200 hover:border-b-2 duration-100"
+                >
                   Get it
-                </button>
+                </Link>
               </div>
             </div>
           </div>
@@ -51,9 +56,9 @@ const Index = ({ user, game }) => {
             Best For Today
           </h3>
           <div className="w-full flex flex-wrap">
-            <CardKidsGame />
-            <CardKidsGame />
-            <CardKidsGame />
+            {kidgamelib.slice(1).map((item, index) => (
+              <CardKidsGame key={item.id} game={item} />
+            ))}
           </div>
         </div>
       </div>
