@@ -1,7 +1,8 @@
 /** @type {import('tailwindcss').Config} */
 const defaultTheme = require("tailwindcss/defaultTheme");
 module.exports = {
-  mode: "jit",
+  darkMode: "class",
+  //mode: "jit",
   content: ["./src/**/*.{html,js}"],
   theme: {
     extend: {
@@ -33,14 +34,14 @@ module.exports = {
         _black: "#2E2C2D",
         _pink1: "#EAC1B1",
         _blue: "#00ADB5",
-        _yellow: "#F9ED69",
+        _yellow: "#FFD714",
         _pink: "#F38181",
-        _orange: "#F08A5D",
+        _orange: "#E85818",
         _green: "#1FAB89",
         _brown: "#9E7676",
         _darkblue: "#2B2E4A",
         _red: "#E84545",
-        _dark: "#252A34",
+        _dark: "#212429",
         _w_bg: "#322638",
         _w_text: "#ECEFF1",
         _w_match: "#388E3C",

@@ -5,10 +5,24 @@ import Hamburger from "./subcomponents/Hamburger";
 import { useUserAuth } from "./helper/UserAuthContextProvider";
 import { useRouter } from "next/router";
 import { Links } from "@/libs/menuItem";
+import Image from "next/image";
 
 const Navbar = () => {
+  const links = [
+    { id: "articles", slug: "articles", child: undefined },
+    {
+      id: "games for brain",
+      slug: "games-for-brain",
+      child: [
+        { id: "brain games", slug: "brain-games" },
+        { id: "kids games", slug: "kids-games" },
+      ],
+    },
+    { id: "trivia", slug: "trivia", child: undefined },
+  ];
   const id = useId();
   const [imgUser, setImgUser] = useState();
+  const [verticalMenu, setVerticalMenu] = useState(true);
   const [popover, setPopover] = useState(false);
   const { user, logOut } = useUserAuth();
   const navigate = useRouter();
@@ -18,7 +32,7 @@ const Navbar = () => {
   /*
 
     if (typeof window !== "undefined") {
-        const handleColor = () => {
+        const handleScroll = () => {
             if (window.scrollY >= 100) {
                 setHascolor('nav-blur')
             } else {
@@ -26,7 +40,7 @@ const Navbar = () => {
             }
         }
 
-        window.addEventListener('scroll', handleColor)
+        window.addEventListener('scroll', handleScroll)
     }
 */
 
@@ -43,19 +57,21 @@ const Navbar = () => {
   }, [user]);
 
   useEffect(() => {
-    const handleColor = () => {
+    const handleScroll = () => {
       if (window.scrollY >= 100) {
-        setHascolor("md:nav-blur");
+        //setHascolor("md:nav-blur");
+        setVerticalMenu(false);
       } else {
-        setHascolor("bg-white md:bg-transparent");
+        //setHascolor("bg-white md:bg-transparent");
+        setVerticalMenu(true);
       }
     };
 
-    window.addEventListener("scroll", handleColor);
+    window.addEventListener("scroll", handleScroll);
 
     // return a cleanup function to remove the event listener when the component unmounts
     return () => {
-      window.removeEventListener("scroll", handleColor);
+      window.removeEventListener("scroll", handleScroll);
     };
   }, []);
 
@@ -71,107 +87,93 @@ const Navbar = () => {
   };
 
   return (
-    <div
-      className={`w-full fixed z-50 top-0 left-0 bg-white shadow-sm md:shadow-none ${hasColor}`}
-    >
+    <>
       <div
-        className={`max-w-7xl mx-auto md:flex items-center justify-between py-4 px-5`}
+        className={`w-full z-50 fixed top-0 left-0 bg-white ${
+          verticalMenu ? "" : "border-b"
+        }`}
       >
-        <div className="text-base cursor-pointer flex items-center text-gray-800">
-          <Link
-            href={"/"}
-            className="flex font-medium items-center text-gray-900 md:mb-0"
-          >
-            <img
-              className="h-6 md:h-8"
-              src={"/images/logo/logodark.png"}
-              alt="logo iqup"
-            />
-          </Link>
-        </div>
-
         <div
-          onClick={() => setOpen(!open)}
-          className="text-3xl absolute right-8 top-4 cursor-pointer md:hidden"
+          className={`z-50 max-w-[56rem] mx-auto ${
+            verticalMenu
+              ? "flex-row sm:flex-col h-[50px] sm:h-[100px] flex justify-between sm:justify-center items-center"
+              : "flex-row h-[50px] flex justify-between items-center"
+          } `}
         >
-          <Hamburger openMenu={open} setOpenMenu={setOpen} />
-        </div>
-
-        <ul
-          className={`md:flex md:items-center md:pb-0 pb-12 px-5 pt-10 md:pt-0 absolute top-14 md:static bg-white md:bg-transparent md:z-auto z-[-1] left-0 w-full md:w-auto md:pl-0 border-b md:border-none transition-all duration-500 ease-in ${
-            open ? " " : "hidden"
-          }`}
-        >
-          {Links.map((link, index) => (
-            <li
-              key={index}
-              className="md:ml-5 md:my-0 py-3 border-b md:border-none"
+          <Link href={"/"}>
+            <div
+              className={`relative w-40  my-1 ${
+                verticalMenu ? "h-6 sm:h-9" : "h-6"
+              }`}
             >
-              <Link
-                href={link.link}
-                onClick={() => setOpen(false)}
-                className="font-Inter text-base font-medium text-gray-800 hover:text-_green duration-200"
-              >
-                {link.name}
-              </Link>
-            </li>
-          ))}
-          <div className="relative pt-5 md:pt-0">
-            {user ? (
-              <img
-                onClick={() => setPopover(true)}
-                className="rounded-full md:ml-5 text-md md:my-0 cursor-pointer"
-                src={imgUser}
-                alt="user"
-                width={40}
-                height={40}
+              <Image
+                src={"/images/logo/logodark.png"}
+                fill
+                objectFit="contain"
               />
-            ) : (
-              <button onClick={handleSignIn} className="btn-getstarted ml-3">
-                Get Started
-              </button>
-            )}
-            {popover && (
-              <div className="absolute top-12 md:right-0 w-52 h-auto bg-white rounded-2xl py-1 shadow-md">
-                <svg
-                  onClick={() => setPopover(false)}
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  strokeWidth="2.5"
-                  stroke="gray"
-                  className="absolute top-2 right-2 w-6 h-6 cursor-pointer hover:bg-gray-100"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    d="M6 18L18 6M6 6l12 12"
-                  />
-                </svg>
-                <h5 className="text-sm text-gray-500 px-4 py-1 cursor-pointer">
-                  Signed in as
-                </h5>
-                <h5 className="text-base text-gray-600 font-semibold px-4 pb-3 border-b cursor-pointer">
-                  {user.displayName}
-                </h5>
-                <Link href={"/user"}>
-                  <div className="text-base text-gray-600 mt-2 px-4 py-1 hover:bg-gray-200 cursor-pointer">
-                    Your IQ score
-                  </div>
-                </Link>
-
-                <h5
-                  onClick={signOutGoogle}
-                  className="text-base text-gray-600 mb-3 px-4 py-1 hover:bg-gray-200  cursor-pointer"
-                >
-                  Sign out
-                </h5>
-              </div>
-            )}
+            </div>
+          </Link>
+          <div>
+            <div className="hidden sm:block">
+              <ul className="flex my-1 text-sm">
+                {links.map((link) => (
+                  <li
+                    key={link.id}
+                    className="mx-3 cursor-pointer capitalize hover:text-_pink relative group py-3"
+                  >
+                    <Link href={link.slug}>{link.id}</Link>
+                    {link.child !== undefined && (
+                      <ul className="font-medium text-_darkblue pl-5 absolute top-10 -left-3 w-[150px] bg-white border rounded hidden group-hover:block">
+                        {link.child.map((child) => (
+                          <li
+                            key={child.id}
+                            className="capitalize my-2 cursor-pointer hover:text-_pink"
+                          >
+                            <Link href={child.slug}>{child.id}</Link>
+                          </li>
+                        ))}
+                      </ul>
+                    )}
+                  </li>
+                ))}
+              </ul>
+            </div>
+            <div className="sm:hidden mr-5 w-6 h-6">
+              <Hamburger openMenu={open} setOpenMenu={setOpen} />
+            </div>
           </div>
+        </div>
+      </div>
+      <div
+        className={`fixed z-10 w-full h-screen top-0 left-0 bg-white px-10 pt-[60px] ${
+          open ? "block sm:hidden" : "hidden"
+        }`}
+      >
+        <ul className="text-lg font-semibold text-_blue">
+          {links.map((link) => (
+            <>
+              <li
+                key={link.id}
+                className="capitalize my-2 cursor-pointer border-b hover:text-_pink"
+              >
+                <Link href={link.slug}>{link.id}</Link>
+              </li>
+              <ul className="text-base font-medium text-_darkblue pl-5">
+                {link.child !== undefined &&
+                  link.child.map((child) => (
+                    <li
+                      key={child.id}
+                      className="capitalize my-2 cursor-pointer hover:text-_pink"
+                    >
+                      <Link href={child.slug}>{child.id}</Link>
+                    </li>
+                  ))}
+              </ul>
+            </>
+          ))}
         </ul>
       </div>
-    </div>
+    </>
   );
 };
 

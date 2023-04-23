@@ -1,51 +1,221 @@
 import React from "react";
 import Link from "next/link";
+import Image from "next/image";
 
 const Hero = () => {
   return (
     <>
-      <section className="text-gray-600 font-Inter">
-        <div className="max-w-7xl mx-auto flex px-5 py-20 md:py-44 md:flex-row flex-col items-center">
-          <div className="lg:flex-grow md:w-1/2 lg:pr-24 md:pr-16 flex flex-col md:items-start md:text-left mb-16 md:mb-0 items-center">
-            <h1 className="mt-4 font-Inter font-bold text-3xl md:text-5xl text-gray-900 tracking-tighter md:leading-[1.15]">
-              Improve your mind with{" "}
-              <span className="text-_green cursor-pointer">brain games</span>{" "}
-              and{" "}
-              <span className="text-_green cursor-pointer">free IQ tests</span>{" "}
-              to measure your logic.
-            </h1>
-            <p className="my-8 leading-relaxed text-lg text-gray-600 tracking-tighter">
-              Unlock Your Potential with Our Free IQ Test and Brain Games!{" "}
-              <br />
-              Take the challenge and discover your IQ score.
-            </p>
-            <div className="flex justify-center">
-              <Link
-                href={"/test-iq"}
-                className="rounded px-5 py-2.5 overflow-hidden group bg-_green relative hover:bg-gradient-to-r hover:from-_green hover:to-from-_green/[0.5] text-white hover:ring-2 hover:ring-offset-2 hover:ring-_green transition-all ease-out duration-300"
-              >
-                <span className="absolute right-0 w-8 h-32 -mt-12 transition-all duration-1000 transform translate-x-12 bg-white opacity-10 rotate-12 group-hover:-translate-x-40 ease"></span>
-                <span className="relative">Test IQ</span>
-              </Link>
-
-              <Link
-                href={"/brain-games"}
-                className="ml-2 rounded px-5 py-2.5 overflow-hidden group bg-_green relative hover:bg-gradient-to-r hover:from-_green hover:to-from-_green/[0.5] text-white hover:ring-2 hover:ring-offset-2 hover:ring-_green transition-all ease-out duration-300"
-              >
-                <span className="absolute right-0 w-8 h-32 -mt-12 transition-all duration-1000 transform translate-x-12 bg-white opacity-10 rotate-12 group-hover:-translate-x-40 ease"></span>
-                <span className="relative">Play Brain Games</span>
-              </Link>
+      <div className="max-w-[56rem] mx-auto px-3">
+        <div className="mt-14 sm:mt-28 p-6 border rounded-2xl mx-1">
+          <h1 className="font-Inter font-bold text-xl md:text-2xl text-_darkblue tracking-tighter md:leading-[1.15]">
+            Improve your mind with{" "}
+            <span className="text-_green cursor-pointer">
+              <Link href={"/brain-games"}>brain games</Link>
+            </span>{" "}
+            and{" "}
+            <span className="text-_green cursor-pointer">
+              <Link href={"/iq-test"}>free IQ tests</Link>
+            </span>{" "}
+            to measure your logic.
+          </h1>
+        </div>
+        <div className="flex flex-wrap mt-8">
+          <div className="w-full sm:w-1/3 p-1 text-white">
+            <div className="border w-full min-h-[200px] rounded-2xl flex bg-_green">
+              <div className="w-2/3 p-5 flex flex-col justify-start items-start">
+                <h3 className="text-xl font-bold">Free Test IQ</h3>
+                <p className="text-xs sm:text-sm mt-2 font-thin">
+                  Take the challenge and discover your IQ score
+                </p>
+              </div>
+              <div className="relative w-1/4 h-[200px]">
+                <Image
+                  fill
+                  objectFit="contain"
+                  src={"/images/system/braintest.png"}
+                />
+              </div>
             </div>
           </div>
-          <div className="lg:max-w-lg lg:w-full md:w-1/2 w-5/6">
-            <img
-              className="object-cover object-center rounded"
-              alt="hero"
-              src="https://media.istockphoto.com/id/1133376754/vector/laboratory-scientist-group-study-human-brain-and-psychology-medical-research-microscope-head.jpg?b=1&s=170667a&w=0&k=20&c=pUs76aQWnmjzFmfJu-rkU6tDjyjK7sXsTDtcewA60PQ="
-            />
+          <div className="w-1/2 sm:w-1/3 p-1 text-white">
+            <div className="border w-full h-[260px] sm:h-[200px] rounded-2xl flex flex-wrap bg-_dark overflow-hidden">
+              <div className="w-full sm:w-2/3 p-5 flex flex-col justify-start items-start">
+                <h3 className="text-xl font-bold">Play a brain game!</h3>
+                <p className="text-xs sm:text-sm font-thin mt-2">
+                  Playing a few rounds of games can help increase focus for work
+                </p>
+              </div>
+              <div className="relative w-full sm:w-1/4 h-[50px] sm:h-full">
+                <Image
+                  fill
+                  objectFit="contain"
+                  src={"/images/system/gamebrain.png"}
+                />
+              </div>
+            </div>
+          </div>
+          <div className="w-1/2 sm:w-1/3 p-1 text-_dark">
+            <div className="border w-full h-[260px] sm:h-[200px] rounded-2xl bg-_yellow">
+              <div className="relative w-full h-[50px] mt-3">
+                <Image
+                  fill
+                  objectFit="contain"
+                  src={"/images/system/trivia.png"}
+                />
+              </div>
+              <div className="w-full p-3 flex flex-col justify-end items-center">
+                <h3 className="text-xl font-bold">Trivia games</h3>
+                <p className="text-xs sm:text-sm mt-2 font-semibold text-center">
+                  Trivia puzzles to test your knowledge of life and science
+                </p>
+              </div>
+            </div>
           </div>
         </div>
-      </section>
+        <div className="mt-16 mx-3">
+          <h3 className="text-xl font-bold text-_dark text-center border rounded">
+            Recently Published
+          </h3>
+        </div>
+        <div className="flex flex-wrap mt-5">
+          <div className="w-full md:w-1/3 p-3">
+            <Link href={"/trivia/guess-the-movie-by-emoji-quiz"}>
+              <div className="group rounded-2xl border w-full min-h-[280px] p-6 overflow-hidden relative cursor-pointer">
+                <h3 className="font-bold text-gray-900 text-2xl group-hover:underline group-hover:text-_green duration-100">
+                  Guess the Movie by Emoji — Quiz
+                </h3>
+                <p className="pt-5 text-sm">
+                  Can you guess the movies by emojis? Let&apos;s find out and
+                  have heaps of fun in the guess the movie by emoji quiz!
+                </p>
+                <div className="absolute -bottom-4 -right-4 w-14 h-14 bg-_green rounded-2xl">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    strokeWidth="2.5"
+                    stroke="currentColor"
+                    className="absolute bottom-6 right-6 w-6 h-6 text-white group-hover:translate-x-1 duration-100"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"
+                    />
+                  </svg>
+                </div>
+              </div>
+            </Link>
+          </div>
+          <div className="w-full md:w-1/3 p-3">
+            <Link
+              href={"/articles/the-top-9-brain-foods-for-studying-and-exams"}
+            >
+              <div className="group rounded-2xl w-full min-h-[280px] p-6 border overflow-hidden relative cursor-pointer">
+                <h3 className="font-bold text-gray-900 text-2xl group-hover:underline group-hover:text-_green duration-100">
+                  The Top 9 Brain Foods for Studying and Exams — Articles
+                </h3>
+                <p className="pt-5 text-sm">
+                  Foods that are good for the brain, help you study and work
+                  more effectively
+                </p>
+                <div className="absolute -bottom-4 -right-4 w-14 h-14 bg-_green rounded-2xl">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    strokeWidth="2.5"
+                    stroke="currentColor"
+                    className="absolute bottom-6 right-6 w-6 h-6 text-white group-hover:translate-x-1 duration-100"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"
+                    />
+                  </svg>
+                </div>
+              </div>
+            </Link>
+          </div>
+          <div className="w-full md:w-1/3 p-3">
+            <Link href={"/brain-games/wordl"}>
+              <div className="group rounded-2xl w-full min-h-[280px] p-6 border overflow-hidden relative cursor-pointer">
+                <h3 className="font-bold text-gray-900 text-2xl group-hover:underline group-hover:text-_green duration-100">
+                  Wordle — Brain Game
+                </h3>
+                <p className="pt-5 text-sm">
+                  Wordle is a popular online word-guessing game where players
+                  must guess a five-letter word in six attempts. It&apos;s fun,
+                  challenging, and educational.
+                </p>
+                <div className="absolute -bottom-4 -right-4 w-14 h-14 bg-_green rounded-2xl">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    strokeWidth="2.5"
+                    stroke="currentColor"
+                    className="absolute bottom-6 right-6 w-6 h-6 text-white group-hover:translate-x-1 duration-100"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"
+                    />
+                  </svg>
+                </div>
+              </div>
+            </Link>
+          </div>
+          <div className="w-full md:w-1/3 p-3">
+            <Link href={"/test-iq"}></Link>
+            <div className="group rounded-2xl w-full min-h-[280px] p-6 border overflow-hidden relative cursor-pointer">
+              <h3 className="font-bold text-gray-900 text-2xl group-hover:underline group-hover:text-_green duration-100">
+                Get a free IQ Test — IQ
+              </h3>
+              <p className="pt-5 text-sm">
+                Take the challenge and discover your IQ score...
+              </p>
+              <div className="absolute -bottom-4 -right-4 w-14 h-14 bg-_green rounded-2xl">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  strokeWidth="2.5"
+                  stroke="currentColor"
+                  className="absolute bottom-6 right-6 w-6 h-6 text-white group-hover:translate-x-1 duration-100"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"
+                  />
+                </svg>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div className="border rounded-3xl bg-_accent px-5 sm:px-40 py-10 my-10 mx-2">
+          <h2 className="text-5xl font-black text-center">Get in touch</h2>
+          <p className="text-center text-white mt-3">
+            We love biulding great user experiences and we are dedicated ti
+            creating the app for budgeting
+          </p>
+          <div className="flex flex-col sm:flex-row justify-center items-center mt-5">
+            <input
+              placeholder="Enter your email"
+              type="email"
+              id="email"
+              name="email"
+              className="flex-grow bg-gray-100 bg-opacity-50 rounded-full border border-gray-300 focus:border-indigo-500 focus:bg-transparent focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-3 px-5 mt-3 leading-8 transition-colors duration-200 ease-in-out"
+            />
+            <button className="text-white bg-black rounded-full border-0 py-3 px-5 focus:outline-none hover:bg-indigo-600 sm:ml-5 text-lg mt-3">
+              Subscribe
+            </button>
+          </div>
+        </div>
+      </div>
     </>
   );
 };

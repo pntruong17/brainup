@@ -2,8 +2,26 @@ import Image from "next/image";
 import { AnimatePresence, motion } from "framer-motion";
 import React, { useEffect, useReducer, useRef, useState } from "react";
 import AnimatedTextCharacter from "@/components/AnimatedTextCharacter";
+import AnimatedTextWord from "@/components/AnimatedTextWord";
 
 const CountingAnimals = () => {
+  const sometext = [
+    "Good luck with\n your game!\n I hope you excel\n and make it\n through to the\n next level.",
+    "Keep up the good work,\n little one!\n You're doing great.\n I believe in you.",
+    "May your skills\n and hard work\n pay off in this game.\n You've got this!",
+    "Don't give up, kiddo!\n Keep trying and\n you'll get better\n with every attempt.",
+    "I'm cheering you on\n from the sidelines!\n Go out there\n and show everyone\n what you're made of.",
+    "Wishing you all the best\n as you play your game!\n May you have fun\n and do your best.",
+    "You're a natural\n at this game!\n Have fun and\n show off your\n amazing skills.",
+    "Good luck, little gamer!\n May you have a blast and\n achieve all\n your goals in the game.",
+    "Remember to take\n a deep breath\n and focus on\n your strategy.\n I'm rooting for you!",
+    "Play with passion\n and give it your all.\n You're destined\n for greatness!",
+    "I know you've got\n the talent\n and determination to\n succeed in this game.\n Keep pushing yourself!",
+    "You're a superstar\n in the making!\n Keep practicing and\n improving your game.",
+    "I have faith in your abilities\n to surpass this level.\n Believe in yourself\n and keep going!",
+    "May your gaming\n skills be sharp\n and your spirit be strong.\n Go forth and conquer\n the game!",
+  ];
+
   const gameInfor = {
     name: "Count Animal",
     desc: "Some text describing",
@@ -44,7 +62,7 @@ const CountingAnimals = () => {
   const parentRef = useRef();
 
   const gameInit = {
-    state: STATES[0],
+    state: STATES[5],
     currentQuestion: 0,
     combo: 0,
     point: 0,
@@ -174,7 +192,7 @@ const CountingAnimals = () => {
     timeref = setTimeout(() => {
       dispatchGameState({ type: "timego" });
       clearTimeout(timeref);
-    }, 2500);
+    }, 500);
 
     return () => clearTimeout(timeref);
   }, [gameState]);
@@ -194,7 +212,7 @@ const CountingAnimals = () => {
 
   // update new question
   useEffect(() => {
-    if (gameState.state === STATES[0]) return;
+    if (gameState.state === STATES[0] || gameState.state === STATES[5]) return;
     dispatchGameState({ type: "pre-screen" });
     const randomNumbers = generateRandomNumbers(
       mixedQuestion[gameState.currentQuestion]?.among
@@ -214,7 +232,7 @@ const CountingAnimals = () => {
     <>
       {gameState.state === STATES[0] && (
         <div className="w-full h-full">
-          <div className="relative w-full min-h-[350px] rounded-3xl overflow-hidden">
+          <div className="relative w-full min-h-[350px] overflow-hidden">
             <Image
               src={
                 gameInfor.image ||
@@ -244,7 +262,7 @@ const CountingAnimals = () => {
           </div>
         </div>
       )}
-      {gameState.state !== STATES[0] && (
+      {gameState.state !== STATES[0] && gameState.state !== STATES[5] && (
         <>
           <div className="w-full h-full relative" ref={parentRef}>
             <motion.div
@@ -274,8 +292,8 @@ const CountingAnimals = () => {
                   className="w-full h-full top-0 left-0 absolute z-20 bg-orange-50/[0.9]"
                 >
                   <div className="w-full h-full flex justify-center items-center">
-                    <h3 className="text-center text-3xl xs:text-4xl font-black tracking-tighter p-10 rounded-3xl bg-orange-50">
-                      <AnimatedTextCharacter text={"chung ta thuoc ve nhau"} />
+                    <h3 className="text-center text-xl xs:text-4xl font-black tracking-tighter p-10 rounded-3xl bg-orange-50">
+                      <AnimatedTextWord text={shuffleArray(sometext)[0]} />
                     </h3>
                   </div>
                 </motion.div>
@@ -286,7 +304,7 @@ const CountingAnimals = () => {
                   animate={{ opacity: 1 }}
                   exit={{ opacity: 0 }}
                   transition={{ duration: 0.5 }}
-                  className="w-full border h-full absolute bottom-0 z-10 rounded-3xl bg-transparent flex flex-wrap justify-center items-center"
+                  className="w-full border h-full absolute bottom-0 z-10  bg-transparent flex flex-wrap justify-center items-center"
                 >
                   {options &&
                     options.map((option) => (
@@ -295,7 +313,7 @@ const CountingAnimals = () => {
                         key={option}
                         className={`${
                           rightSignal && option === thisQuestion.among
-                            ? "user-correct"
+                            ? "user-correct shake-element"
                             : ""
                         } ${
                           wrongSignal === option &&
@@ -310,16 +328,12 @@ const CountingAnimals = () => {
                       </div>
                     ))}
                   {rightSignal !== undefined && wrongSignal === undefined && (
-                    <div className="absolute top-5 w-full h-[600px] flex justify-center">
-                      <iframe
-                        src="https://embed.lottiefiles.com/animation/74694"
-                        width="600"
-                        height="600"
-                      ></iframe>
+                    <div className="absolute top-5 w-full h-full">
+                      <div className="absolute sun -bottom-[1000px] md:-bottom-[500px] -left-[800px] md:-left-[500px]"></div>
                     </div>
                   )}
                   {rightSignal !== undefined && (
-                    <div className="absolute bottom-5 w-full flex justify-center">
+                    <div className="absolute bottom-5 w-full flex justify-center px-3">
                       <button
                         onClick={handleNext}
                         className="py-2 px-5 text-center text-2xl xs:text-5xl font-black bg-white rounded-full border-b-4 border-green-200 hover:border-b-2 duration-100"
@@ -346,6 +360,33 @@ const CountingAnimals = () => {
             </div>
           </div>
         </>
+      )}
+      {gameState.state === STATES[5] && (
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          transition={{ duration: 0.25 }}
+          className="w-full h-full top-0 left-0 absolute bg-orange-50/[0.9] overflow-hidden"
+        >
+          <div className="w-full h-full flex flex-col justify-center">
+            <div className="absolute top-5 w-full h-full opacity-10">
+              <div className="absolute sun -bottom-[1000px] md:-bottom-[500px] -left-[800px] md:-left-[500px]"></div>
+            </div>
+            <iframe src="https://embed.lottiefiles.com/animation/31174"></iframe>
+            <div className="w-full flex border-4 justify-center">
+              <div className="w-40 h-40 border-4">
+                <iframe src="https://embed.lottiefiles.com/animation/97585"></iframe>
+              </div>
+              <div className="w-40 h-40">
+                <iframe src="https://embed.lottiefiles.com/animation/97585"></iframe>
+              </div>
+            </div>
+            <h3 className="text-center text-2xl xs:text-5xl font-black tracking-tighter select-none">
+              asdkjalsjdlj alsjdas djkljf ljhdlghdjkl
+            </h3>
+          </div>
+        </motion.div>
       )}
     </>
   );

@@ -5,8 +5,14 @@ import Statistic from "@/components/Statistic";
 import GameFeatureIntro from "@/components/GameIntro";
 import Testimonial from "@/components/Testimonial";
 import AllTopic from "@/components/AllTopic";
+import { useEffect } from "react";
+import { useTheme } from "next-themes";
 
 export default function Home() {
+  const { theme, setTheme } = useTheme();
+  useEffect(() => {
+    setTheme("light");
+  }, []);
   return (
     <>
       <Layout
@@ -22,8 +28,6 @@ export default function Home() {
           transition={{ duration: 0.5, ease: "easeOut" }}
         >
           <Hero />
-          <Statistic />
-          <AllTopic />
         </motion.main>
       </Layout>
     </>

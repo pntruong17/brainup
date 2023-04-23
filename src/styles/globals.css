@@ -178,6 +178,25 @@
   animation: analog_rotation 18s linear;
 }
 
+.animate-rotation-18-infinite {
+  animation: analog_rotation 18s linear infinite;
+}
+
+.shake-element {
+  animation: shake 1s;
+}
+.shake-element-infinite {
+  animation: shake 1s infinite;
+}
+
+.sun {
+  width: 2000px;
+  height: 2000px;
+  background-image: url("https://img.freepik.com/premium-vector/white-background-with-pastel-sun-rays-abstract-summer-sun-shine-flat-vector-illustration_643118-57.jpg?w=2000");
+  background-size: contain;
+  animation: spin 200s linear infinite;
+}
+
 .flipped {
   transform: rotateY(180deg);
 }
@@ -249,6 +268,12 @@
   background-color: #3a393c;
 }
 
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
 @keyframes spin1 {
   0% {
     transform: rotate(0deg);
@@ -287,5 +312,30 @@
   }
   100% {
     transform: rotate(360deg);
+  }
+}
+@keyframes shake {
+  0% {
+    transform: translate(0, 0);
+  }
+  10%,
+  90% {
+    transform: translate(-10px, 0);
+  }
+  20%,
+  80% {
+    transform: translate(10px, 0);
+  }
+  30%,
+  50%,
+  70% {
+    transform: translate(-10px, 0);
+  }
+  40%,
+  60% {
+    transform: translate(10px, 0);
+  }
+  100% {
+    transform: translate(0, 0);
   }
 }
