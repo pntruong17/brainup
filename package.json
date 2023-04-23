@@ -22,6 +22,7 @@
     "framer-motion": "^8.5.3",
     "fs": "^0.0.1-security",
     "graphcms-js": "^1.1.0",
+    "graphql-request": "^6.0.0",
     "html-react-parser": "^3.0.15",
     "jsonwebtoken": "^9.0.0",
     "next": "13.1.5",
