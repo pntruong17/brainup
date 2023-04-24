@@ -1,17 +1,21 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { motion } from "framer-motion";
 import Link from "next/link";
-import { graphqlcms, QUERY_POSTS } from "@/components/graphqlcms/graphql";
 import Layout from "@/components/Layout";
 import Image from "next/image";
 
+import fs from "fs";
+import path from "path";
+import matter from "gray-matter";
+import { sortByDate } from "@/components/helper/utils";
+
 const Index = ({ posts }) => {
-  const [blogSEO, setBlogSEO] = useState(() =>
-    posts.filter((post) => post.tags.includes("SEO"))
+  const idSEO = 0;
+  const [postSEO, setPostSEO] = useState(posts[idSEO]);
+  const [otherPosts, setOtherPosts] = useState(() =>
+    posts.filter((post, i) => i !== 0 && i !== 1)
   );
-  const [blogs, setBlogs] = useState(() =>
-    posts.filter((post) => !post.tags.includes("SEO"))
-  );
+
   return (
     <>
       <Layout
@@ -27,10 +31,10 @@ const Index = ({ posts }) => {
           transition={{ duration: 0.7, ease: "easeOut" }}
           class="text-_dark body-font px-3"
         >
-          <div class="max-w-7xl h-auto pt-16 md:pt-24 mx-auto font-Nunito">
+          <div class="max-w-[56rem] h-auto pt-16 md:pt-24 mx-auto font-Nunito">
             <div className="flex flex-wrap">
               <Link
-                href={"/articles/" + blogSEO[0].slug}
+                href={"/articles/" + postSEO.slug}
                 className="w-full md:w-1/2 min-h-[30rem] overflow-hidden relative rounded-xl my-3"
               >
                 <Image
@@ -38,19 +42,22 @@ const Index = ({ posts }) => {
                   objectFit="cover"
                   loading="lazy"
                   className="max-w-full min-h-full hover:cursor-pointer"
-                  src={blogSEO[0].coverImage.url}
+                  src={postSEO.frontmatter.cover_image}
+                  alt="blog image"
                 />
                 <div className="absolute bottom-5 w-full">
                   <div className="w-[90%] mx-auto bg-white p-6 rounded-lg shadow">
                     <h2 className="text-2xl md:text-3xl font-black hover:text-_blue hover:cursor-pointer">
-                      {blogSEO[0].title}
+                      {postSEO.frontmatter.title}
                     </h2>
-                    <p className="text-base mt-5">{blogSEO[0].excerpt}</p>
+                    <p className="text-base mt-5">
+                      {postSEO.frontmatter.excerpt}
+                    </p>
                   </div>
                 </div>
               </Link>
               <Link
-                href={"/articles/" + blogSEO[1].slug}
+                href={"/articles/" + posts[1].slug}
                 className="w-full min-h-[30rem] md:w-1/2 md:px-10 my-3 overflow-hidden"
               >
                 <div className="relative w-full h-1/2 rounded-t-xl hover:cursor-pointer overflow-hidden flex justify-center items-center">
@@ -59,41 +66,50 @@ const Index = ({ posts }) => {
                     objectFit="cover"
                     loading="lazy"
                     className="h-full hover:cursor-pointer"
-                    src={blogSEO[1].coverImage.url}
+                    src={posts[1].frontmatter.cover_image}
+                    alt="image blog"
                   />
                 </div>
                 <div className="p-3">
                   <h2 className="text-2xl md:text-3xl font-black hover:text-_blue hover:cursor-pointer">
-                    {blogSEO[1].title}
+                    {posts[1].frontmatter.title}
                   </h2>
-                  <p className="text-base mt-5">{blogSEO[1].excerpt}</p>
+                  <p className="text-base mt-5">
+                    {posts[1].frontmatter.excerpt}
+                  </p>
                 </div>
               </Link>
             </div>
           </div>
-          {blogs.lenght > 0 && (
-            <div className="max-w-7xl py-10 mx-auto">
+          {posts.length > 0 && (
+            <div className="max-w-[56rem] border-8 py-10 mx-auto">
               <h2 className="text-xl font-semibold border-b-2 py-2 m-4">
                 THIS JUST IN
               </h2>
               <div className="flex flex-wrap">
                 <div className="w-full flex flex-wrap p-2">
-                  {blogs.map((post, i) => {
+                  {otherPosts.map((post, i) => {
                     return (
                       <Link
                         key={i}
                         href={"/articles/" + post.slug}
                         className="flex tablet:w-1/2 p-2 hover:cursor-pointer"
                       >
-                        <img
-                          className="h-36 object-cover"
-                          src={post.coverImage.url}
-                        />
+                        <div className="h-36">
+                          <Image
+                            fill
+                            objectFit="cover"
+                            src={post.frontmatter.cover_image}
+                            alt="image blog"
+                          />
+                        </div>
                         <div className="px-5">
                           <h2 className="text-xl font-semibold hover:text-_blue tracking-tight">
-                            {post.title}
+                            {post.frontmatter.title}
                           </h2>
-                          <p className="text-md mt-1 tracking-tight">{"..."}</p>
+                          <p className="text-md mt-1 tracking-tight">
+                            {post.frontmatter.excerpt}
+                          </p>
                         </div>
                       </Link>
                     );
@@ -108,13 +124,34 @@ const Index = ({ posts }) => {
   );
 };
 
-export const getStaticProps = async () => {
-  const { posts } = await graphqlcms.request(QUERY_POSTS);
+export async function getStaticProps() {
+  // Get files from the posts dir
+  const files = fs.readdirSync(path.join("src/posts"));
+
+  // Get slug and frontmatter from posts
+  const posts = files.map((filename) => {
+    // Create slug
+    const slug = filename.replace(".md", "");
+
+    // Get frontmatter
+    const markdownWithMeta = fs.readFileSync(
+      path.join("src/posts", filename),
+      "utf-8"
+    );
+
+    const { data: frontmatter } = matter(markdownWithMeta);
+
+    return {
+      slug,
+      frontmatter,
+    };
+  });
 
   return {
-    props: { posts },
-    revalidate: 10,
+    props: {
+      posts: posts.sort(sortByDate),
+    },
   };
-};
+}
 
 export default Index;

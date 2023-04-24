@@ -1,5 +1,4 @@
 import Cookies from "universal-cookie";
-import jwt from "jsonwebtoken";
 
 // const cookies = new Cookies();
 // const secret = process.env.NEXT_PUBLIC_COOKIE_SECRET_KEY;

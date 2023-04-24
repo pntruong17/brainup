@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import { PayPalButtons, usePayPalScriptReducer } from "@paypal/react-paypal-js";
-import { updateUser } from "firebase/firestore";
+import { updateUser } from "@/firebase/usersFirebase";
 
 // This values are the props in the UI
 const amount = "2.9";

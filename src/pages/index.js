@@ -1,10 +1,6 @@
 import Hero from "@/components/Hero";
 import { motion } from "framer-motion";
 import Layout from "../components/Layout";
-import Statistic from "@/components/Statistic";
-import GameFeatureIntro from "@/components/GameIntro";
-import Testimonial from "@/components/Testimonial";
-import AllTopic from "@/components/AllTopic";
 import { useEffect } from "react";
 import { useTheme } from "next-themes";
 

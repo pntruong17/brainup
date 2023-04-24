@@ -1,18 +1,21 @@
 import { motion } from "framer-motion";
 import detail from "./blog.module.css";
 import Layout from "@/components/Layout";
-import {
-  QUERY_SINGLE_POST,
-  SLUG_LIST,
-  graphqlcms,
-} from "@/components/graphqlcms/graphql";
+import fs from "fs";
+import path from "path";
+import matter from "gray-matter";
+import * as marked from "marked";
 
-const BlogPost = ({ post, slug }) => {
+const BlogPost = ({
+  frontmatter: { title, date, cover_image, excerpt },
+  slug,
+  content,
+}) => {
   return (
     <Layout
       pageMeta={{
-        title: post.title,
-        description: post.excerpt,
+        title: title,
+        description: excerpt,
       }}
     >
       <motion.section
@@ -23,11 +26,11 @@ const BlogPost = ({ post, slug }) => {
       >
         <div className="px-8 py-20">
           <h1 className="text-center my-10 text-[3rem] font-Nunito font-black leading-tight">
-            {post.title}
+            {title}
           </h1>
           <div
             className={`${detail.html} font-Nunito`}
-            dangerouslySetInnerHTML={{ __html: post.content.html }}
+            dangerouslySetInnerHTML={{ __html: marked.parse(content) }}
           ></div>
         </div>
       </motion.section>
@@ -37,25 +40,34 @@ const BlogPost = ({ post, slug }) => {
 
 export default BlogPost;
 
-export const getStaticPaths = async () => {
-  const { posts } = await graphqlcms.request(SLUG_LIST);
-  const _paths = posts.map((post) => ({ params: { slug: post.slug } }));
+export async function getStaticPaths() {
+  const files = fs.readdirSync(path.join("src/posts"));
+
+  const paths = files.map((filename) => ({
+    params: {
+      slug: filename.replace(".md", ""),
+    },
+  }));
 
   return {
-    paths: _paths,
+    paths,
     fallback: false,
   };
-};
+}
 
-export const getStaticProps = async ({ params }) => {
-  const slug = params.slug;
-  const data = await graphqlcms.request(QUERY_SINGLE_POST, { slug });
-  const post = data.post;
+export async function getStaticProps({ params: { slug } }) {
+  const markdownWithMeta = fs.readFileSync(
+    path.join("src/posts", slug + ".md"),
+    "utf-8"
+  );
+
+  const { data: frontmatter, content } = matter(markdownWithMeta);
+
   return {
     props: {
-      post,
+      frontmatter,
       slug,
+      content,
     },
-    revalidate: 10,
   };
-};
+}

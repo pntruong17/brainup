@@ -1,5 +1,5 @@
 //import firebase from "firebase/app";
-import firebase, { db } from "./firebaseconfig";
+import { db, firebase } from "./firebaseconfig";
 
 import {
   collection,

@@ -1,16 +1,14 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   reactStrictMode: true,
+
   images: {
-    images: {
-      domains: ["images.unsplash.com", "google.com"],
-    },
-    remotePatterns: [
-      {
-        protocol: "https",
-        hostname: "**",
-      },
-    ],
+    domains: ["images.unsplash.com", "google.com", "res.cloudinary.com"],
+  },
+
+  // Removed the invalid remotePatterns property
+  webpack(config, options) {
+    return config;
   },
 };
 
