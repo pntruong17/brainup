@@ -110,6 +110,7 @@ const Navbar = () => {
                 src={"/images/logo/logodark.png"}
                 fill
                 objectFit="contain"
+                alt="brain up"
               />
             </div>
           </Link>

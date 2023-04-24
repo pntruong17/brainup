@@ -31,22 +31,6 @@ export const UserAuthContextProvider = ({ children }) => {
     return await signInWithPopup(auth, googleAuthProvider);
   };
 
-  const remakeIUSER = async () => {
-    try {
-      const docRef = doc(db, "users", user.uid);
-      const docSnap = await getDoc(docRef);
-
-      if (docSnap.exists()) {
-        setIuser(docSnap.data());
-      } else {
-        return null;
-        // doc.data() will be undefined in this case
-      }
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (currentuser) => {
       setUser(currentuser);
@@ -69,7 +53,6 @@ export const UserAuthContextProvider = ({ children }) => {
           googleSignIn,
           iuser,
           setIuser,
-          remakeIUSER,
         }}
       >
         {children}

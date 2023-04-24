@@ -1,20 +1,24 @@
 import React, { useState } from "react";
 import Link from "next/link";
+import Image from "next/image";
 
 const Footer = () => {
   return (
     <>
       <footer className="text-gray-600 body-font">
-        <div className="max-w-7xl px-5 py-8 mx-auto flex items-center sm:flex-row flex-col">
+        <div className="max-w-[56rem] px-5 py-8 mx-auto flex items-center sm:flex-row flex-col">
           <a
             href="./"
             className="flex title-font font-medium items-center md:justify-start justify-center text-gray-900"
           >
-            <img
-              className="h-6"
-              src={"/images/logo/logodark.png"}
-              alt="logo iqup"
-            />
+            <div className="relative h-6">
+              <Image
+                fill
+                objectFit="contain"
+                src={"/images/logo/logodark.png"}
+                alt="logo iqup"
+              />
+            </div>
           </a>
           <p className="text-sm text-gray-500 sm:ml-4 sm:pl-4 sm:border-l-2 sm:border-gray-200 sm:py-2 sm:mt-0 mt-4">
             © 2020 Brain Up

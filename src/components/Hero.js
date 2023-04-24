@@ -33,6 +33,7 @@ const Hero = () => {
                   fill
                   objectFit="contain"
                   src={"/images/system/braintest.png"}
+                  alt="Free Test IQ"
                 />
               </div>
             </div>
@@ -50,6 +51,7 @@ const Hero = () => {
                   fill
                   objectFit="contain"
                   src={"/images/system/gamebrain.png"}
+                  alt="Play a brain game!"
                 />
               </div>
             </div>
@@ -61,6 +63,7 @@ const Hero = () => {
                   fill
                   objectFit="contain"
                   src={"/images/system/trivia.png"}
+                  alt="Trivia games"
                 />
               </div>
               <div className="w-full p-3 flex flex-col justify-end items-center">
