@@ -1,9 +1,11 @@
 import React, { useState } from "react";
 import Link from "next/link";
 import { Links } from "@/libs/menuItem";
+import { useTheme } from "next-themes";
 
 const NavbarFixed = () => {
   const [open, setOpen] = useState(false);
+  const { theme, setTheme } = useTheme();
 
   return (
     <div className="fixed top-2 left-2 z-10">
@@ -17,8 +19,8 @@ const NavbarFixed = () => {
               xmlns="http://www.w3.org/2000/svg"
               fill="none"
               viewBox="0 0 24 24"
-              strokeWidth="5"
-              stroke="currentColor"
+              strokeWidth="2"
+              stroke={theme === "dark" ? "currentColor" : "black"}
               className="w-6 h-6"
             >
               <path
@@ -29,7 +31,7 @@ const NavbarFixed = () => {
             </svg>
           </div>
           <div
-            className={`fixed bg-_dark shadow-md z-10 top-0 left-0 w-full h-screen transition-all duration-200 ease ${
+            className={`fixed bg-white dark:bg-_bg_dark shadow-md z-10 top-0 left-0 w-full h-screen transition-all duration-200 ease ${
               open ? "" : "hidden"
             }`}
           >
@@ -38,8 +40,8 @@ const NavbarFixed = () => {
               xmlns="http://www.w3.org/2000/svg"
               fill="none"
               viewBox="0 0 24 24"
-              strokeWidth="5"
-              stroke="white"
+              strokeWidth="2"
+              stroke={theme === "dark" ? "currentColor" : "black"}
               className="absolute top-2 right-2 w-6 h-6"
             >
               <path
@@ -54,7 +56,7 @@ const NavbarFixed = () => {
                 <li key={link.name} className="my-2 text-center">
                   <Link
                     href={link.link}
-                    className="font-Inter text-2xl font-black text-_pink hover:text-black duration-100"
+                    className="font-Inter text-2xl font-black text-_bg_dark dark:text-_accent_dark hover:underline duration-100"
                   >
                     {link.name}
                   </Link>

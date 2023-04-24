@@ -302,7 +302,7 @@ const Trivia = ({ triviBySlug, triviNotThisQuiz }) => {
           discription: triviBySlug.expert,
         }}
       >
-        <div className="w-full bg-[#16202C] py-8 md:py-12 font-Nunito">
+        <div className="w-full py-8 md:py-12 font-Nunito">
           <h2 className="font-black text-4xl text-center text-_contrast_bg font-Nunito underline sm:mb-8 hidden sm:block">
             {triviBySlug.title}
           </h2>

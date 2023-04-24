@@ -19,7 +19,7 @@ const Donation = () => {
           transition={{ duration: 1, ease: "easeOut" }}
           className="w-full h-screen p-5 md:p-10"
         >
-          <div className="max-w-2xl mx-auto rounded-3xl shadow-md overflow-hidden pb-3">
+          <div className="max-w-2xl mx-auto rounded-3xl shadow-md overflow-hidden pb-3 bg-white">
             <div className="w-full h-32 overflow-hidden">
               <img
                 className="w-full object-center"
@@ -29,10 +29,10 @@ const Donation = () => {
             </div>
             <div className="flex">
               <div className="w-full p-2 md:p-10">
-                <h2 className="font-bold text-2xl text-center">
+                <h2 className="font-bold text-_bg_dark text-2xl text-center">
                   Let&apos;s do a good deed today!
                 </h2>
-                <p className="font-medium text-_dark text-center mt-2 sm:px-10">
+                <p className="font-medium text-_bg_dark text-center mt-2 sm:px-10">
                   Your donation will help us develop more high-quality brain
                   games in the future. Thank you for your support.
                 </p>

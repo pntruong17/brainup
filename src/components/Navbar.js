@@ -6,18 +6,21 @@ import { useUserAuth } from "./helper/UserAuthContextProvider";
 import { useRouter } from "next/router";
 import { Links } from "@/libs/menuItem";
 import Image from "next/image";
+import { useTheme } from "next-themes";
 
 const Navbar = () => {
+  const { theme, setTheme } = useTheme();
   const links = [
     { id: "articles", slug: "articles", child: undefined },
     {
       id: "games for brain",
-      slug: "games-for-brain",
+      slug: "brain-games",
       child: [
         { id: "brain games", slug: "brain-games" },
-        { id: "kids games", slug: "kids-games" },
+        { id: "kids games", slug: "kid-games" },
       ],
     },
+    { id: "test IQ", slug: "test-iq", child: undefined },
     { id: "trivia", slug: "trivia", child: undefined },
   ];
   const id = useId();
@@ -89,8 +92,8 @@ const Navbar = () => {
   return (
     <>
       <div
-        className={`w-full z-50 fixed top-0 left-0 bg-white ${
-          verticalMenu ? "" : "border-b"
+        className={`w-full z-50 fixed top-0 left-0 bg-white dark:bg-_bg_dark ${
+          verticalMenu ? "" : "border-b dark:border-none dark:shadow-md"
         }`}
       >
         <div
@@ -102,16 +105,25 @@ const Navbar = () => {
         >
           <Link href={"/"}>
             <div
-              className={`relative w-40  my-1 ${
-                verticalMenu ? "h-6 sm:h-9" : "h-6"
+              className={`relative w-40   ${
+                verticalMenu ? "h-6 sm:h-8 mt-2" : "h-6"
               }`}
             >
-              <Image
-                src={"/images/logo/logodark.png"}
-                fill
-                objectFit="contain"
-                alt="brain up"
-              />
+              {theme === "light" ? (
+                <Image
+                  src={"/images/logo/logodark.png"}
+                  fill
+                  objectFit="contain"
+                  alt="brain up"
+                />
+              ) : (
+                <Image
+                  src={"/images/logo/logowhite.png"}
+                  fill
+                  objectFit="contain"
+                  alt="brain up"
+                />
+              )}
             </div>
           </Link>
           <div>

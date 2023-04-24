@@ -11,7 +11,7 @@ const FooterDark = () => {
             href="./"
             className="flex title-font font-medium items-center md:justify-start justify-center text-gray-900"
           >
-            <div className="relative h-6">
+            <div className="relative w-20 h-12">
               <Image
                 fill
                 objectFit="contain"

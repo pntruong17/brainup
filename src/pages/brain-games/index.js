@@ -22,7 +22,7 @@ const BrainGames = () => {
           <h1 className="text-3xl md:text-5xl font-Inter font-bold tracking-tight text-center">
             Game Designed to <br /> train your brain
           </h1>
-          <h4 className="text-lg md:text-2xl font-Inter font-medium tracking-tighter text-center py-2 text-gray-600">
+          <h4 className="text-lg md:text-2xl font-Inter font-medium tracking-tighter text-center py-2">
             Discover the various cognitive games and exercises
           </h4>
         </div>

@@ -5,10 +5,6 @@ import { useEffect } from "react";
 import { useTheme } from "next-themes";
 
 export default function Home() {
-  const { theme, setTheme } = useTheme();
-  useEffect(() => {
-    setTheme("light");
-  }, []);
   return (
     <>
       <Layout

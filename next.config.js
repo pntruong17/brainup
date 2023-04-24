@@ -3,7 +3,13 @@ const nextConfig = {
   reactStrictMode: true,
 
   images: {
-    domains: ["images.unsplash.com", "google.com", "res.cloudinary.com"],
+    domains: [
+      "images.unsplash.com",
+      "google.com",
+      "res.cloudinary.com",
+      "img.freepik.com",
+      "s.luyengame.net",
+    ],
   },
 
   // Removed the invalid remotePatterns property

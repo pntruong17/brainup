@@ -3,6 +3,7 @@ import React from "react";
 import { useRouter } from "next/router";
 import NavbarFixed from "./NavbarFixed";
 import FooterDark from "./FooterDark";
+import Footer from "./Footer";
 
 const LayoutTrivia = ({ children, pageMeta }) => {
   const router = useRouter();
@@ -39,7 +40,7 @@ const LayoutTrivia = ({ children, pageMeta }) => {
       </Head>
       <NavbarFixed />
       <main>{children}</main>
-      <FooterDark />
+      <Footer />
     </>
   );
 };

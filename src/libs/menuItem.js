@@ -1,5 +1,9 @@
 export const Links = [
   {
+    name: "Home",
+    link: "/",
+  },
+  {
     name: "Test IQ Free",
     link: "/test-iq",
   },
