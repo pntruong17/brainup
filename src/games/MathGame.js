@@ -2,8 +2,8 @@ import NavbarFixed from "@/components/NavbarFixed";
 import React, { useState, useEffect, useRef } from "react";
 import CheckAndXMark from "./comps/CheckAndXMark";
 import MathBoard from "./comps/MathBoard";
-import ShowTopScore from "./comps/ShowTopScore";
 import { checkCookies, setCookies, getCookies } from "@/components/cookie";
+import ScoreBoard from "@/components/subcomponents/ScoreBoard";
 
 const MathGame = () => {
   let timeRef = useRef();
@@ -14,7 +14,7 @@ const MathGame = () => {
   const [visibleMark, setVisibleMark] = useState(false);
   const [showTopScore, setShowTopScore] = useState(false);
 
-  const [pointCookies, setPointCookies] = useState([]);
+  const [pointCookies, setPointCookies] = useState();
   const [soPhepTinh, setSoPhepTinh] = useState(1);
   const maxcomboPoint = 4;
   const [arrayTrai, setArrayTrai] = useState([]);
@@ -294,8 +294,12 @@ const MathGame = () => {
           </div>
         </div>
       )}
-
-      <div className="w-full h-screen px-2 py-8 text-_bg_dark border-8">
+      {showTopScore && (
+        <div className="absolute top-0 left-0 w-full h-screen bg-_bg_dark py-16">
+          <ScoreBoard correct={point} pointCookies={pointCookies} />
+        </div>
+      )}
+      <div className="w-full h-screen px-2 py-8 text-_bg_dark">
         {state !== states[0] && (
           <div className="w-full h-full p-2 _response-grid">
             <div className="w-full h-full sm:h-auto flex flex-col justify-between max-w-2xl mx-auto bg-white shadow-md rounded-lg overflow-hidden">
@@ -348,21 +352,21 @@ const MathGame = () => {
                 <div className="flex flex-nowrap justify-center flex-1">
                   <button
                     onClick={handleLeftClick}
-                    className="w-1/3 h-28 bg-white p-1 border-t text-xs text-gray-800 font-semibold uppercase hover:bg-gray-100 transition-all duration-100"
+                    className="w-1/3 h-28 bg-white p-1 border-t text-5xl text-gray-800 font-semibold uppercase hover:bg-gray-100 transition-all duration-100"
                   >
-                    Left Phase is Greater
+                    {">"}
                   </button>
                   <button
                     onClick={handleDownClick}
-                    className="w-1/3 h-28 bg-white p-1 border text-xs text-gray-800 font-semibold uppercase hover:bg-gray-100 transition-all duration-100"
+                    className="w-1/3 h-28 bg-white p-1 border text-5xl text-gray-800 font-semibold uppercase hover:bg-gray-100 transition-all duration-100"
                   >
                     {"="}
                   </button>
                   <button
                     onClick={handleRightClick}
-                    className="w-1/3 h-28 bg-white p-1 border-t text-xs text-gray-800 font-semibold uppercase hover:bg-gray-100 transition-all duration-100"
+                    className="w-1/3 h-28 bg-white p-1 border-t text-5xl text-gray-800 font-semibold uppercase hover:bg-gray-100 transition-all duration-100"
                   >
-                    Right Phase is Greater
+                    {"<"}
                   </button>
                 </div>
               </div>

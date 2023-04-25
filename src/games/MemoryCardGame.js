@@ -2,13 +2,14 @@ import NavbarFixed from "@/components/NavbarFixed";
 import React, { useState, useEffect, useRef } from "react";
 import MemoryCard from "./comps/MemoryCard";
 import { motion } from "framer-motion";
+import ScoreBoard from "@/components/subcomponents/ScoreBoard";
+import { checkCookies, setCookies, getCookies } from "@/components/cookie";
 
 const MemoryCardGame = () => {
   //index là level mà người chơi phải vượt wa, giá trị mỗi index là số cặp lá bài được chia`
   const editlevel = [
     4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20,
   ];
-  const firstStart = useRef(true);
   const [cardlist, setCardlist] = useState(
     [
       { icon: "🥩", id: 0 },
@@ -49,12 +50,19 @@ const MemoryCardGame = () => {
     ].sort(() => Math.random() - 0.5)
   );
 
+  const STATES = ["prepare", "play", "close"];
+
+  const [state, setState] = useState(STATES[0]);
+
   const [lv, setLv] = useState(0);
+  const [showScoreBoard, setShowScoreBoard] = useState(false);
   const [items, setItems] = useState([]);
   const [prev, setPrev] = useState(-1);
   const [hidePlayButton, setHidePlay] = useState(false);
   const [canClick, setCanClick] = useState(true);
   const [flips, setFlips] = useState();
+  const [point, setPoint] = useState(0);
+  const [pointCookies, setPointCookies] = useState();
 
   const shuffleCards = () => {
     setHidePlay(true);
@@ -109,6 +117,19 @@ const MemoryCardGame = () => {
     ).play();
   }
 
+  //cookies data
+  useEffect(() => {
+    const hasCookie = checkCookies("_USER_COOKIES_TRIVIA_LVL");
+    if (hasCookie) {
+      setPointCookies(getCookies("_USER_COOKIES_TRIVIA_LVL"));
+    } else {
+      setPointCookies(0);
+      setCookies("_USER_COOKIES_TRIVIA_LVL", 0);
+    }
+  }, []);
+
+  // end cookies data
+
   function handleClick(id) {
     if (items[id].stat === "correct" || !canClick) {
       return;
@@ -133,13 +154,19 @@ const MemoryCardGame = () => {
         setLv((prev) => prev + 1);
       }
     }
+    const _point = editlevel[lv] * 100;
+    setPoint(_point);
+    const numCookies = getCookies("_USER_COOKIES_TRIVIA_LVL");
+    const newPoint = Number(numCookies) + Number(_point);
+    setCookies("_USER_COOKIES_TRIVIA_LVL", newPoint);
+    setPointCookies(newPoint);
+
+    setShowScoreBoard(true);
   };
 
   useEffect(() => {
-    if (firstStart.current) {
-      firstStart.current = !firstStart.current;
-      return;
-    }
+    if (state === STATES[0]) return;
+
     const isAllCorrect = items.findIndex((item) => item.stat !== "correct");
     if (isAllCorrect < 0) {
       setHidePlay(false);
@@ -151,6 +178,17 @@ const MemoryCardGame = () => {
   return (
     <>
       <NavbarFixed />
+
+      {showScoreBoard && (
+        <div className="absolute top-0 left-0 w-full h-screen bg-_bg_dark py-16">
+          <ScoreBoard
+            closeButton={true}
+            correct={point}
+            pointCookies={pointCookies}
+          />
+        </div>
+      )}
+
       <div className="flex w-full h-screen justify-center items-center px-3 py-10">
         <div className="bg-white rounded-md flex flex-col justify-between max-w-xl h-full sm:h-auto overflow-hidden">
           <div className="flex flex-nowrap justify-between p-4 border-b bg-slate-50">

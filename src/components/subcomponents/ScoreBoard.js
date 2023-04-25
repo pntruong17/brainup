@@ -72,27 +72,35 @@ const ScoreBoard = ({
         <div className="absolute -top-[20px] sm:-top-[35px] xs:left-[22%] sm:left-[75px] sm:w-[230px] sm:h-[80px] bg-blue-400 border-b-8 border-blue-500/[0.9] rounded-lg text-4xl font-bold text-white flex justify-center items-center">
           Score Board
         </div>
-        <div className="max-w-[280px] h-[68px] mx-auto mb-2 text-_green bg-white rounded-md shadow-lg flex justify-between items-center p-2 border-b-4">
-          <h3 className="font-bold text-xl tracking-tight">1. Win Streak </h3>
-          <h3 className="font-bold text-xl tracking-tight">{winstreak}</h3>
-        </div>
-        <div className="max-w-[280px] h-[68px] mx-auto mb-2 text-_accent bg-white rounded-md shadow-lg flex justify-between items-center p-2 border-b-4">
-          <h3 className="font-bold text-xl tracking-tight">2. Timer Bonus </h3>
-          <h3 className="font-bold text-xl tracking-tight">{timeBonusStack}</h3>
-        </div>
-        <div className="max-w-[280px] h-[68px] mx-auto mb-2 text-_w_almost bg-white rounded-md shadow-lg flex justify-between items-center p-2 border-b-4">
-          <h3 className="font-bold text-xl tracking-tight">3. Correct </h3>
-          <h3 className="font-bold text-xl tracking-tight">{correct}</h3>
-        </div>
+        {winstreak && (
+          <div className="max-w-[280px] h-[68px] mx-auto mb-2 text-_green bg-white rounded-md shadow-lg flex justify-between items-center p-2 border-b-4">
+            <h3 className="font-bold text-xl tracking-tight">Win Streak </h3>
+            <h3 className="font-bold text-xl tracking-tight">{winstreak}</h3>
+          </div>
+        )}
+        {timeBonusStack && (
+          <div className="max-w-[280px] h-[68px] mx-auto mb-2 text-_accent bg-white rounded-md shadow-lg flex justify-between items-center p-2 border-b-4">
+            <h3 className="font-bold text-xl tracking-tight">Timer Bonus </h3>
+            <h3 className="font-bold text-xl tracking-tight">
+              {timeBonusStack}
+            </h3>
+          </div>
+        )}
+        {correct && (
+          <div className="max-w-[280px] h-[68px] mx-auto mb-2 text-_w_almost bg-white rounded-md shadow-lg flex justify-between items-center p-2 border-b-4">
+            <h3 className="font-bold text-xl tracking-tight">Correct </h3>
+            <h3 className="font-bold text-xl tracking-tight">{correct}</h3>
+          </div>
+        )}
         <div className="max-w-[280px] h-[68px] mx-auto mb-2 text-_red bg-white rounded-md shadow-lg flex justify-between items-center p-2 border-b-4">
           <h3 className="font-black text-2xl tracking-tight">
             Neurons Point:{" "}
           </h3>
           <h3 className="font-black text-2xl tracking-tight">
-            +{winstreak + timeBonusStack + correct}
+            +{(winstreak ?? 0) + (timeBonusStack ?? 0) + (correct ?? 0)}
           </h3>
         </div>
-        <h4 className="font-bold text-xl tracking-tight text-center pt-3">
+        <h4 className="font-bold text-xl text-_bg_dark tracking-tight text-center pt-3">
           Your level: <span>{levelPlayer.title}</span>
         </h4>
         <div className="w-40 h-40 mx-auto">
@@ -127,7 +135,7 @@ const ScoreBoard = ({
         </div>
         <h4
           onClick={() => setTrigger(!trigger)}
-          className="font-semibold text-base tracking-tight text-center p-2"
+          className="font-semibold text-base text-_bg_dark tracking-tight text-center p-2"
         >
           {levelPlayer.title === CLASS[10].title
             ? "You reached max level!!!"
