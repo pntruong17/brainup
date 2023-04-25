@@ -151,7 +151,7 @@ const MemoryCardGame = () => {
   return (
     <>
       <NavbarFixed />
-      <div className="flex w-full h-screen bg-_dark justify-center items-center px-3 py-10">
+      <div className="flex w-full h-screen justify-center items-center px-3 py-10">
         <div className="bg-white rounded-md flex flex-col justify-between max-w-xl h-full sm:h-auto overflow-hidden">
           <div className="flex flex-nowrap justify-between p-4 border-b bg-slate-50">
             <h4 className="border text-_pink rounded-full px-2 text-center text-xs font-medium">

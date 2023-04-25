@@ -209,13 +209,13 @@ const FastMatch = () => {
         visible={showTopScore}
         setVisible={setShowTopScore}
       />
-      <div className="flex h-screen bg-_dark justify-center items-center">
-        <div className="flex flex-col response-gridx bg-white rounded-lg box-shadow-framer overflow-hidden">
-          <div className="flex flex-nowrap justify-between p-4 border-b bg-slate-50">
-            <h3 className="border rounded-full px-2 text-center text-sm font-medium bg-white">
+      <div className="flex h-screen justify-center items-center">
+        <div className="flex flex-col response-gridx bg-_accent_dark dark:bg-_secondary_dark rounded-lg box-shadow-framer overflow-hidden">
+          <div className="flex flex-nowrap justify-between p-4 border-b border-_accent bg-_accent_dark dark:bg-_secondary_dark">
+            <h3 className="border rounded-full px-2 text-center text-sm font-medium">
               {"Score: " + point}
             </h3>
-            <h3 className="border rounded-full px-2 text-center text-sm font-medium bg-white">
+            <h3 className="rounded-full px-2 text-center text-sm font-medium">
               Time remaining: {renderTimer()}
             </h3>
             <svg
@@ -254,7 +254,7 @@ const FastMatch = () => {
               disabled={start && !close ? true : false}
               className={`${
                 start ? "hidden" : ""
-              } flex justify-center items-center rounded-full w-28 h-12 border bg-_blue m-1 hover:box-shadow-framer`}
+              } flex justify-center items-center rounded-full w-28 h-12 bg-_blue m-1 hover:box-shadow-framer`}
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -290,18 +290,18 @@ const FastMatch = () => {
             </button>
             <CheckAndXMark signal={signal} checkChange={checkbullshit} />
           </div>
-          <div className="w-full flex-1 flex justify-center mx-auto mt-10 bg-slate-100">
+          <div className="w-full flex-1 flex justify-center mx-auto mt-10 bg-_accent_dark dark:bg-_secondary_dark">
             <button
               disabled={!start || close ? true : false}
               onClick={handleArrowLeft}
-              className="w-1/2 h-full border-t font-bold text-sm hover:text-lg transition-all duration-100 ease outline-none"
+              className="w-1/2 h-full border-t border-_accent font-bold text-sm hover:text-lg transition-all duration-100 ease outline-none"
             >
               NOT
             </button>
             <button
               disabled={!start || close ? true : false}
               onClick={handleArrowRight}
-              className="w-1/2 h-full border-t text-_blue font-bold text-sm hover:text-lg transition-all duration-100 ease outline-none"
+              className="w-1/2 h-full border-t border-l border-_accent text-_blue font-bold text-sm hover:text-lg transition-all duration-100 ease outline-none"
             >
               MATCH
             </button>

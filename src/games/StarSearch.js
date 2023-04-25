@@ -169,14 +169,14 @@ const StarSearch = () => {
       <NavbarFixed />
       {state === states[1] && (
         <div className="fixed w-full top-0 left-0 flex">
-          <div className="w-lg mx-auto flex justify-between text-white text-center p-2">
+          <div className="w-lg mx-auto flex justify-between  text-center p-2">
             <h4>Time: {renderTimer()}</h4>
           </div>
         </div>
       )}
       {state === states[0] && (
         <div className="fixed w-full top-1/2 left-0 flex">
-          <div className="w-lg mx-auto flex justify-between text-white text-center p-2">
+          <div className="w-lg mx-auto flex justify-between  text-center p-2">
             <button onClick={() => setState(states[1])} className="btn">
               Play !
             </button>
@@ -185,7 +185,7 @@ const StarSearch = () => {
       )}
       {state === states[2] && (
         <div className="fixed w-full top-1/2 left-0 flex">
-          <div className="w-lg mx-auto flex flex-col text-white text-center p-2 border -m-10">
+          <div className="w-lg mx-auto flex flex-col  text-center p-2 border -m-10">
             <h4 className="text-2xl font-bold text-center underline">
               Game Close
             </h4>
@@ -198,13 +198,13 @@ const StarSearch = () => {
       )}
       {state === states[1] && (
         <div className="fixed w-full bottom-0 left-0 flex">
-          <div className="w-lg mx-auto flex justify-between text-white text-center p-2">
+          <div className="w-lg mx-auto flex justify-between  text-center p-2">
             <h4>Level: {point}</h4>
             <h4 className="ml-10">!ncorrect: {wrongclick}</h4>
           </div>
         </div>
       )}
-      <div className="w-full flex items-center h-screen bg-_black p-5">
+      <div className="w-full flex items-center h-screen p-5">
         <div className="max-w-xl md:max-w-2xl max-h-full rounded-md mx-auto">
           <div className="grid grid-cols-4  w-full max-h-full">
             <AnimatePresence>

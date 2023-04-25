@@ -3,12 +3,7 @@ import React, { useState, useEffect, useRef } from "react";
 import CheckAndXMark from "./comps/CheckAndXMark";
 import MathBoard from "./comps/MathBoard";
 import ShowTopScore from "./comps/ShowTopScore";
-import {
-  checkCookies,
-  getCookies,
-  setCookies,
-  updateCookies,
-} from "@/components/cookie";
+import { checkCookies, setCookies, getCookies } from "@/components/cookie";
 
 const MathGame = () => {
   let timeRef = useRef();
@@ -199,20 +194,22 @@ const MathGame = () => {
 
   //cookies data
   useEffect(() => {
-    const hasCookie = checkCookies("MathGame");
+    const hasCookie = checkCookies("_USER_COOKIES_TRIVIA_LVL");
     if (hasCookie) {
-      setPointCookies(getCookies("MathGame"));
+      setPointCookies(getCookies("_USER_COOKIES_TRIVIA_LVL"));
     } else {
-      setPointCookies([]);
-      setCookies("MathGame", []);
+      setPointCookies(0);
+      setCookies("_USER_COOKIES_TRIVIA_LVL", 0);
     }
   }, []);
   useEffect(() => {
     if (timer <= 0) {
-      updateCookies("MathGame", point);
-      setPointCookies(getCookies("MathGame"));
+      const numCookies = getCookies("_USER_COOKIES_TRIVIA_LVL");
+      const newPoint = Number(numCookies) + Number(point);
+      setCookies("_USER_COOKIES_TRIVIA_LVL", newPoint);
+      setPointCookies(newPoint);
     }
-  }, [point]);
+  }, [timer]);
   // end cookies data
 
   useEffect(() => {
@@ -279,7 +276,7 @@ const MathGame = () => {
           <div className="w-lg mx-auto flex justify-between text-white text-center p-2">
             <button
               onClick={() => setState(states[1])}
-              className={`flex justify-center items-center rounded-full w-28 h-12 border bg-_blue m-1 hover:box-shadow-framer`}
+              className={`flex justify-center items-center rounded-full w-28 h-12 bg-_blue m-1 hover:box-shadow-framer`}
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -297,14 +294,8 @@ const MathGame = () => {
           </div>
         </div>
       )}
-      <ShowTopScore
-        score={point}
-        data={pointCookies}
-        visible={showTopScore}
-        setVisible={setShowTopScore}
-      />
 
-      <div className="w-full h-screen px-2 py-8 bg-_dark">
+      <div className="w-full h-screen px-2 py-8 text-_bg_dark border-8">
         {state !== states[0] && (
           <div className="w-full h-full p-2 _response-grid">
             <div className="w-full h-full sm:h-auto flex flex-col justify-between max-w-2xl mx-auto bg-white shadow-md rounded-lg overflow-hidden">

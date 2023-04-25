@@ -16,7 +16,7 @@ const PregameModal = ({
             initial={{ opacity: 1 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            className={`fixed w-screen h-screen flex justify-center items-center bg-_darkblue z-20`}
+            className={`fixed w-screen h-screen flex justify-center items-center bg-_bg_dark z-20`}
           >
             <div className="w-1/2 flex flex-col items-center">
               <img className="w-24 mb-6 " src={photoURL} alt={nameGame} />

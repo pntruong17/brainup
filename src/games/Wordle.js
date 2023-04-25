@@ -99,7 +99,7 @@ const Wordle = () => {
   return (
     <>
       <NavbarFixed />
-      <div className="w-full h-screen bg-_dark text-_w_text overflow-hidden">
+      <div className="w-full h-screen overflow-hidden">
         <div className="max-w-xl h-full mx-auto flex flex-col justify-between items-center relative">
           <div className="w-full px-10">
             <div className="w-full border-b flex justify-between pt-5 pb-1">
@@ -158,7 +158,7 @@ const Wordle = () => {
           </WordleContext.Provider>
           {modalName === "close" && (
             <div className="fixed w-full h-full bg-_dark/[.8] px-5 flex justify-center items-center">
-              <div className="w-96 h-64 bg-_dark border border-gray-500 rounded-md">
+              <div className="w-96 h-64 border border-gray-500 rounded-md">
                 <div className="h-full flex flex-col justify-center items-center">
                   <h3 className="font-bold text-center text-xl">
                     {gameOver.guessedWord
@@ -188,7 +188,7 @@ const Wordle = () => {
             </div>
           )}
           {modalName === "tip" && (
-            <div className="absolute top-0 w-full h-full bg-_dark px-5">
+            <div className="absolute top-0 w-full bg-white dark:bg-_bg_dark h-full px-5">
               <svg
                 onClick={() => setModalName("none")}
                 xmlns="http://www.w3.org/2000/svg"
@@ -286,7 +286,7 @@ const Wordle = () => {
             </div>
           )}
           {modalName === "credits" && (
-            <div className="absolute top-0 w-full h-full bg-_dark px-5">
+            <div className="absolute top-0 w-full h-full bg-white dark:bg-_bg_dark px-5">
               <svg
                 onClick={() => setModalName("none")}
                 xmlns="http://www.w3.org/2000/svg"

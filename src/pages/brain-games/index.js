@@ -26,22 +26,20 @@ const BrainGames = () => {
             Discover the various cognitive games and exercises
           </h4>
         </div>
-        <div className="max-w-6xl mx-auto my-12">
-          <div className="max-w-5xl mx-auto px-5 grid sm:grid-cols-2 md:grid-cols-3">
-            {gamelib.map((game) => {
-              return (
-                <div key={game.id} className="">
-                  <GameCard
-                    gameName={game.Name}
-                    gameDesc={game.Desc}
-                    gamePhoto={game.PhotoURL}
-                    gameSlug={game.Slug}
-                    gameColorBG={game.ColorBG}
-                  />
-                </div>
-              );
-            })}
-          </div>
+        <div className="max-w-[56rem] mx-auto mt-10 grid sm:grid-cols-2 md:grid-cols-3">
+          {gamelib.map((game) => {
+            return (
+              <div key={game.id} className="">
+                <GameCard
+                  gameName={game.Name}
+                  gameDesc={game.Desc}
+                  gamePhoto={game.PhotoURL}
+                  gameSlug={game.Slug}
+                  gameColorBG={game.ColorBG}
+                />
+              </div>
+            );
+          })}
         </div>
       </motion.section>
     </Layout>

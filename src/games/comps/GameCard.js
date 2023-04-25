@@ -7,22 +7,25 @@ const GameCard = ({ gameName, gameDesc, gamePhoto, gameSlug, gameColorBG }) => {
   const router = useRouter();
   return (
     <>
-      <div className="m-3 border dark:border-none dark:bg-_darkblue rounded-2xl h-80 overflow-hidden hover:shadow-md cursor-pointer">
+      <div className="flex flex-col m-3 border dark:border-none dark:bg-_darkblue rounded-2xl min-h-[320px] overflow-hidden hover:shadow-md cursor-pointer">
         <div
-          className={`flex w-full h-32 justify-center items-center ${gameColorBG} `}
+          className={`flex w-full h-28 justify-center items-center ${gameColorBG}`}
         >
-          <img
+          <Image
+            width={80}
+            height={80}
+            objectFit="contain"
             className="object-scale-down object-center w-1/4 h-24"
             src={gamePhoto}
             alt={gameName}
           />
         </div>
-        <div className="flex flex-col h-44 justify-between text-center p-2">
+        <div className="flex-grow flex flex-col h-auto justify-between text-center p-2">
           <h3 className=" font-bold text-2xl tracking-tighter">{gameName}</h3>
           <p className=" text-sm tracking-tighter ">{gameDesc}</p>
           <Link
             href={"/brain-games/" + gameSlug}
-            className="font-semibold  text-md border border-gray-300 p-3 rounded-full hover:border-gray-400"
+            className="font-semibold text-md border border-gray-300 p-3 rounded-full hover:border-gray-400 my-3"
           >
             Play
           </Link>

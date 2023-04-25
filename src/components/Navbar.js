@@ -105,7 +105,7 @@ const Navbar = () => {
         >
           <Link href={"/"}>
             <div
-              className={`relative w-40   ${
+              className={`relative w-28   ${
                 verticalMenu ? "h-6 sm:h-8 mt-2" : "h-6"
               }`}
             >

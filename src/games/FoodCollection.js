@@ -154,9 +154,9 @@ const FoodCollection = () => {
   return (
     <>
       <NavbarFixed />
-      <div className="flex w-full h-screen bg-_dark justify-center items-center px-3 py-10">
+      <div className="flex w-full min-h-screen justify-center items-center px-3 py-10">
         {state === states[1] && (
-          <div className="rounded-2xl bg-white p-5 -m-2">
+          <div className="rounded-2xl bg-_secondary_dark p-5 -m-2">
             <div className="w-full flex justify-between">
               <h4 className="text-xs border rounded-full px-3 py-1 text-center">
                 Collected: {selected.length} / 35
@@ -186,7 +186,7 @@ const FoodCollection = () => {
           <div className="w-full flex h-28 justify-center">
             <button
               onClick={handleStart}
-              className={`flex justify-center items-center rounded-full w-28 h-12 border bg-green-400 m-1 hover:box-shadow-framer`}
+              className={`flex justify-center items-center rounded-full w-28 h-12 bg-green-400 m-1 hover:box-shadow-framer`}
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
