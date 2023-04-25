@@ -1,20 +1,11 @@
-import React, { useEffect, useState } from "react";
-import {
-  returnTopTenNeuronsUsers,
-  returnNeuronsAndAddNeuronAndIdTrivia,
-} from "@/firebase/usersFirebase";
-import {
-  saveRecordTrivia,
-  calculatePercentageIncrease,
-} from "@/firebase/quizFirebase";
+import { useEffect, useState } from "react";
 
 const ScoreBoard = ({
-  uid,
   idTrivia,
   winstreak,
   timeBonusStack,
   correct,
-  state,
+  pointCookies,
 }) => {
   const CLASS = [
     { title: "Reincarnate", points: 0 },
@@ -29,18 +20,9 @@ const ScoreBoard = ({
     { title: "God", points: 1000000 },
     { title: "Creative Muse", points: 2000000 },
   ];
-  const [topTenUsers, setTopTenUsers] = useState([]);
   const [trigger, setTrigger] = useState(false);
   const [percent, setPercent] = useState([]);
-  const [oldNeurons, setOldNeurons] = useState();
-  const [newNeurons, setNewNeurons] = useState();
   const [levelPlayer, setLevelPlayer] = useState({
-    title: "",
-    nextTitle: "",
-    percent: 0,
-    xpNeeded: 0,
-  });
-  const [newLevelPlayer, setNewLevelPlayer] = useState({
     title: "",
     nextTitle: "",
     percent: 0,
@@ -52,23 +34,22 @@ const ScoreBoard = ({
   const strokeWidth = 18;
   const circumference = 2 * Math.PI * radius;
   const offset1 = circumference - levelPlayer.percent * circumference;
-  const offset2 = circumference - newLevelPlayer.percent * circumference;
+  const offset2 = circumference - levelPlayer.percent * circumference;
 
   const calculateLevelPlayer = () => {
-    const _oldIndex = CLASS.findIndex((item) => item.points > oldNeurons);
-    const _newIndex = CLASS.findIndex((item) => item.points > newNeurons);
+    const _index = CLASS.findIndex((item) => item.points > pointCookies);
 
-    if (_oldIndex >= 0) {
-      const rangePoints = CLASS[_oldIndex].points - CLASS[_oldIndex - 1].points;
-      const nextPoint = oldNeurons - CLASS[_oldIndex - 1].points;
+    if (_index >= 0) {
+      const rangePoints = CLASS[_index].points - CLASS[_index - 1].points;
+      const nextPoint = pointCookies - CLASS[_index - 1].points;
       const percentage = nextPoint / rangePoints;
 
       setLevelPlayer({
         ...levelPlayer,
-        title: CLASS[_oldIndex - 1].title,
-        nextTitle: CLASS[_oldIndex].title,
+        title: CLASS[_index - 1].title,
+        nextTitle: CLASS[_index].title,
         percent: percentage,
-        xpNeeded: CLASS[_oldIndex].points - oldNeurons,
+        xpNeeded: CLASS[_index].points - pointCookies,
       });
     } else {
       setLevelPlayer({
@@ -79,58 +60,12 @@ const ScoreBoard = ({
         xpNeeded: 0,
       });
     }
-    if (_newIndex >= 0) {
-      const rangePoints = CLASS[_newIndex].points - CLASS[_newIndex - 1].points;
-      const nextPoint = oldNeurons - CLASS[_newIndex - 1].points;
-      const percentage = nextPoint / rangePoints;
-
-      setNewLevelPlayer({
-        ...newLevelPlayer,
-        title: CLASS[_newIndex - 1].title,
-        nextTitle: CLASS[_newIndex].title,
-        percent: percentage,
-        xpNeeded: CLASS[_newIndex].points - oldNeurons,
-      });
-    } else {
-      setNewLevelPlayer({
-        ...newLevelPlayer,
-        title: "Creative Muse",
-        nextTitle: "Creative Muse",
-        percent: 1,
-        xpNeeded: 0,
-      });
-    }
-  };
-
-  const saveTrivia = async (newRecordTrivia) => {
-    await saveRecordTrivia(newRecordTrivia);
-  };
-
-  const percentages = async (newRecordPercent) => {
-    const pc = await calculatePercentageIncrease(newRecordPercent);
-    setPercent(pc);
-  };
-
-  const returnNeuronsAndAddNeuronAndIdTriviaFunc = async (newRecord) => {
-    const returnNeuron = await returnNeuronsAndAddNeuronAndIdTrivia(newRecord);
-    setOldNeurons(returnNeuron.oldNeurons);
-    setNewNeurons(returnNeuron.newNeurons);
   };
 
   useEffect(() => {
-    if (state !== "showingScore") return;
-    const newRecord = {
-      uid: uid,
-      idTrivia: idTrivia,
-      neurons: winstreak + timeBonusStack + correct,
-    };
-    returnNeuronsAndAddNeuronAndIdTriviaFunc(newRecord).then(() =>
-      calculateLevelPlayer()
-    );
-  }, []);
-  useEffect(() => {
+    calculateLevelPlayer();
     console.log(levelPlayer.percent);
-  }, [levelPlayer]);
+  }, []);
   return (
     <>
       <div className="max-w-[380px] h-auto mx-auto pt-16 pb-3 px-2 rounded-2xl bg-amber-100 border-b-8 border-gray-400/[0.2] relative">
@@ -158,10 +93,10 @@ const ScoreBoard = ({
           </h3>
         </div>
         <h4 className="font-bold text-xl tracking-tight text-center pt-3">
-          Your level: <span>{newLevelPlayer.title}</span>
+          Your level: <span>{levelPlayer.title}</span>
         </h4>
         <div className="w-40 h-40 mx-auto">
-          {newLevelPlayer.percent !== undefined && (
+          {levelPlayer.percent !== undefined && (
             <svg transform="rotate(-90)" width={200} height={200}>
               <circle
                 cx={123}
@@ -184,7 +119,7 @@ const ScoreBoard = ({
                 strokeDasharray={circumference}
                 strokeDashoffset={
                   circumference -
-                  ((newLevelPlayer.percent * 2.3) / 3) * circumference
+                  ((levelPlayer.percent * 2.3) / 3) * circumference
                 }
               />
             </svg>
@@ -196,7 +131,7 @@ const ScoreBoard = ({
         >
           {levelPlayer.title === CLASS[10].title
             ? "You reached max level!!!"
-            : `${newLevelPlayer.xpNeeded} Neurons needed to reach next level - ${newLevelPlayer.nextTitle}`}
+            : `${levelPlayer.xpNeeded} Neurons needed to reach next level - ${levelPlayer.nextTitle}`}
         </h4>
       </div>
     </>

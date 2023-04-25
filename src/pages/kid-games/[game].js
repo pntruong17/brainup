@@ -14,8 +14,8 @@ const Game = ({ game }) => {
   }, []);
   return (
     <>
-      <div className="w-full h-screen font-Nunito text-_darkblue p-0 sm:p-3 bg-emerald-400">
-        <div className="max-w-md md:max-w-5xl h-full mx-auto bg-orange-50 rounded-none sm:rounded-[50px] overflow-hidden border sm:border-8">
+      <div className="w-full h-screen font-Nunito text-_darkblue p-0 sm:p-3 bg-_bg_dark">
+        <div className="max-w-md md:max-w-5xl h-full mx-auto bg-orange-50 rounded-none sm:rounded-[50px] overflow-hidden border sm:border-8 relative">
           {kidgamelib[game.index].Game}
         </div>
       </div>

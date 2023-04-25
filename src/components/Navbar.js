@@ -20,8 +20,8 @@ const Navbar = () => {
         { id: "kids games", slug: "kid-games" },
       ],
     },
-    { id: "test IQ", slug: "test-iq", child: undefined },
     { id: "trivia", slug: "trivia", child: undefined },
+    { id: "test IQ", slug: "test-iq", child: undefined },
   ];
   const id = useId();
   const [imgUser, setImgUser] = useState();
@@ -158,11 +158,11 @@ const Navbar = () => {
         </div>
       </div>
       <div
-        className={`fixed z-10 w-full h-screen top-0 left-0 bg-white px-10 pt-[60px] ${
+        className={`fixed z-10 w-full h-screen top-0 left-0 bg-white dark:bg-_bg_dark px-10 pt-[60px] ${
           open ? "block sm:hidden" : "hidden"
         }`}
       >
-        <ul className="text-lg font-semibold text-_blue">
+        <ul className="text-lg font-semibold">
           {links.map((link) => (
             <>
               <li
@@ -171,7 +171,7 @@ const Navbar = () => {
               >
                 <Link href={link.slug}>{link.id}</Link>
               </li>
-              <ul className="text-base font-medium text-_darkblue pl-5">
+              <ul className="text-base font-medium pl-5">
                 {link.child !== undefined &&
                   link.child.map((child) => (
                     <li

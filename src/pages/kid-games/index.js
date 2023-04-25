@@ -7,7 +7,7 @@ import Link from "next/link";
 const Index = ({ user, game }) => {
   return (
     <>
-      <div className="w-full min-h-screen font-Nunito text-_darkblue p-3 bg-emerald-400">
+      <div className="w-full min-h-screen font-Nunito text-_darkblue p-3 bg-_bg_dark">
         <div className="max-w-md min-h-[850px] mx-auto bg-orange-50 rounded-[50px] overflow-hidden px-3 xs:px-5 py-4">
           <div className="flex justify-start items-center">
             <div className="w-10 h-10 relative">

@@ -1,17 +1,11 @@
 import React, { useEffect, useReducer, useState } from "react";
 import Image from "next/image";
-import { useUserAuth } from "@/components/helper/UserAuthContextProvider";
 import { motion } from "framer-motion";
 import LayoutTrivia from "@/components/LayoutTrivia";
 import AnswerButton from "@/trivia/AnswerButton";
 import TriviaCard from "@/trivia/TriviaCard";
 import TimeBonus from "@/trivia/TimeBonus";
-import {
-  checkCookies,
-  getCookies,
-  setCookies,
-  updateSingleNumberCookies,
-} from "@/components/cookie";
+import { setCookies, getCookies, checkCookies } from "@/components/cookie";
 import ScoreBoard from "@/components/subcomponents/ScoreBoard";
 import { useRouter } from "next/router";
 import triviaData from "/src/trivia/triviaData.json";
@@ -56,7 +50,6 @@ const Trivia = ({ triviBySlug, triviNotThisQuiz }) => {
     xpNeeded: undefined,
   });
   const [chart, setChart] = useState(15);
-  const { user } = useUserAuth();
   // chart
   const radius = 65;
   const strokeWidth = 18;
@@ -115,12 +108,6 @@ const Trivia = ({ triviBySlug, triviNotThisQuiz }) => {
 
   const navigate = useRouter();
 
-  useEffect(() => {
-    if (user === null) {
-      navigate.push("/login");
-      return;
-    }
-  }, [user, navigate]);
   const calculateLevelPlayer = () => {
     const _findIndex = CLASS.findIndex((item) => item.points > pointCookies);
 
@@ -174,7 +161,7 @@ const Trivia = ({ triviBySlug, triviNotThisQuiz }) => {
 
     console.log("newPoints", newPoints);
     if (state === STATES[4]) {
-      updateSingleNumberCookies("_USER_COOKIES_TRIVIA_LVL", newPoints);
+      setCookies("_USER_COOKIES_TRIVIA_LVL", newPoints);
       setPointCookies(newPoints);
     }
   }, [state]);
@@ -261,7 +248,7 @@ const Trivia = ({ triviBySlug, triviNotThisQuiz }) => {
     //console.log("pointCookies", pointCookies);
     //console.log("levelPlayer", levelPlayer);
     //onsole.log(user.uid);
-  }, [correct, gameScore, pointCookies, levelPlayer, thisQuestion, user]);
+  }, [correct, gameScore, pointCookies, levelPlayer, thisQuestion]);
 
   useEffect(() => {
     let interval = null;
@@ -465,12 +452,11 @@ const Trivia = ({ triviBySlug, triviNotThisQuiz }) => {
             {state === STATES[4] && (
               <div className="w-full h-full p-2 bg-_contrast_bg border rounded-lg pt-16">
                 <ScoreBoard
-                  uid={user.uid}
                   idTrivia={triviBySlug.id}
                   winstreak={gameScore.winstreak}
                   timeBonusStack={gameScore.timeBonusStack}
                   correct={gameScore.point}
-                  state={state}
+                  pointCookies={pointCookies}
                 />
                 <div className="w-full rounded-md mt-5 ">
                   <div className="font-black text-_contrast_text text-2xl underline text-center my-10">

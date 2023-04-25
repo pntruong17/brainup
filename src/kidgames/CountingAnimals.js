@@ -1,8 +1,8 @@
 import Image from "next/image";
 import { AnimatePresence, motion } from "framer-motion";
 import React, { useEffect, useReducer, useRef, useState } from "react";
-import AnimatedTextCharacter from "@/components/AnimatedTextCharacter";
 import AnimatedTextWord from "@/components/AnimatedTextWord";
+import Link from "next/link";
 
 const CountingAnimals = () => {
   const sometext = [
@@ -48,7 +48,7 @@ const CountingAnimals = () => {
     },
   ];
 
-  const TIMER = 3000; //18000;
+  const TIMER = 18000;
   const STATES = [
     "context",
     "pre-screen",
@@ -60,10 +60,16 @@ const CountingAnimals = () => {
   ];
 
   const parentRef = useRef();
+  const [options, setOptions] = useState();
+  const [rightSignal, setRightSignal] = useState(undefined);
+  const [wrongSignal, setWrongSignal] = useState(undefined);
+  const [thisQuestion, setThisQuestion] = useState(undefined);
+  const [mixedQuestion, setMixedQuestion] = useState(undefined);
 
   const gameInit = {
-    state: STATES[5],
+    state: STATES[0],
     currentQuestion: 0,
+    animal: 0,
     combo: 0,
     point: 0,
   };
@@ -88,6 +94,7 @@ const CountingAnimals = () => {
       case "correct":
         return {
           ...state,
+          animal: state.animal + thisQuestion.among,
           combo: state.combo + 1,
           point: state.point + 500 + state.combo * 50,
         };
@@ -110,13 +117,8 @@ const CountingAnimals = () => {
         return state;
     }
   };
-  const lottieRef = useRef(null);
   const [gameState, dispatchGameState] = useReducer(gameReducer, gameInit);
-  const [options, setOptions] = useState();
-  const [rightSignal, setRightSignal] = useState(undefined);
-  const [wrongSignal, setWrongSignal] = useState(undefined);
-  const [thisQuestion, setThisQuestion] = useState(undefined);
-  const [mixedQuestion, setMixedQuestion] = useState(undefined);
+
   //next question
   const handleNext = () => {
     setRightSignal(undefined);
@@ -192,7 +194,7 @@ const CountingAnimals = () => {
     timeref = setTimeout(() => {
       dispatchGameState({ type: "timego" });
       clearTimeout(timeref);
-    }, 500);
+    }, 3000);
 
     return () => clearTimeout(timeref);
   }, [gameState]);
@@ -242,6 +244,7 @@ const CountingAnimals = () => {
               layout="fill"
               objectFit="cover"
               objectPosition="center"
+              alt="count animal game"
             />
           </div>
           <div className="w-full p-2 xs:p-5 flex flex-col justify-between items-center">
@@ -327,11 +330,7 @@ const CountingAnimals = () => {
                         </h3>
                       </div>
                     ))}
-                  {rightSignal !== undefined && wrongSignal === undefined && (
-                    <div className="absolute top-5 w-full h-full">
-                      <div className="absolute sun -bottom-[1000px] md:-bottom-[500px] -left-[800px] md:-left-[500px]"></div>
-                    </div>
-                  )}
+
                   {rightSignal !== undefined && (
                     <div className="absolute bottom-5 w-full flex justify-center px-3">
                       <button
@@ -367,24 +366,30 @@ const CountingAnimals = () => {
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
           transition={{ duration: 0.25 }}
-          className="w-full h-full top-0 left-0 absolute bg-orange-50/[0.9] overflow-hidden"
+          className="w-full h-full top-0 left-0 absolute bg-white overflow-hidden"
         >
           <div className="w-full h-full flex flex-col justify-center">
-            <div className="absolute top-5 w-full h-full opacity-10">
-              <div className="absolute sun -bottom-[1000px] md:-bottom-[500px] -left-[800px] md:-left-[500px]"></div>
-            </div>
             <iframe src="https://embed.lottiefiles.com/animation/31174"></iframe>
-            <div className="w-full flex border-4 justify-center">
-              <div className="w-40 h-40 border-4">
-                <iframe src="https://embed.lottiefiles.com/animation/97585"></iframe>
-              </div>
-              <div className="w-40 h-40">
-                <iframe src="https://embed.lottiefiles.com/animation/97585"></iframe>
-              </div>
-            </div>
-            <h3 className="text-center text-2xl xs:text-5xl font-black tracking-tighter select-none">
-              asdkjalsjdlj alsjdas djkljf ljhdlghdjkl
+            <h3 className="text-_accent text-center text-3xl xs:text-5xl sm:text-8xl font-black tracking-tighter select-none p-5 mt-5">
+              Congratulations, Cutie!
             </h3>
+            <h3 className="text-center text-2xl xs:text-4xl sm:text-6xl font-black tracking-tighter select-none p-5">
+              You have correctly counted a total of
+            </h3>
+            <h3 className="text-_red text-center text-5xl xs:text-7xl sm:text-9xl font-black tracking-tighter select-none p-5">
+              {gameState.animal}
+            </h3>
+            <h3 className="text-center text-2xl xs:text-4xl sm:text-6xl font-black tracking-tighter select-none p-5">
+              animals.
+            </h3>
+            <div className="w-full h-16 flex justify-center">
+              <Link
+                href={"/kid-games"}
+                className="mx-auto py-2 px-8 text-center text-2xl xs:text-4xl font-black bg-_pink1 rounded-full border-b-4 border-green-200 hover:border-b-2 duration-100"
+              >
+                Back
+              </Link>
+            </div>
           </div>
         </motion.div>
       )}

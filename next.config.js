@@ -9,6 +9,7 @@ const nextConfig = {
       "res.cloudinary.com",
       "img.freepik.com",
       "s.luyengame.net",
+      "play-lh.googleusercontent.com",
     ],
   },
 
