@@ -2,10 +2,18 @@ import NavbarFixed from "@/components/NavbarFixed";
 import { AnimatePresence } from "framer-motion";
 import React, { useState, useEffect, useRef } from "react";
 import RenderStars from "./comps/RenderStars";
+import { checkCookies, setCookies, getCookies } from "@/components/cookie";
+import { useRouter } from "next/router";
+import ScoreBoard from "@/components/subcomponents/ScoreBoard";
 
 const StarSearch = () => {
+  const router = useRouter();
+  const [showScore, setShowScore] = useState(false);
+  const [showScoreBoard, setShowScoreBoard] = useState(true);
+  const [pointCookies, setPointCookies] = useState();
+
   const states = ["start", "playing", "close"];
-  const [timer, setTimer] = useState(90);
+  const [timer, setTimer] = useState(10); //timer
   const delayVisible = useRef();
   const [ins, setIns] = useState(0);
   const [state, setState] = useState("start");
@@ -13,8 +21,8 @@ const StarSearch = () => {
 
   const [id, setID] = useState(0);
   const [totalrow, setTotalrow] = useState(20);
-
-  const [point, setPoint] = useState(1);
+  const [point, setPoint] = useState(0);
+  const [dimond, setDimond] = useState(0);
   const [stars, setStars] = useState([]);
   const [wrongclick, setWrongclick] = useState(3);
 
@@ -82,8 +90,8 @@ const StarSearch = () => {
 
   const createStars = () => {
     let starArray = [];
-    let s = 3 + Math.floor(point / 2.5); //5
-    let st = 3 + Math.floor(point / 4.5); //9
+    let s = 3 + Math.floor(dimond / 2.5); //5
+    let st = 3 + Math.floor(dimond / 4.5); //9
     if (s >= 20) s = 20;
     if (st >= 14) st = 14;
     const state = randomStates(st); //st
@@ -114,21 +122,39 @@ const StarSearch = () => {
     return tem;
   };
 
-  /// USeEffect
-
+  //cookies data
   useEffect(() => {
-    if (state === states[0] || state === states[2]) return;
-    if (wrongclick <= 1) {
-      setState(states[2]);
+    const hasCookie = checkCookies("_USER_COOKIES_TRIVIA_LVL");
+    if (hasCookie) {
+      setPointCookies(getCookies("_USER_COOKIES_TRIVIA_LVL"));
+    } else {
+      setPointCookies(0);
+      setCookies("_USER_COOKIES_TRIVIA_LVL", 0);
     }
+  }, []);
+
+  // end cookies data
+
+  const checkDiamond = (id) => {
     if (id === 0) {
-      setStars([]);
-      setStars(addFullPlace());
-      setPoint(point + 1);
+      setDimond(dimond + 1);
     } else {
       setWrongclick(wrongclick - 1);
     }
+  };
 
+  /// USeEffect
+  useEffect(() => {
+    //if (state === states[0] || state === states[2]) return;
+    if (wrongclick <= 1) {
+      setState(states[2]);
+    }
+    setStars([]);
+    setStars(addFullPlace());
+  }, [dimond, wrongclick]);
+
+  useEffect(() => {
+    if (state === states[0] || state === states[2]) return;
     delayVisible.current = setTimeout(() => {
       setVisible(true);
     }, 250);
@@ -151,6 +177,14 @@ const StarSearch = () => {
     return "" + changeTimeCode(munite) + ":" + changeTimeCode(second);
   };
 
+  const tinhDiem = () => {
+    const _point = dimond * 100;
+    setPoint(_point);
+    const numCookies = getCookies("_USER_COOKIES_TRIVIA_LVL");
+    const newPoint = Number(numCookies) + Number(_point);
+    setCookies("_USER_COOKIES_TRIVIA_LVL", newPoint);
+    setPointCookies(newPoint);
+  };
   useEffect(() => {
     if (state === states[0] || state === states[2]) return;
     const intervalId = setInterval(() => {
@@ -164,9 +198,37 @@ const StarSearch = () => {
     return () => clearInterval(intervalId);
   }, [state, timer]);
 
+  // delay show score
+  useEffect(() => {
+    if (state !== states[2]) return;
+
+    let timeDelayRef;
+    timeDelayRef = setTimeout(() => {
+      tinhDiem();
+      setShowScore(true);
+    }, 2000);
+
+    return () => clearTimeout(timeDelayRef);
+  }, [state]);
+  useEffect(() => {
+    if (!showScoreBoard) {
+      router.push("/brain-games");
+    }
+  }, [showScoreBoard]);
+
   return (
     <>
       <NavbarFixed />
+      {showScore && (
+        <div className="absolute z-10 top-0 left-0 w-full h-screen bg-_bg_dark py-16">
+          <ScoreBoard
+            closeButton={true}
+            correct={point}
+            pointCookies={pointCookies}
+            setShowScoreBoard={setShowScoreBoard}
+          />
+        </div>
+      )}
       {state === states[1] && (
         <div className="fixed w-full top-0 left-0 flex">
           <div className="w-lg mx-auto flex justify-between  text-center p-2">
@@ -191,7 +253,7 @@ const StarSearch = () => {
             </h4>
             <h4 className="text-xl font-bold text-center">
               You have picked up{" "}
-              <span className="text-3xl text-_accent">{point}</span> diamonds
+              <span className="text-3xl text-_accent">{dimond}</span> diamonds
             </h4>
           </div>
         </div>
@@ -199,7 +261,7 @@ const StarSearch = () => {
       {state === states[1] && (
         <div className="fixed w-full bottom-0 left-0 flex">
           <div className="w-lg mx-auto flex justify-between  text-center p-2">
-            <h4>Level: {point}</h4>
+            <h4>Level: {dimond + 1}</h4>
             <h4 className="ml-10">!ncorrect: {wrongclick}</h4>
           </div>
         </div>
@@ -215,6 +277,7 @@ const StarSearch = () => {
                       key={index}
                       star={star}
                       setID={setID}
+                      checkDiamond={checkDiamond}
                       setIns={setIns}
                       visible={visible}
                       setVisible={setVisible}

@@ -65,6 +65,7 @@ const MemoryCardGame = () => {
   const [pointCookies, setPointCookies] = useState();
 
   const shuffleCards = () => {
+    setState(STATES[1]);
     setHidePlay(true);
     setFlips(editlevel[lv] * 3 + 3);
     // sẽ lấy từ cardlist số cặp icon , lấy từ vị trí index 0-> editlevel[lv]
@@ -146,22 +147,25 @@ const MemoryCardGame = () => {
     }
   }
 
-  const handleWinGame = () => {
-    if (flips > 0) {
-      if (lv >= editlevel.length - 1) {
-        setLv(editlevel.length - 1);
-      } else {
-        setLv((prev) => prev + 1);
-      }
-    }
+  const tinhDiem = () => {
     const _point = editlevel[lv] * 100;
     setPoint(_point);
     const numCookies = getCookies("_USER_COOKIES_TRIVIA_LVL");
     const newPoint = Number(numCookies) + Number(_point);
     setCookies("_USER_COOKIES_TRIVIA_LVL", newPoint);
     setPointCookies(newPoint);
+  };
 
-    setShowScoreBoard(true);
+  const checkWinGame = () => {
+    if (flips > 0) {
+      tinhDiem();
+      setShowScoreBoard(true);
+      if (lv >= editlevel.length - 1) {
+        setLv(editlevel.length - 1);
+      } else {
+        setLv((prev) => prev + 1);
+      }
+    }
   };
 
   useEffect(() => {
@@ -171,7 +175,7 @@ const MemoryCardGame = () => {
     if (isAllCorrect < 0) {
       setHidePlay(false);
 
-      handleWinGame();
+      checkWinGame();
     } else {
     }
   }, [items]);
@@ -180,11 +184,12 @@ const MemoryCardGame = () => {
       <NavbarFixed />
 
       {showScoreBoard && (
-        <div className="absolute top-0 left-0 w-full h-screen bg-_bg_dark py-16">
+        <div className="absolute z-10 top-0 left-0 w-full h-screen bg-_bg_dark py-16">
           <ScoreBoard
             closeButton={true}
             correct={point}
             pointCookies={pointCookies}
+            setShowScoreBoard={setShowScoreBoard}
           />
         </div>
       )}

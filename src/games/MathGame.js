@@ -4,15 +4,18 @@ import CheckAndXMark from "./comps/CheckAndXMark";
 import MathBoard from "./comps/MathBoard";
 import { checkCookies, setCookies, getCookies } from "@/components/cookie";
 import ScoreBoard from "@/components/subcomponents/ScoreBoard";
+import { useRouter } from "next/router";
 
 const MathGame = () => {
-  let timeRef = useRef();
+  const timeRef = useRef();
+  const router = useRouter();
   const TIME_GAME = 60;
-  const rand = ["l", "d", "r"];
+  const rand = ["left", "down", "right"];
   const states = ["start", "playing", "close"];
   const [state, setState] = useState("start");
   const [visibleMark, setVisibleMark] = useState(false);
   const [showTopScore, setShowTopScore] = useState(false);
+  const [showScoreBoard, setShowScoreBoard] = useState(true);
 
   const [pointCookies, setPointCookies] = useState();
   const [soPhepTinh, setSoPhepTinh] = useState(1);
@@ -101,18 +104,18 @@ const MathGame = () => {
 
   const newNumber = () => {
     const newrand = rand[Math.floor(Math.random() * rand.length)];
-    if (newrand === "l") {
-      setAnswer("l");
+    if (newrand === "left") {
+      setAnswer("left");
 
       const nextrand = Math.floor(Math.random() * 5) + 1;
       setArrayTrai(returnRandomNumberArray(firstRandom + nextrand, soPhepTinh));
       setArrayPhai(returnRandomNumberArray(firstRandom, soPhepTinh));
-    } else if (newrand === "d") {
-      setAnswer("d");
+    } else if (newrand === "down") {
+      setAnswer("down");
       setArrayTrai(returnRandomNumberArray(firstRandom, soPhepTinh));
       setArrayPhai(returnRandomNumberArray(firstRandom, soPhepTinh));
-    } else if (newrand === "r") {
-      setAnswer("r");
+    } else if (newrand === "right") {
+      setAnswer("right");
       const nextrand = Math.floor(Math.random() * 5) + 1;
       setArrayTrai(returnRandomNumberArray(firstRandom, soPhepTinh));
       setArrayPhai(returnRandomNumberArray(firstRandom + nextrand, soPhepTinh));
@@ -125,7 +128,7 @@ const MathGame = () => {
     if (_answer === answer) {
       // neu dung
       setSignal(1);
-      setCorrect(correct + 1);
+      setCorrect((prev) => prev + 1);
     } else {
       //neu sai
       setSignal(0);
@@ -147,18 +150,15 @@ const MathGame = () => {
 
   const handleLeftClick = () => {
     if (state !== states[1]) return;
-    setButtonPressed("l");
-    setTotalClick(totalClick + 1);
+    setButtonPressed((prev) => [...prev, "left"]);
   };
   const handleDownClick = () => {
     if (state !== states[1]) return;
-    setButtonPressed("d");
-    setTotalClick(totalClick + 1);
+    setButtonPressed((prev) => [...prev, "down"]);
   };
   const handleRightClick = () => {
     if (state !== states[1]) return;
-    setButtonPressed("r");
-    setTotalClick(totalClick + 1);
+    setButtonPressed((prev) => [...prev, "right"]);
   };
 
   useEffect(() => {
@@ -202,14 +202,7 @@ const MathGame = () => {
       setCookies("_USER_COOKIES_TRIVIA_LVL", 0);
     }
   }, []);
-  useEffect(() => {
-    if (timer <= 0) {
-      const numCookies = getCookies("_USER_COOKIES_TRIVIA_LVL");
-      const newPoint = Number(numCookies) + Number(point);
-      setCookies("_USER_COOKIES_TRIVIA_LVL", newPoint);
-      setPointCookies(newPoint);
-    }
-  }, [timer]);
+
   // end cookies data
 
   useEffect(() => {
@@ -217,47 +210,46 @@ const MathGame = () => {
       return;
     }
     newNumber();
-  }, [totalMath, state]);
+  }, [buttonPress, state]);
 
   useEffect(() => {
     if (comboPoint >= maxcomboPoint) {
       setComboPoint(4);
     } else {
-      setComboPoint(comboPoint + 1);
+      setComboPoint((prev) => prev + 1);
     }
     if (comboTimer >= maxcomboPoint) {
       setComboTimer(0);
-      setTimer(timer + 5);
+      setTimer((prev) => prev + 5);
     } else {
-      setComboTimer(comboTimer + 1);
+      setComboTimer((prev) => prev + 1);
     }
     setPoint((prev) => prev + correct * 10 * comboPoint);
   }, [correct]);
 
   useEffect(() => {
-    if (buttonPress === "l") {
-      checkAnswers("l");
-    } else if (buttonPress === "d") {
-      checkAnswers("d");
-    } else if (buttonPress === "r") {
-      checkAnswers("r");
-    } else {
-      return;
+    if (state === states[2]) {
+      const numCookies = getCookies("_USER_COOKIES_TRIVIA_LVL");
+      const newPoint = Number(numCookies) + Number(point);
+      setCookies("_USER_COOKIES_TRIVIA_LVL", newPoint);
+      setPointCookies(newPoint);
     }
-  }, [totalClick]);
+  }, [state]);
+
+  useEffect(() => {
+    if (state === states[0]) return;
+    checkAnswers(buttonPress[buttonPress.length - 1]);
+  }, [buttonPress]);
 
   useEffect(() => {
     if (state !== states[1]) return;
     const handleKeyUp = (event) => {
-      if (event.key === "a") {
-        setButtonPressed("l");
-        setTotalClick(totalClick + 1);
-      } else if (event.key === "s") {
-        setButtonPressed("d");
-        setTotalClick(totalClick + 1);
-      } else if (event.key === "d") {
-        setButtonPressed("r");
-        setTotalClick(totalClick + 1);
+      if (event.key === "ArrowLeft") {
+        handleLeftClick();
+      } else if (event.key === "ArrowDown") {
+        handleDownClick();
+      } else if (event.key === "ArrowRight") {
+        handleRightClick();
       }
     };
 
@@ -266,7 +258,13 @@ const MathGame = () => {
     return () => {
       window.removeEventListener("keyup", handleKeyUp);
     };
-  }, [totalClick]);
+  }, [state]);
+
+  useEffect(() => {
+    if (!showScoreBoard) {
+      router.push("/brain-games");
+    }
+  }, [showScoreBoard]);
 
   return (
     <>
@@ -296,7 +294,12 @@ const MathGame = () => {
       )}
       {showTopScore && (
         <div className="absolute top-0 left-0 w-full h-screen bg-_bg_dark py-16">
-          <ScoreBoard correct={point} pointCookies={pointCookies} />
+          <ScoreBoard
+            closeButton={true}
+            correct={point}
+            pointCookies={pointCookies}
+            setShowScoreBoard={setShowScoreBoard}
+          />
         </div>
       )}
       <div className="w-full h-screen px-2 py-8 text-_bg_dark">
@@ -342,7 +345,7 @@ const MathGame = () => {
               <div className="w-full h-28 flex justify-center">
                 <CheckAndXMark
                   signal={signal}
-                  checkChange={totalClick}
+                  checkChange={buttonPress}
                   visibleMark={visibleMark}
                   setVisibleMark={setVisibleMark}
                 />

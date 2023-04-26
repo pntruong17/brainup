@@ -1,16 +1,21 @@
 import NavbarFixed from "@/components/NavbarFixed";
 import React, { useState, useEffect, useRef } from "react";
 import ItemScrollAnimation from "./comps/ItemScrollAnimation";
+import ScoreBoard from "@/components/subcomponents/ScoreBoard";
+import { useRouter } from "next/router";
+import { checkCookies, setCookies, getCookies } from "@/components/cookie";
 
 // loi-> xuat hien hinh bi trung
 
 const FoodCollection = () => {
+  const router = useRouter();
   const delayVisibleRef = useRef();
   const states = ["start", "playing", "close"];
   const [state, setState] = useState(states[0]);
 
-  const [win, setWin] = useState(null);
-
+  const [win, setWin] = useState(false);
+  const [showScoreBoard, setShowScoreBoard] = useState(true);
+  const [pointCookies, setPointCookies] = useState();
   const [visible, setVisible] = useState(true);
 
   const [features, setFeatures] = useState(
@@ -89,8 +94,16 @@ const FoodCollection = () => {
       //.sort(() => Math.random() - 0.5)
     );
   };
+  const tinhDiem = () => {
+    const _point = 2000;
+    const numCookies = getCookies("_USER_COOKIES_TRIVIA_LVL");
+    const newPoint = Number(numCookies) + Number(_point);
+    setCookies("_USER_COOKIES_TRIVIA_LVL", newPoint);
+    setPointCookies(newPoint);
+  };
 
   const handleWinGame = () => {
+    tinhDiem();
     setState(states[2]);
     setWin(true);
   };
@@ -131,6 +144,25 @@ const FoodCollection = () => {
     };
   }, [featureSlots]);
 
+  useEffect(() => {
+    if (!showScoreBoard) {
+      router.push("/brain-games");
+    }
+  }, [showScoreBoard]);
+
+  //cookies data
+  useEffect(() => {
+    const hasCookie = checkCookies("_USER_COOKIES_TRIVIA_LVL");
+    if (hasCookie) {
+      setPointCookies(getCookies("_USER_COOKIES_TRIVIA_LVL"));
+    } else {
+      setPointCookies(0);
+      setCookies("_USER_COOKIES_TRIVIA_LVL", 0);
+    }
+  }, []);
+
+  // end cookies data
+
   const setValue = (_value) => {
     const isInfeaSlot = featureSlots.some((v) => v.id === _value);
     const isInSelected = selected.some((v) => v.id === _value) || false;
@@ -154,6 +186,16 @@ const FoodCollection = () => {
   return (
     <>
       <NavbarFixed />
+      {state === states[2] && (
+        <div className="absolute z-10 top-0 left-0 w-full h-screen bg-_bg_dark py-16">
+          <ScoreBoard
+            closeButton={true}
+            correct={2000}
+            pointCookies={pointCookies}
+            setShowScoreBoard={setShowScoreBoard}
+          />
+        </div>
+      )}
       <div className="flex w-full min-h-screen justify-center items-center px-3 py-10">
         {state === states[1] && (
           <div className="rounded-2xl bg-_secondary_dark p-5 -m-2">

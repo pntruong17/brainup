@@ -2,17 +2,13 @@ import React, { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import CheckAndXMark from "./comps/CheckAndXMark";
 import NavbarFixed from "@/components/NavbarFixed";
-import {
-  checkCookies,
-  getCookies,
-  setCookies,
-  updateCookies,
-} from "@/components/cookie";
-import ShowTopScore from "./comps/ShowTopScore";
+import ScoreBoard from "@/components/subcomponents/ScoreBoard";
+import { checkCookies, setCookies, getCookies } from "@/components/cookie";
+import { useRouter } from "next/router";
 
 const FastMatch = () => {
-  const TIME_GAME = 60;
-  const NAME_COOKIE = "_F_M";
+  const router = useRouter();
+  const TIME_GAME = 40;
 
   const [ingredient, setIngredient] = useState(
     [
@@ -30,13 +26,15 @@ const FastMatch = () => {
     ].sort(() => Math.random() - 0.5)
   );
 
+  const [showScore, setShowScore] = useState(false);
+  const [showScoreBoard, setShowScoreBoard] = useState(true);
+  const [pointCookies, setPointCookies] = useState();
+
   const [comboTimer, setComboTimer] = useState(0);
   const [timer, setTimer] = useState(TIME_GAME);
   const [point, setPoint] = useState(0);
-  const [pointCookies, setPointCookies] = useState([]);
   const comboRef = useRef(0);
   const [signal, setSignal] = useState(-1);
-  const [showTopScore, setShowTopScore] = useState(false);
 
   const [start, setStart] = useState(false);
   const [gameStart, setGameStart] = useState(false);
@@ -113,22 +111,16 @@ const FastMatch = () => {
 
   //cookies data
   useEffect(() => {
-    const hasCookie = checkCookies(NAME_COOKIE);
+    const hasCookie = checkCookies("_USER_COOKIES_TRIVIA_LVL");
     if (hasCookie) {
-      setPointCookies(getCookies(NAME_COOKIE));
+      setPointCookies(getCookies("_USER_COOKIES_TRIVIA_LVL"));
     } else {
-      setPointCookies([]);
-      setCookies(NAME_COOKIE, []);
+      setPointCookies(0);
+      setCookies("_USER_COOKIES_TRIVIA_LVL", 0);
     }
   }, []);
-  useEffect(() => {
-    if (close) {
-      updateCookies(NAME_COOKIE, point);
-      setPointCookies(getCookies(NAME_COOKIE));
-    }
-  }, [close]);
-  // end cookies data
 
+  // end cookies data
   useEffect(() => {
     newTurn();
     checkMatched(isRight);
@@ -183,7 +175,12 @@ const FastMatch = () => {
     let second = timer % 60;
     return "" + changeTimeCode(munite) + ":" + changeTimeCode(second);
   };
-
+  const tinhDiem = () => {
+    const numCookies = getCookies("_USER_COOKIES_TRIVIA_LVL");
+    const newPoint = Number(numCookies) + Number(point);
+    setCookies("_USER_COOKIES_TRIVIA_LVL", newPoint);
+    setPointCookies(newPoint);
+  };
   useEffect(() => {
     if (!start || close) return;
     const intervalId = setInterval(() => {
@@ -192,7 +189,8 @@ const FastMatch = () => {
         setGameStart(false);
         setTimer(0);
         setClose(true);
-        setShowTopScore(true);
+        tinhDiem();
+        setShowScore(true);
         clearInterval(intervalId);
       }
     }, 1000);
@@ -200,15 +198,24 @@ const FastMatch = () => {
     return () => clearInterval(intervalId);
   }, [timer, start, close]);
 
+  useEffect(() => {
+    if (!showScoreBoard) {
+      router.push("/brain-games");
+    }
+  }, [showScoreBoard]);
   return (
     <>
       <NavbarFixed />
-      <ShowTopScore
-        score={point}
-        data={pointCookies}
-        visible={showTopScore}
-        setVisible={setShowTopScore}
-      />
+      {showScore && (
+        <div className="absolute z-10 top-0 left-0 w-full h-screen bg-_bg_dark py-16">
+          <ScoreBoard
+            closeButton={true}
+            correct={point}
+            pointCookies={pointCookies}
+            setShowScoreBoard={setShowScoreBoard}
+          />
+        </div>
+      )}
       <div className="flex h-screen justify-center items-center">
         <div className="flex flex-col response-gridx bg-_accent_dark dark:bg-_secondary_dark rounded-lg box-shadow-framer overflow-hidden">
           <div className="flex flex-nowrap justify-between p-4 border-b border-_accent bg-_accent_dark dark:bg-_secondary_dark">
@@ -218,21 +225,6 @@ const FastMatch = () => {
             <h3 className="rounded-full px-2 text-center text-sm font-medium">
               Time remaining: {renderTimer()}
             </h3>
-            <svg
-              onClick={() => setShowTopScore(true)}
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 24 24"
-              strokeWidth="1.5"
-              stroke="currentColor"
-              className="w-6 h-6 cursor-pointer"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                d="M3 13.125C3 12.504 3.504 12 4.125 12h2.25c.621 0 1.125.504 1.125 1.125v6.75C7.5 20.496 6.996 21 6.375 21h-2.25A1.125 1.125 0 013 19.875v-6.75zM9.75 8.625c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125v11.25c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 01-1.125-1.125V8.625zM16.5 4.125c0-.621.504-1.125 1.125-1.125h2.25C20.496 3 21 3.504 21 4.125v15.75c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 01-1.125-1.125V4.125z"
-              />
-            </svg>
           </div>
           <div className="max-w-md mx-auto mt-10">
             <AnimatePresence exitBeforeEnter>
@@ -313,5 +305,3 @@ const FastMatch = () => {
 };
 
 export default FastMatch;
-
-// <a href="https://www.freepik.com/free-vector/collection-heart_887838.htm#query=heart&position=26&from_view=keyword&track=sph">Image by patchariyavector</a> on Freepik

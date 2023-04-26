@@ -1,12 +1,20 @@
 import React, { useState } from "react";
 import { motion } from "framer-motion";
-const RenderStars = ({ visible, setVisible, star, setIns, setID }) => {
+const RenderStars = ({
+  visible,
+  setVisible,
+  star,
+  setIns,
+  setID,
+  checkDiamond,
+}) => {
   const [_deg, _setDeg] = useState(0);
   const clickSelf = () => {
     _setDeg(0);
     setID(star.id);
     setIns((prev) => prev + 1);
     setVisible(false);
+    checkDiamond(star.id);
   };
 
   return (

@@ -1,5 +1,6 @@
 import React from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import Image from "next/image";
 
 const PregameModal = ({
   nameGame,
@@ -19,7 +20,7 @@ const PregameModal = ({
             className={`fixed w-screen h-screen flex justify-center items-center bg-_bg_dark z-20`}
           >
             <div className="w-1/2 flex flex-col items-center">
-              <img className="w-24 mb-6 " src={photoURL} alt={nameGame} />
+              <Image width={80} height={80} src={photoURL} alt={nameGame} />
               <h3 className="font-bold text-xl my-1 tracking-tighter text-_red">
                 {nameGame}
               </h3>

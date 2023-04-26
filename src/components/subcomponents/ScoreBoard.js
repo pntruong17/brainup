@@ -2,10 +2,12 @@ import { useEffect, useState } from "react";
 
 const ScoreBoard = ({
   idTrivia,
+  closeButton,
   winstreak,
   timeBonusStack,
   correct,
   pointCookies,
+  setShowScoreBoard,
 }) => {
   const CLASS = [
     { title: "Reincarnate", points: 0 },
@@ -64,7 +66,6 @@ const ScoreBoard = ({
 
   useEffect(() => {
     calculateLevelPlayer();
-    console.log(levelPlayer.percent);
   }, []);
   return (
     <>
@@ -141,6 +142,16 @@ const ScoreBoard = ({
             ? "You reached max level!!!"
             : `${levelPlayer.xpNeeded} Neurons needed to reach next level - ${levelPlayer.nextTitle}`}
         </h4>
+        {closeButton && (
+          <div className="w-full flex justify-center">
+            <button
+              onClick={() => setShowScoreBoard(false)}
+              className="p-1 text-_bg_dark border border-_bg_dark font-black rounded-full"
+            >
+              Next
+            </button>
+          </div>
+        )}
       </div>
     </>
   );
