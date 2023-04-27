@@ -58,6 +58,7 @@ const CountingAnimals = () => {
     "game-close",
     "game-reset",
   ];
+  const [imageSize, setImageSize] = useState();
 
   const parentRef = useRef();
   const [options, setOptions] = useState();
@@ -119,6 +120,15 @@ const CountingAnimals = () => {
   };
   const [gameState, dispatchGameState] = useReducer(gameReducer, gameInit);
 
+  // return width Img
+  function handleImageLoad(e) {
+    setImageSize(
+      (window.innerHeight * e.target.naturalWidth) / e.target.naturalHeight
+    );
+    console.log(
+      (window.innerHeight * e.target.naturalWidth) / e.target.naturalHeight
+    );
+  }
   //next question
   const handleNext = () => {
     setRightSignal(undefined);
@@ -271,7 +281,8 @@ const CountingAnimals = () => {
             <motion.div
               drag
               dragConstraints={parentRef}
-              className="relative w-[2000px] h-full"
+              className={`relative h-full`}
+              style={{ width: imageSize }}
             >
               <Image
                 style={{ pointerEvents: "none" }}
@@ -283,6 +294,7 @@ const CountingAnimals = () => {
                 objectFit="cover"
                 alt="Description of image"
                 layout="fill"
+                onLoad={handleImageLoad}
               />
             </motion.div>
             <AnimatePresence exitBeforeEnter>

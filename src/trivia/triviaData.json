@@ -1,7 +1,7 @@
 {
   "questions": [
     {
-      "id": "trivia0000",
+      "id": "0",
       "title": "Guess the Movie by Emoji Quiz",
       "slug": "guess-the-movie-by-emoji-quiz",
       "image": "https://res.cloudinary.com/dammaehjo/image/upload/v1681366413/trivia/guess-movie-byicon_vfi2rq.jpg",
@@ -145,7 +145,7 @@
       ]
     },
     {
-      "id": "trivia0001",
+      "id": "1",
       "title": "Guess the Famous Actress by Her Eyes",
       "slug": "guess-the-famous-actress-by-her-eye",
       "image": "https://res.cloudinary.com/dammaehjo/image/upload/v1681366397/actress/can-you-guess-the-singer-by-their-eyes_gde0ze.jpg",

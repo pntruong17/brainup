@@ -10,18 +10,24 @@ import { useTheme } from "next-themes";
 
 const Navbar = () => {
   const { theme, setTheme } = useTheme();
+  // const links = [
+  //   { id: "articles", slug: "/articles", child: undefined },
+  //   {
+  //     id: "games for brain",
+  //     slug: "/brain-games",
+  //     child: [
+  //       { id: "brain games", slug: "/brain-games" },
+  //       { id: "kids games", slug: "/kid-games" },
+  //     ],
+  //   },
+  //   { id: "trivia", slug: "/trivia", child: undefined },
+  //   { id: "test IQ", slug: "/test-iq", child: undefined },
+  // ];
   const links = [
-    { id: "articles", slug: "articles", child: undefined },
-    {
-      id: "games for brain",
-      slug: "brain-games",
-      child: [
-        { id: "brain games", slug: "brain-games" },
-        { id: "kids games", slug: "kid-games" },
-      ],
-    },
-    { id: "trivia", slug: "trivia", child: undefined },
-    { id: "test IQ", slug: "test-iq", child: undefined },
+    { id: "articles", slug: "/articles", child: undefined },
+    { id: "brain games", slug: "/brain-games", child: undefined },
+    { id: "trivia", slug: "/trivia", child: undefined },
+    { id: "test IQ", slug: "/test-iq", child: undefined },
   ];
   const id = useId();
   const [imgUser, setImgUser] = useState();

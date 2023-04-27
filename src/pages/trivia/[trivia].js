@@ -426,7 +426,7 @@ const Trivia = ({ triviBySlug, triviNotThisQuiz }) => {
                         exit={{ opacity: 0 }}
                         className="border rounded-lg"
                       >
-                        <p className="p-3 text-sm font-semibold tracking-tighter">
+                        <p className="p-3 text-sm text-_bg_dark font-semibold tracking-tighter">
                           <span className="font-bold text-_orange">Fact: </span>
                           {thisQuestion.fact}
                         </p>

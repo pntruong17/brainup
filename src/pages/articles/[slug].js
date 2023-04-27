@@ -5,6 +5,7 @@ import fs from "fs";
 import path from "path";
 import matter from "gray-matter";
 import * as marked from "marked";
+import Markdown from "markdown-to-jsx";
 
 const BlogPost = ({
   frontmatter: { title, date, cover_image, excerpt },
@@ -18,7 +19,7 @@ const BlogPost = ({
         description: excerpt,
       }}
     >
-      <motion.section
+      <motion.div
         initial={{ opacity: 0, y: 30 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.7, ease: "easeOut" }}
@@ -33,7 +34,7 @@ const BlogPost = ({
             dangerouslySetInnerHTML={{ __html: marked.parse(content) }}
           ></div>
         </div>
-      </motion.section>
+      </motion.div>
     </Layout>
   );
 };
