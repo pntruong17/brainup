@@ -1,11 +1,16 @@
 import Head from "next/head";
-import React from "react";
+import { useState, useEffect } from "react";
 import Footer from "./Footer";
 import Navbar from "./Navbar";
 import { useRouter } from "next/router";
+import { useTheme } from "next-themes";
+import { setCookies, getCookies, checkCookies } from "@/components/cookie";
 
 const Layout = ({ children, pageMeta }) => {
   const router = useRouter();
+  const { theme, setTheme } = useTheme();
+  const [themeCookie, setThemeCookie] = useState();
+
   const meta = {
     title: "Webapp Brain Up",
     description:
@@ -13,6 +18,24 @@ const Layout = ({ children, pageMeta }) => {
     type: "application",
     ...pageMeta,
   };
+
+  //cookies data
+  useEffect(() => {
+    const hasCookie = checkCookies("_USER_COOKIES_THEME");
+    if (hasCookie) {
+      setThemeCookie(getCookies("_USER_COOKIES_THEME"));
+    } else {
+      setThemeCookie("light");
+      setTheme("light");
+      setCookies("_USER_COOKIES_THEME", "light");
+    }
+  }, []);
+
+  useEffect(() => {
+    setCookies("_USER_COOKIES_THEME", theme);
+    setThemeCookie(theme);
+  }, [theme]);
+
   return (
     <>
       <Head>
@@ -37,10 +60,10 @@ const Layout = ({ children, pageMeta }) => {
         <title>{meta.title}</title>
       </Head>
       <header>
-        <Navbar />
+        <Navbar themeCookie={themeCookie} />
       </header>
       <main>{children}</main>
-      <Footer />
+      <Footer themeCookie={themeCookie} />
     </>
   );
 };

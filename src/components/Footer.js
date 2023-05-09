@@ -3,7 +3,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { useTheme } from "next-themes";
 
-const Footer = () => {
+const Footer = ({ themeCookie }) => {
   const { theme, setTheme } = useTheme();
   function toggleTheme() {
     setTheme(theme === "light" ? "dark" : "light");
@@ -20,21 +20,14 @@ const Footer = () => {
             className="flex title-font font-medium items-center md:justify-start justify-center text-gray-900"
           >
             <div className="relative w-20 h-12">
-              {theme === "light" ? (
-                <Image
-                  fill
-                  objectFit="contain"
-                  src={"/images/logo/logodark.png"}
-                  alt="logo iqup"
-                />
-              ) : (
-                <Image
-                  fill
-                  objectFit="contain"
-                  src={"/images/logo/logowhite.png"}
-                  alt="logo iqup"
-                />
-              )}
+              <Image
+                src={`/images/logo/logo${
+                  themeCookie === "light" ? "dark" : "white"
+                }.png`}
+                fill
+                objectFit="contain"
+                alt="brain up"
+              />
             </div>
           </a>
           <p className="text-sm text-gray-500 sm:ml-4 sm:pl-4 sm:border-l-2 sm:border-gray-200 sm:py-2 sm:mt-0 mt-4">

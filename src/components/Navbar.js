@@ -1,69 +1,18 @@
-import React, { useState, useEffect, memo, useId } from "react";
+import { useState, useEffect, memo } from "react";
 import Link from "next/link";
-import axios from "axios";
 import Hamburger from "./subcomponents/Hamburger";
-import { useUserAuth } from "./helper/UserAuthContextProvider";
-import { useRouter } from "next/router";
-import { Links } from "@/libs/menuItem";
 import Image from "next/image";
-import { useTheme } from "next-themes";
 
-const Navbar = () => {
-  const { theme, setTheme } = useTheme();
-  // const links = [
-  //   { id: "articles", slug: "/articles", child: undefined },
-  //   {
-  //     id: "games for brain",
-  //     slug: "/brain-games",
-  //     child: [
-  //       { id: "brain games", slug: "/brain-games" },
-  //       { id: "kids games", slug: "/kid-games" },
-  //     ],
-  //   },
-  //   { id: "trivia", slug: "/trivia", child: undefined },
-  //   { id: "test IQ", slug: "/test-iq", child: undefined },
-  // ];
+const Navbar = ({ themeCookie }) => {
   const links = [
     { id: "articles", slug: "/articles", child: undefined },
     { id: "brain games", slug: "/brain-games", child: undefined },
     { id: "trivia", slug: "/trivia", child: undefined },
     { id: "test IQ", slug: "/test-iq", child: undefined },
   ];
-  const id = useId();
-  const [imgUser, setImgUser] = useState();
   const [verticalMenu, setVerticalMenu] = useState(true);
-  const [popover, setPopover] = useState(false);
-  const { user, logOut } = useUserAuth();
-  const navigate = useRouter();
 
   const [open, setOpen] = useState(false);
-  const [hasColor, setHascolor] = useState("bg-white md:bg-transparent");
-  /*
-
-    if (typeof window !== "undefined") {
-        const handleScroll = () => {
-            if (window.scrollY >= 100) {
-                setHascolor('nav-blur')
-            } else {
-                setHascolor('bg-transparent')
-            }
-        }
-
-        window.addEventListener('scroll', handleScroll)
-    }
-*/
-
-  const logOutRemoveCookie = async () => {
-    const user = await axios.get("/api/auth/logout");
-
-    console.log(user);
-  };
-
-  useEffect(() => {
-    if (user) {
-      setImgUser(user.photoURL);
-    }
-  }, [user]);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -83,17 +32,6 @@ const Navbar = () => {
       window.removeEventListener("scroll", handleScroll);
     };
   }, []);
-
-  const signOutGoogle = () => {
-    setPopover(false);
-    setOpen(false);
-    logOut();
-    logOutRemoveCookie();
-    navigate.push("/");
-  };
-  const handleSignIn = () => {
-    navigate.push("/login");
-  };
 
   return (
     <>
@@ -115,21 +53,14 @@ const Navbar = () => {
                 verticalMenu ? "h-6 sm:h-8 mt-2" : "h-6"
               }`}
             >
-              {theme === "light" ? (
-                <Image
-                  src={"/images/logo/logodark.png"}
-                  fill
-                  objectFit="contain"
-                  alt="brain up"
-                />
-              ) : (
-                <Image
-                  src={"/images/logo/logowhite.png"}
-                  fill
-                  objectFit="contain"
-                  alt="brain up"
-                />
-              )}
+              <Image
+                src={`/images/logo/logo${
+                  themeCookie === "light" ? "dark" : "white"
+                }.png`}
+                fill
+                objectFit="contain"
+                alt="brain up"
+              />
             </div>
           </Link>
           <div>

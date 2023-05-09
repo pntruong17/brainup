@@ -57,7 +57,7 @@ const Index = ({ triviaData }) => {
                 </div>
               </Link>
               <Link
-                href={"/articles/" + triviaData[seoID2].slug}
+                href={"/trivia/" + triviaData[seoID2].slug}
                 className="w-full h-auto md:min-h-[30rem] md:w-1/2 md:pl-10 my-3 "
               >
                 <div className="w-full h-full overflow-hidden rounded-xl dark:bg-_darkblue">
@@ -93,7 +93,7 @@ const Index = ({ triviaData }) => {
                   return (
                     <Link
                       key={i}
-                      href={"/articles/" + trivia.slug}
+                      href={"/trivia/" + trivia.slug}
                       className="flex w-full my-2 hover:cursor-pointer px-1"
                     >
                       <div className="w-full h-full rounded-xl overflow-hidden dark:bg-_darkblue">

@@ -11,10 +11,10 @@ export const Links = [
     name: "Brain Games",
     link: "/brain-games",
   },
-  {
-    name: "Kid's Games",
-    link: "/kid-games",
-  },
+  // {
+  //   name: "Kid's Games",
+  //   link: "/kid-games",
+  // },
   {
     name: "Trivia",
     link: "/trivia",
