@@ -14,6 +14,7 @@ const FoodCollection = () => {
   const [state, setState] = useState(states[0]);
 
   const [win, setWin] = useState(false);
+  const [show, setShow] = useState(false);
   const [showScoreBoard, setShowScoreBoard] = useState(true);
   const [pointCookies, setPointCookies] = useState();
   const [visible, setVisible] = useState(true);
@@ -109,6 +110,17 @@ const FoodCollection = () => {
   };
 
   useEffect(() => {
+    let timeDelayRef = null;
+    if (state === states[2]) {
+      timeDelayRef = setTimeout(() => {
+        setShow(true);
+        clearTimeout(timeDelayRef);
+      }, 2500);
+    }
+    return () => clearTimeout(timeDelayRef);
+  }, [state]);
+
+  useEffect(() => {
     if (state === states[0]) {
       return;
     }
@@ -186,7 +198,7 @@ const FoodCollection = () => {
   return (
     <>
       <NavbarFixed />
-      {state === states[2] && (
+      {show ? (
         <div className="absolute z-10 top-0 left-0 w-full h-screen bg-_bg_dark py-16">
           <ScoreBoard
             closeButton={true}
@@ -195,7 +207,7 @@ const FoodCollection = () => {
             setShowScoreBoard={setShowScoreBoard}
           />
         </div>
-      )}
+      ) : null}
       <div className="flex w-full min-h-screen justify-center items-center px-3 py-10">
         {state === states[1] && (
           <div className="rounded-2xl bg-_secondary_dark p-5 -m-2">

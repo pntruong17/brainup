@@ -13,7 +13,7 @@ const StarSearch = () => {
   const [pointCookies, setPointCookies] = useState();
 
   const states = ["start", "playing", "close"];
-  const [timer, setTimer] = useState(10); //timer
+  const [timer, setTimer] = useState(90); //timer
   const delayVisible = useRef();
   const [ins, setIns] = useState(0);
   const [state, setState] = useState("start");
